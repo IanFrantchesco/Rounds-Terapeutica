@@ -771,7 +771,6 @@
 
   <footer>
     <p class="cite">Diretriz Brasileira de Hipertensão Arterial &mdash; SBC/SBN/SBH, 2025</p>
-    <img src="https://visitor-badge.laobi.icu/badge?page_id=ianfrantchesco.terapeutica-has&text=acessos&color=0e6b63" alt="" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;">
   </footer>
 </div>
 
@@ -1270,4 +1269,9 @@
       window.scrollTo({ top: 0 });
     });
   });
+
+  /* contador de acessos — sem elemento visível na página; consulte
+     https://visitor-badge.laobi.icu/badge?page_id=ianfrantchesco.terapeutica-has
+     diretamente no seu navegador para ver o total */
+  fetch("https://visitor-badge.laobi.icu/badge?page_id=ianfrantchesco.terapeutica-has", { mode: "no-cors" }).catch(() => {});
 </script>
