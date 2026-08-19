@@ -1270,8 +1270,15 @@
     });
   });
 
-  /* contador de acessos — sem elemento visível na página; consulte
-     https://visitor-badge.laobi.icu/badge?page_id=ianfrantchesco.terapeutica-has
-     diretamente no seu navegador para ver o total */
-  fetch("https://visitor-badge.laobi.icu/badge?page_id=ianfrantchesco.terapeutica-has", { mode: "no-cors" }).catch(() => {});
+  /* contador de visitantes (aproximado) — sem elemento visível na página.
+     Soma no máximo 1 vez por navegador/aparelho (marca local), não por
+     visita — se a pessoa limpar os dados do navegador ou usar aba anônima,
+     pode contar de novo. Consulte o total em:
+     https://visitor-badge.laobi.icu/badge?page_id=ianfrantchesco.terapeutica-has-unicos */
+  try {
+    if (!localStorage.getItem("has_rounds_visited")) {
+      localStorage.setItem("has_rounds_visited", "1");
+      fetch("https://visitor-badge.laobi.icu/badge?page_id=ianfrantchesco.terapeutica-has-unicos", { mode: "no-cors" }).catch(() => {});
+    }
+  } catch (e) {}
 </script>
