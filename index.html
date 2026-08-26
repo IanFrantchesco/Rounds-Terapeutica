@@ -546,7 +546,7 @@
   <div class="masthead">
     <div>
       <span class="eyebrow">Rounds &middot; HAS &middot; Diretriz SBC 2025</span>
-      <h1>Terapêutica em cena</h1>
+      <h1>Rounds de Terapêutica</h1>
       <p class="byline"><span>por</span> Ian Frantchesco</p>
     </div>
     <div class="tabs" role="tablist">
@@ -560,7 +560,7 @@
 
     <div class="case-nav-row">
       <button class="navbtn" id="prevBtn" aria-label="Caso anterior">&lsaquo;</button>
-      <span class="case-counter" id="caseCounter">01 / 10</span>
+      <span class="case-counter" id="caseCounter">01 / 15</span>
       <button class="navbtn" id="nextBtn" aria-label="Próximo caso">&rsaquo;</button>
     </div>
 
@@ -1147,6 +1147,191 @@
         ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
         ["Mono ou combinada?", "Combinada <strong>dupla ou tripla</strong>, conforme gravidade."],
         ["Contraindicações?", "Diurético tiazídico pode precipitar crise de <strong>gota</strong> (histórico recente) — preferir IECA/BRA + BCC."]
+      ]
+    },
+    {
+      name: "Patrícia", age: 39, sex: "feminino", initials: "PT",
+      vitals: [
+        { label: "PA persistente", value: "165/100", flag: true },
+        { label: "FC", value: "92 bpm", flag: false },
+        { label: "IMC", value: "23 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Asma persistente moderada", c: "crit" },
+        { t: "Broncoespasmo recorrente", c: "crit" },
+        { t: "Sem DCV estabelecida", c: "" },
+        { t: "Risco moderado", c: "warn" }
+      ],
+      qp: "Falta de ar aos esforços; usa bombinha de resgate (salbutamol) cerca de 3x por semana.",
+      options: [
+        { t: "IECA ou BRA + betabloqueador" },
+        { t: "IECA ou BRA + bloqueador de canal de cálcio" },
+        { t: "Betabloqueador em monoterapia" },
+        { t: "Diurético tiazídico + betabloqueador" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Combinação dupla é a conduta certa para Estágio 2.", whyNot: "Mas não com betabloqueador aqui: asma persistente com broncoespasmo recorrente é motivo para evitar essa classe — risco de precipitar crise." },
+        { why: "Estágio 2 pede combinação dupla já de início, e BCC é uma das classes de 1ª linha, sem qualquer interação com a asma dela — a escolha mais segura e eficaz aqui.", whyNot: "" },
+        { why: "Monoterapia com BB pareceria controlar a taquicardia leve.", whyNot: "Estágio 2 exige combinação, não monoterapia — e ainda esbarra na mesma contraindicação relativa da asma." },
+        { why: "Diurético é uma classe de 1ª linha válida.", whyNot: "A combinação com betabloqueador mantém o mesmo problema: risco de broncoespasmo numa paciente com asma persistente." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>165/100 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 2</strong> (PAS 160–179 e/ou PAD 100–109)."],
+        ["Estratificação de risco?", "Risco <strong>moderado</strong> — sem DCV estabelecida, mas com fatores agravantes."],
+        ["Decisão terapêutica?", "Combinação dupla, indicada para Estágio 2 independente do risco."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações?", "<strong>Betabloqueador</strong> deve ser evitado — asma persistente com broncoespasmo recorrente, sem indicação compelida que justifique o risco."]
+      ]
+    },
+    {
+      name: "Vitor", age: 63, sex: "masculino", initials: "VT",
+      vitals: [
+        { label: "PA persistente", value: "148/92", flag: true },
+        { label: "FEVE", value: "32%", flag: true },
+        { label: "FC", value: "88 bpm", flag: false }
+      ],
+      tags: [
+        { t: "ICFEr (FEVE 32%)", c: "crit" },
+        { t: "Dispneia aos esforços", c: "crit" },
+        { t: "Pós-alta recente por descompensação", c: "warn" },
+        { t: "Dislipidemia", c: "warn" }
+      ],
+      qp: "Em acompanhamento após internação por insuficiência cardíaca descompensada há 1 mês. Refere cansaço aos médios esforços.",
+      options: [
+        { t: "Bloqueador de canal de cálcio + diurético" },
+        { t: "IECA ou BRA + betabloqueador" },
+        { t: "Monoterapia com bloqueador de canal de cálcio" },
+        { t: "Betabloqueador em monoterapia" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "BCC + diurético é uma combinação de 1ª linha em HAS não complicada.", whyNot: "Não aqui: BCC não tem papel comprovado em ICFEr, e não substitui a terapia de base que o coração dele precisa (IECA/BRA + BB)." },
+        { why: "Essa combinação é a terapia guiada por evidência para ICFEr (reduz mortalidade e reinternação) e, ao mesmo tempo, trata a hipertensão — dois objetivos com o mesmo esquema.", whyNot: "" },
+        { why: "Monoterapia pareceria um começo mais simples.", whyNot: "Estágio 1 + alto risco (DCV estabelecida) já pede combinação, e BCC isolado não trata a insuficiência cardíaca de base." },
+        { why: "Betabloqueador sozinho já ataca parte do problema.", whyNot: "Insuficiente isoladamente — falta o IECA/BRA, também parte essencial da terapia de ICFEr e da combinação exigida pelo estágio/risco." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>148/92 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 1</strong>."],
+        ["Estratificação de risco?", "<strong>Alto risco</strong> — ICFEr é doença cardiovascular estabelecida, classifica automaticamente."],
+        ["Decisão terapêutica?", "Combinação dupla — Estágio 1 + risco alto, reforçada pela indicação cardiológica."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>, com individualização conforme tolerância hemodinâmica."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações / indicação especial?", "<strong>IECA/BRA + betabloqueador</strong> são indicação compelida em ICFEr — tratam a insuficiência cardíaca e a HAS ao mesmo tempo."]
+      ]
+    },
+    {
+      name: "Helena", age: 41, sex: "feminino", initials: "HL",
+      vitals: [
+        { label: "PA persistente", value: "146/94", flag: true },
+        { label: "FC", value: "62 bpm", flag: true },
+        { label: "IMC", value: "29 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Enxaqueca crônica", c: "" },
+        { t: "Em uso de verapamil (neuro)", c: "crit" },
+        { t: "Obesidade grau I", c: "warn" },
+        { t: "Sedentarismo", c: "warn" }
+      ],
+      qp: "Em acompanhamento neurológico para enxaqueca crônica, em uso de verapamil há 8 meses com boa resposta. PA elevada nas últimas consultas.",
+      options: [
+        { t: "Adicionar betabloqueador" },
+        { t: "Adicionar IECA ou BRA" },
+        { t: "Trocar o verapamil por diurético tiazídico" },
+        { t: "Adicionar outro bloqueador de canal de cálcio" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Betabloqueador é uma classe eficaz e comum em combinações.", whyNot: "Não junto com verapamil: a combinação betabloqueador + BCC não-di-idropiridínico tem risco real de bradicardia/bloqueio AV grave — contraindicação direta aqui." },
+        { why: "IECA/BRA soma um mecanismo de ação diferente do verapamil, sem interação relevante, mantendo o controle da enxaqueca já conquistado e tratando a HAS com a combinação padrão.", whyNot: "" },
+        { why: "Trocar o verapamil resolveria a questão da interação.", whyNot: "Sem necessidade: o verapamil está funcionando bem para a enxaqueca dela — trocar um medicamento estável sem motivo clínico não é a conduta, e ainda perderia esse benefício." },
+        { why: "Mais um BCC pareceria reforçar o mesmo mecanismo.", whyNot: "Empilhar dois BCCs não é estratégia padrão de combinação — o parceiro indicado é de outra classe (IECA/BRA)." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>146/94 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 1</strong>."],
+        ["Estratificação de risco?", "Risco <strong>moderado</strong> — obesidade e sedentarismo, sem DCV estabelecida."],
+        ["Decisão terapêutica?", "Combinação dupla — Estágio 1 + risco moderado."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações?", "<strong>Betabloqueador contraindicado</strong> pela combinação com verapamil (BCC não-di-idropiridínico) — risco de bradicardia/bloqueio AV. IECA/BRA é o parceiro seguro."]
+      ]
+    },
+    {
+      name: "Antônia", age: 71, sex: "feminino", initials: "AT",
+      vitals: [
+        { label: "PA persistente", value: "172/104", flag: true },
+        { label: "FC", value: "80 bpm", flag: false },
+        { label: "IMC", value: "27 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Hígida, sem quedas", c: "" },
+        { t: "Sem hipotensão ortostática", c: "" },
+        { t: "Sobrepeso", c: "warn" },
+        { t: "Sedentarismo", c: "warn" }
+      ],
+      qp: "Consulta de rotina, ativa e independente. Nunca teve tontura ou episódios de queda.",
+      options: [
+        { t: "Monoterapia com IECA, reavaliar em 3 meses" },
+        { t: "Combinação dupla" },
+        { t: "MEV isolada por 3 meses" },
+        { t: "Combinação tripla imediata" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Monoterapia pareceria prudente pela idade dela.", whyNot: "A regra de monoterapia por idade vale para ≥80 anos, frágeis, ou com hipotensão ortostática sintomática — ela tem 71 anos, é hígida e sem nenhum desses critérios. Idade isolada não basta." },
+        { why: "Estágio 2 pede combinação dupla já de início, independente do risco — e não há nenhum motivo de fragilidade que justifique começar mais devagar aqui.", whyNot: "" },
+        { why: "MEV isolada seria a conduta em quadros mais leves.", whyNot: "Estágio 2 já exige tratamento farmacológico imediato, não espera de MEV isolada." },
+        { why: "Tripla pareceria mais agressivo, compatível com a PA elevada.", whyNot: "Desproporcional para Estágio 2 sem gravidade adicional — combinação dupla já é a conduta indicada." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>172/104 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 2</strong> (PAS 160–179 e/ou PAD 100–109)."],
+        ["Estratificação de risco?", "Risco <strong>moderado</strong> — sobrepeso e sedentarismo, sem lesão de órgão-alvo."],
+        ["Decisão terapêutica?", "Combinação dupla, indicada para Estágio 2 independente do risco."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações?", "Nenhuma por idade — os critérios de monoterapia (≥80 anos, fragilidade, hipotensão ortostática) não se aplicam a ela."]
+      ]
+    },
+    {
+      name: "Marcelo", age: 56, sex: "masculino", initials: "MC",
+      vitals: [
+        { label: "PA persistente", value: "148/94", flag: true },
+        { label: "K+", value: "3.1", flag: true },
+        { label: "IMC", value: "25 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Uso crônico de laxantes", c: "crit" },
+        { t: "Hipocalemia (K+ 3.1)", c: "crit" },
+        { t: "Diarreia recorrente", c: "warn" },
+        { t: "Sem DCV estabelecida", c: "" }
+      ],
+      qp: "Refere fraqueza muscular leve e cãibras. Uso prolongado de laxantes por constipação autolimitada, sem orientação médica.",
+      options: [
+        { t: "IECA ou BRA + diurético tiazídico" },
+        { t: "IECA ou BRA + bloqueador de canal de cálcio" },
+        { t: "Diurético tiazídico em monoterapia" },
+        { t: "Espironolactona em monoterapia" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Tiazídico é o parceiro mais comum do IECA/BRA.", whyNot: "Não aqui: ele já está hipocalêmico (K+ 3.1) pelo uso crônico de laxantes — tiazídico reduziria ainda mais o potássio, com risco de arritmia." },
+        { why: "IECA/BRA mantém a combinação eficaz de 1ª linha, e o BCC não interfere no potássio — evita agravar a hipocalemia já presente.", whyNot: "" },
+        { why: "Diurético tiazídico isolado seria insuficiente.", whyNot: "Estágio 1 + risco moderado pede combinação, não monoterapia — e ainda pioraria a hipocalemia." },
+        { why: "Espironolactona poupa potássio, o que pareceria lógico aqui.", whyNot: "Não é indicação de 1ª linha fora do contexto de HAS resistente — o caso pede a combinação padrão inicial, não um antagonista mineralocorticoide isolado." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>148/94 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 1</strong>."],
+        ["Estratificação de risco?", "Risco <strong>moderado</strong> — sem DCV estabelecida."],
+        ["Decisão terapêutica?", "Combinação dupla — Estágio 1 + risco moderado."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações?", "<strong>Diurético tiazídico contraindicado</strong> — hipocalemia já presente (K+ 3.1) por uso crônico de laxantes; BCC é o parceiro seguro."]
       ]
     }
   ];
