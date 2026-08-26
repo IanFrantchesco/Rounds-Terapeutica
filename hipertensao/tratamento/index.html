@@ -1,0 +1,1469 @@
+<title>Rounds de Terapêutica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #f6f3ec;
+    --paper-raised: #fffdf8;
+    --ink: #21262b;
+    --ink-soft: #565f63;
+    --teal: #0e6b63;
+    --teal-soft: #dcece9;
+    --brick: #b23b2e;
+    --brick-soft: #f6e4e1;
+    --sage: #3f7a52;
+    --sage-soft: #e3ede4;
+    --amber: #b8801f;
+    --amber-soft: #f3e6d1;
+    --line: rgba(33, 38, 43, 0.13);
+    --line-strong: rgba(33, 38, 43, 0.24);
+    --shadow: 0 1px 2px rgba(33,38,43,0.06), 0 8px 24px -12px rgba(33,38,43,0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14181a;
+      --paper-raised: #1b2124;
+      --ink: #ece8df;
+      --ink-soft: #a4aca9;
+      --teal: #55c4ba;
+      --teal-soft: #1c3532;
+      --brick: #e37c6e;
+      --brick-soft: #3a2422;
+      --sage: #7ec293;
+      --sage-soft: #223228;
+      --amber: #e2ac5f;
+      --amber-soft: #382c1a;
+      --line: rgba(236, 232, 223, 0.14);
+      --line-strong: rgba(236, 232, 223, 0.26);
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #14181a;
+    --paper-raised: #1b2124;
+    --ink: #ece8df;
+    --ink-soft: #a4aca9;
+    --teal: #55c4ba;
+    --teal-soft: #1c3532;
+    --brick: #e37c6e;
+    --brick-soft: #3a2422;
+    --sage: #7ec293;
+    --sage-soft: #223228;
+    --amber: #e2ac5f;
+    --amber-soft: #382c1a;
+    --line: rgba(236, 232, 223, 0.14);
+    --line-strong: rgba(236, 232, 223, 0.26);
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Public Sans", system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: clamp(14px, 4vw, 32px);
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  .page {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  /* ---- masthead ---- */
+  .masthead {
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-strong);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .masthead h1 {
+    font-family: "Spectral", Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(1.25rem, 5vw, 1.5rem);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .masthead .eyebrow {
+    display: block;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+
+  .masthead .byline {
+    margin: 5px 0 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .masthead .byline span {
+    font-weight: 400;
+    color: var(--ink-soft);
+  }
+
+  /* ---- tabs ---- */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 4px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    font-family: "Public Sans", sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 9px 10px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .tab-btn[aria-selected="true"] { background: var(--teal); color: var(--paper-raised); }
+  .tab-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  /* ---- panels ---- */
+  .panel { display: none; flex-direction: column; gap: 18px; }
+  .panel.active { display: flex; }
+
+  /* ---- case nav row ---- */
+  .case-nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .navbtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    background: var(--paper-raised);
+    color: var(--ink);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, opacity 0.15s ease;
+    flex: none;
+  }
+
+  .navbtn:hover:not(:disabled) { background: var(--teal-soft); border-color: var(--teal); color: var(--teal); }
+  .navbtn:disabled { opacity: 0.3; cursor: default; }
+  .navbtn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  .case-counter {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    min-width: 68px;
+    text-align: center;
+  }
+
+  /* ---- chart card ---- */
+  .chart {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .chart-id {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .avatar {
+    flex: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--teal-soft);
+    color: var(--teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Spectral", serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+  }
+
+  .chart-id-text h2 {
+    margin: 0 0 2px;
+    font-family: "Spectral", Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  .chart-id-text p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  /* vitals strip */
+  .vitals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .vital {
+    background: var(--paper-raised);
+    padding: 12px 10px;
+    text-align: center;
+  }
+
+  .vital.flag { background: var(--brick-soft); }
+
+  .vital .label {
+    display: block;
+    font-size: 0.63rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+
+  .vital .value {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-weight: 600;
+    font-size: 0.98rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .vital.flag .value { color: var(--brick); }
+
+  /* tags */
+  .chart-body {
+    padding: 16px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .field-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin: 0 0 6px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 0.82rem;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: var(--teal-soft);
+    color: var(--teal);
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+
+  .tag.warn { background: var(--amber-soft); color: var(--amber); }
+  .tag.crit { background: var(--brick-soft); color: var(--brick); }
+
+  .qp {
+    background: var(--paper);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 0.92rem;
+  }
+
+  .qp strong {
+    display: block;
+    font-family: "Spectral", serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--teal);
+    margin-bottom: 3px;
+    font-weight: 600;
+  }
+
+  /* ---- prompt ---- */
+  .prompt {
+    font-family: "Spectral", Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.35;
+    text-wrap: balance;
+    margin: 4px 2px 0;
+  }
+
+  /* ---- options ---- */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+
+  .option {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 13px 14px;
+    font: inherit;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.1s ease, background 0.15s ease;
+  }
+
+  .option:hover:not(:disabled) { border-color: var(--line-strong); }
+  .option:active:not(:disabled) { transform: scale(0.99); }
+  .option:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  .option .letter {
+    flex: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--line);
+    color: var(--ink-soft);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .option .text { font-size: 0.94rem; padding-top: 2px; }
+  .option:disabled { cursor: default; }
+
+  .option.correct { border-color: var(--sage); background: var(--sage-soft); }
+  .option.correct .letter { background: var(--sage); color: var(--paper-raised); }
+  .option.wrong { border-color: var(--brick); background: var(--brick-soft); }
+  .option.wrong .letter { background: var(--brick); color: var(--paper-raised); }
+  .option.dim { opacity: 0.5; }
+
+  /* ---- feedback ---- */
+  .feedback {
+    border-radius: 12px;
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    animation: rise 0.25s ease;
+  }
+
+  .feedback.show { display: flex; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .feedback.is-correct { background: var(--sage-soft); border-color: var(--sage); }
+  .feedback.is-wrong { background: var(--brick-soft); border-color: var(--brick); }
+
+  .feedback .verdict {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Spectral", serif;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .feedback.is-correct .verdict { color: var(--sage); }
+  .feedback.is-wrong .verdict { color: var(--brick); }
+
+  .feedback p { margin: 0; font-size: 0.9rem; color: var(--ink); }
+  .feedback p.muted { color: var(--ink-soft); }
+
+  /* ---- rationale accordion ---- */
+  .rationale {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .rationale summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Spectral", serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .rationale summary::-webkit-details-marker { display: none; }
+
+  .rationale summary .chev {
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--teal);
+    transition: transform 0.2s ease;
+    font-size: 0.85rem;
+  }
+
+  .rationale[open] summary .chev { transform: rotate(90deg); }
+
+  .steps { padding: 0 18px 18px; display: flex; flex-direction: column; gap: 12px; }
+
+  .step { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 0.88rem; }
+
+  .step .n {
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--teal);
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding-top: 1px;
+  }
+
+  .step .q { display: block; color: var(--ink-soft); font-size: 0.78rem; margin-bottom: 2px; }
+  .step .a { color: var(--ink); }
+  .step .a strong { color: var(--teal); }
+
+  /* ---- resumo: section headers ---- */
+  .section-title {
+    font-family: "Spectral", Georgia, serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin: 0 0 2px;
+  }
+  .section-sub { font-size: 0.82rem; color: var(--ink-soft); margin: 0 0 12px; }
+
+  /* ---- resumo: classification table ---- */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-raised); }
+  .class-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 340px; }
+  .class-table th {
+    font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--ink-soft); text-align: left; padding: 10px 10px; border-bottom: 1px solid var(--line-strong);
+  }
+  .class-table td {
+    padding: 9px 10px; border-bottom: 1px solid var(--line);
+    font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; font-variant-numeric: tabular-nums;
+  }
+  .class-table tr:last-child td { border-bottom: none; }
+  .class-table td:first-child { font-family: "Public Sans", sans-serif; font-weight: 600; display: flex; align-items: center; gap: 7px; }
+  .class-table td:nth-child(3) { color: var(--ink-soft); font-family: "Public Sans", sans-serif; font-size: 0.75rem; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+
+  /* ---- resumo: diagram ---- */
+  .diagram {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 16px;
+    margin: 0;
+  }
+  .diagram svg { width: 100%; height: auto; display: block; color: var(--ink-soft); }
+  .diagram figcaption { font-size: 0.78rem; color: var(--ink-soft); margin-top: 10px; text-align: center; }
+
+  /* ---- resumo: drug cards ---- */
+  .drug-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 15px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .drug-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .drug-card h3 { margin: 0; font-family: "Spectral", Georgia, serif; font-size: 1.02rem; font-weight: 600; }
+  .badge {
+    font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 3px 9px; border-radius: 100px; background: var(--teal-soft); color: var(--teal); white-space: nowrap;
+  }
+  .badge.special { background: var(--amber-soft); color: var(--amber); }
+  .badge.fourth { background: var(--brick-soft); color: var(--brick); }
+
+  .drug-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 460px) { .drug-grid { grid-template-columns: 1fr 1fr; } }
+
+  .list-label { font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); margin: 0 0 5px; }
+  .drug-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; font-size: 0.85rem; }
+  .drug-list li { display: flex; gap: 7px; align-items: flex-start; }
+  .drug-list li::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; margin-top: 6px; }
+  .drug-list.good li::before { background: var(--sage); }
+  .drug-list.bad li::before { background: var(--brick); }
+
+  footer { text-align: center; padding: 4px 8px 0; }
+  footer p { margin: 0; }
+  footer .credit { font-size: 0.82rem; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  footer .cite { font-size: 0.75rem; color: var(--ink-soft); }
+</style>
+
+<div class="page">
+
+  <div class="masthead">
+    <div>
+      <span class="eyebrow">Rounds &middot; HAS &middot; Diretriz SBC 2025</span>
+      <h1>Rounds de Terapêutica</h1>
+      <p class="byline"><span>por</span> Ian Frantchesco</p>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn" role="tab" data-tab="resumo" aria-selected="true">Resumo</button>
+      <button class="tab-btn" role="tab" data-tab="casos" aria-selected="false">Casos clínicos</button>
+    </div>
+  </div>
+
+  <!-- ===== PAINEL: CASOS CLÍNICOS ===== -->
+  <div class="panel" id="panelCasos">
+
+    <div class="case-nav-row">
+      <button class="navbtn" id="prevBtn" aria-label="Caso anterior">&lsaquo;</button>
+      <span class="case-counter" id="caseCounter">01 / 15</span>
+      <button class="navbtn" id="nextBtn" aria-label="Próximo caso">&rsaquo;</button>
+    </div>
+
+    <div class="chart">
+      <div class="chart-id">
+        <div class="avatar" id="avatar">JC</div>
+        <div class="chart-id-text">
+          <h2 id="pName">—</h2>
+          <p id="pMeta">—</p>
+        </div>
+      </div>
+
+      <div class="vitals" id="vitals"></div>
+
+      <div class="chart-body">
+        <div>
+          <p class="field-label">Achados &amp; comorbidades</p>
+          <div class="tags" id="tags"></div>
+        </div>
+
+        <div class="qp">
+          <strong>Queixa principal</strong>
+          <span id="qpText">—</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="prompt" id="promptText">Qual a conduta terapêutica correta para este paciente?</p>
+
+    <div class="options" id="options"></div>
+
+    <div class="feedback" id="feedback">
+      <div class="verdict" id="verdictText"></div>
+      <p id="feedbackMain"></p>
+      <p class="muted" id="feedbackWhyNot"></p>
+    </div>
+
+    <details class="rationale" id="rationale">
+      <summary>Ver racional completo (as 7 perguntas)
+        <span class="chev">&rsaquo;</span>
+      </summary>
+      <div class="steps" id="steps"></div>
+    </details>
+  </div>
+
+  <!-- ===== PAINEL: RESUMO ===== -->
+  <div class="panel active" id="panelResumo">
+
+    <div>
+      <p class="section-title">Classificação da PA</p>
+      <p class="section-sub">Diretriz Brasileira de Hipertensão Arterial — 2025</p>
+      <div class="table-wrap">
+        <table class="class-table">
+          <thead><tr><th>Classificação</th><th>PAS</th><th></th><th>PAD</th></tr></thead>
+          <tbody>
+            <tr><td><span class="dot" style="background:var(--sage)"></span>Normal</td><td>&lt;120</td><td>e</td><td>&lt;80</td></tr>
+            <tr><td><span class="dot" style="background:var(--amber)"></span>Pré-hipertensão</td><td>120–139</td><td>e/ou</td><td>80–89</td></tr>
+            <tr><td><span class="dot" style="background:var(--amber)"></span>Estágio 1</td><td>140–159</td><td>e/ou</td><td>90–99</td></tr>
+            <tr><td><span class="dot" style="background:var(--brick)"></span>Estágio 2</td><td>160–179</td><td>e/ou</td><td>100–109</td></tr>
+            <tr><td><span class="dot" style="background:var(--brick)"></span>Estágio 3</td><td>&ge;180</td><td>e/ou</td><td>&ge;110</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-title">Do diagnóstico à meta</p>
+      <p class="section-sub">Fluxo de decisão terapêutica inicial</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 360 372" role="img" aria-label="Fluxograma: confirmar a pressão elevada, classificar estágio e risco cardiovascular, e então seguir para mudança de estilo de vida isolada, monoterapia ou combinação dupla ou tripla, conforme a combinação de estágio e risco, convergindo todos para a meta de 130 por 80 milímetros de mercúrio.">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
+            </marker>
+          </defs>
+
+          <!-- N1 -->
+          <rect x="30" y="8" width="300" height="32" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="180" y="28" text-anchor="middle" font-size="11" fill="var(--ink)" font-family="Public Sans, sans-serif">PA elevada em consulta</text>
+
+          <line x1="180" y1="40" x2="180" y2="50.5" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+
+          <!-- N2 -->
+          <rect x="20" y="52" width="320" height="32" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="180" y="72" text-anchor="middle" font-size="10.5" fill="var(--ink)" font-family="Public Sans, sans-serif">Confirmar: 2 consultas ou MAPA/MRPA</text>
+
+          <line x1="180" y1="84" x2="180" y2="94.5" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+
+          <!-- N3 -->
+          <rect x="20" y="96" width="320" height="32" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="180" y="116" text-anchor="middle" font-size="11" fill="var(--ink)" font-family="Public Sans, sans-serif">Classificar estágio + risco CV</text>
+
+          <!-- trunk into fork -->
+          <path d="M180,128 L180,140 L30,140 L30,306" fill="none" stroke="currentColor" stroke-width="1.3"></path>
+
+          <!-- branch connectors -->
+          <line x1="30" y1="170" x2="56.5" y2="170" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+          <line x1="30" y1="228" x2="56.5" y2="228" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+          <line x1="30" y1="286" x2="56.5" y2="286" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+
+          <!-- B1 -->
+          <rect x="58" y="150" width="282" height="40" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="199" y="164" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">Pré-hipertensão ou Estágio 1 — risco baixo</text>
+          <text x="199" y="180" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">MEV isolada</text>
+
+          <!-- B2 -->
+          <rect x="58" y="200" width="282" height="56" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="199" y="214" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">E1 alto risco · Pré-HAS 130–139 + alto risco</text>
+          <text x="199" y="226" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">idoso ≥80a / frágil / hipotensão ortostática</text>
+          <text x="199" y="246" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">Monoterapia</text>
+
+          <!-- B3 -->
+          <rect x="58" y="266" width="282" height="40" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="199" y="280" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">E1 risco moderado/alto · Estágio 2 · Estágio 3</text>
+          <text x="199" y="296" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">Combinação dupla ou tripla</text>
+
+          <!-- converge to goal -->
+          <path d="M30,306 L30,320 L180,320 L180,330.5" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></path>
+
+          <!-- final -->
+          <rect x="30" y="332" width="300" height="34" rx="8" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.3"></rect>
+          <text x="180" y="353.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--teal)" font-family="Public Sans, sans-serif">Meta terapêutica: &lt;130/80 mmHg</text>
+        </svg>
+        <figcaption>Da confirmação diagnóstica à meta pressórica — o caminho muda conforme estágio e risco cardiovascular.</figcaption>
+      </figure>
+    </div>
+
+    <div>
+      <p class="section-title">Classes de anti-hipertensivos</p>
+      <p class="section-sub">Indicações preferenciais e contraindicações</p>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+
+        <div class="drug-card">
+          <div class="drug-card-head"><h3>IECA / BRA</h3><span class="badge">1ª linha</span></div>
+          <div class="drug-grid">
+            <div><p class="list-label">Indicado</p>
+              <ul class="drug-list good"><li>DM2 (nefroproteção)</li><li>DRC com proteinúria</li><li>ICFEr, pós-IAM</li></ul>
+            </div>
+            <div><p class="list-label">Evitar</p>
+              <ul class="drug-list bad"><li>Gestação (contraindicação absoluta)</li><li>Estenose bilateral de artéria renal</li><li>Hipercalemia · nunca IECA + BRA juntos</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="drug-card">
+          <div class="drug-card-head"><h3>Bloqueador de canal de cálcio</h3><span class="badge">1ª linha</span></div>
+          <div class="drug-grid">
+            <div><p class="list-label">Indicado</p>
+              <ul class="drug-list good"><li>Idosos</li><li>HAS sistólica isolada</li><li>População negra</li></ul>
+            </div>
+            <div><p class="list-label">Evitar</p>
+              <ul class="drug-list bad"><li>Edema/insuficiência venosa (di-idropiridínico)</li><li>Bloqueio AV (não-di-idropiridínico)</li><li>Nunca associar com betabloqueador</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="drug-card">
+          <div class="drug-card-head"><h3>Diurético tiazídico/similar</h3><span class="badge">1ª linha</span></div>
+          <div class="drug-grid">
+            <div><p class="list-label">Indicado</p>
+              <ul class="drug-list good"><li>1ª linha geral</li><li>População negra</li><li>Preferir clortalidona/indapamida</li></ul>
+            </div>
+            <div><p class="list-label">Evitar</p>
+              <ul class="drug-list bad"><li>TFG ≤30 (trocar por diurético de alça)</li><li>Gota/hiperuricemia sintomática</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="drug-card">
+          <div class="drug-card-head"><h3>Diurético de alça</h3><span class="badge special">Situação especial</span></div>
+          <div class="drug-grid">
+            <div><p class="list-label">Indicado</p>
+              <ul class="drug-list good"><li>DRC estágios 4–5 (TFG ≤30)</li><li>Sobrecarga volêmica</li></ul>
+            </div>
+            <div><p class="list-label">Evitar</p>
+              <ul class="drug-list bad"><li>Hipovolemia</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="drug-card">
+          <div class="drug-card-head"><h3>Betabloqueador</h3><span class="badge special">Situação especial</span></div>
+          <div class="drug-grid">
+            <div><p class="list-label">Indicado</p>
+              <ul class="drug-list good"><li>ICFEr, angina, pós-IAM</li><li>Fibrilação atrial (frequência)</li><li>Diálise · gestante/desejo gestacional</li></ul>
+            </div>
+            <div><p class="list-label">Evitar</p>
+              <ul class="drug-list bad"><li>Bradicardia/bloqueio AV</li><li>Asma/DPOC com broncoespasmo</li><li>Nunca com BCC não-di-idropiridínico</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="drug-card">
+          <div class="drug-card-head"><h3>Espironolactona</h3><span class="badge fourth">4º fármaco</span></div>
+          <div class="drug-grid">
+            <div><p class="list-label">Indicado</p>
+              <ul class="drug-list good"><li>HAS resistente (3 classes otimizadas, sem controle)</li><li>Base: estudo PATHWAY-2</li></ul>
+            </div>
+            <div><p class="list-label">Evitar</p>
+              <ul class="drug-list bad"><li>Hipercalemia</li><li>DRC avançada</li><li>Trocar por eplerenona se ginecomastia</li></ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="cite">Diretriz Brasileira de Hipertensão Arterial &mdash; SBC/SBN/SBH, 2025</p>
+  </footer>
+</div>
+
+<script>
+  const CASES = [
+    {
+      name: "João Carlos", age: 59, sex: "masculino", initials: "JC",
+      vitals: [
+        { label: "PA persistente", value: "150/90", flag: true },
+        { label: "FC", value: "48 bpm", flag: true },
+        { label: "IMC", value: "35 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Edema de tornozelos (IVC)", c: "crit" },
+        { t: "Bradicardia", c: "crit" },
+        { t: "DM tipo 2", c: "warn" },
+        { t: "Dislipidemia", c: "warn" },
+        { t: "Hipotireoidismo", c: "" },
+        { t: "Cintura 100 cm", c: "" },
+        { t: "Tabagista, 45 anos", c: "" }
+      ],
+      qp: "Cefaleia occipital há 4 dias, com vertigem. PA sempre elevada quando afere; não adere à MEV.",
+      options: [
+        { t: "IECA ou BRA + bloqueador de canal de cálcio" },
+        { t: "IECA ou BRA + diurético tiazídico em dose baixa" },
+        { t: "Betabloqueador + diurético tiazídico" },
+        { t: "Monoterapia com IECA, reavaliar em 3 meses" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "O BCC (ex. anlodipino) é a classe padrão de acompanhamento do IECA/BRA — mas não aqui.", whyNot: "Esse paciente já tem edema de tornozelos por insuficiência venosa crônica. BCC di-idropiridínico causa edema periférico como efeito colateral clássico, agravando um sintoma que ele já carrega." },
+        { why: "IECA/BRA é preferencial em DM2 (nefroproteção) e o diurético tiazídico em dose baixa é o parceiro padrão para Estágio 1 + alto risco — sem esbarrar nas duas contraindicações deste paciente.", whyNot: "" },
+        { why: "Betabloqueador não é 1ª linha de rotina, e aqui há motivo extra para evitar.", whyNot: "FC de 48 bpm já é bradicardia. Betabloqueador reduziria ainda mais a frequência cardíaca — contraindicação direta." },
+        { why: "Monoterapia é reservada a casos específicos — e este não é um deles.", whyNot: "Estágio 1 com risco alto (DM2) pede terapia combinada já de início, não monoterapia com reavaliação a distância." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>150/90 mmHg</strong> persistente, em múltiplas aferições."],
+        ["Estadiamento?", "<strong>Estágio 1</strong> (PAS 140–159 e/ou PAD 90–99)."],
+        ["Estratificação de risco?", "<strong>Alto risco</strong> — DM2 já classifica automaticamente, reforçado por obesidade, tabagismo pesado e dislipidemia."],
+        ["Decisão terapêutica?", "Tratamento farmacológico indicado — MEV isolada já falhou (sem adesão)."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong> — regra para Estágio 1 + risco alto."],
+        ["Contraindicações?", "<strong>BCC</strong> pioraria o edema por IVC. <strong>Betabloqueador</strong> contraindicado pela bradicardia (FC 48bpm)."]
+      ]
+    },
+    {
+      name: "Mariana", age: 28, sex: "feminino, gestante (24 semanas)", initials: "MR",
+      vitals: [
+        { label: "PA persistente", value: "148/94", flag: true },
+        { label: "FC", value: "82 bpm", flag: false },
+        { label: "IG", value: "24 sem", flag: false }
+      ],
+      tags: [
+        { t: "Gestação 24 semanas", c: "crit" },
+        { t: "Sem proteinúria", c: "" },
+        { t: "Primigesta", c: "" },
+        { t: "Sem comorbidades prévias", c: "" }
+      ],
+      qp: "Vem à consulta de pré-natal de rotina; refere leve inchaço nos pés, nega cefaleia ou alterações visuais.",
+      options: [
+        { t: "IECA em monoterapia" },
+        { t: "Metildopa em monoterapia" },
+        { t: "BRA + diurético tiazídico" },
+        { t: "Espironolactona em monoterapia" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "IECA é 1ª linha fora da gestação — mas não aqui.", whyNot: "IECA é absolutamente contraindicado em todas as fases da gestação — efeito teratogênico." },
+        { why: "Metildopa é o anti-hipertensivo clássico e seguro para uso na gestação, com longo histórico de segurança materno-fetal.", whyNot: "" },
+        { why: "BRA erra pelo mesmo motivo do IECA.", whyNot: "BRA também é contraindicado em toda a gestação — mesma classe de risco teratogênico." },
+        { why: "Espironolactona não tem papel de 1ª linha nesse cenário.", whyNot: "Não é a escolha inicial em gestantes; não é a via preferencial de tratamento da HAS na gravidez." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>148/94 mmHg</strong> persistente na consulta de pré-natal."],
+        ["Estadiamento?", "<strong>Estágio 1</strong> (PAS 140–159 e/ou PAD 90–99)."],
+        ["Estratificação de risco?", "Gestação exige abordagem própria — prioridade em segurança materno-fetal, não nos escores de risco CV padrão."],
+        ["Decisão terapêutica?", "Tratamento farmacológico indicado já no Estágio 1 durante a gestação."],
+        ["Meta terapêutica?", "Individualizada, evitando hipotensão que reduza perfusão placentária."],
+        ["Mono ou combinada?", "<strong>Monoterapia</strong> como início."],
+        ["Contraindicações?", "<strong>IECA e BRA contraindicados</strong> em toda a gestação — usar metildopa, BCC (nifedipina) ou betabloqueador com indicação obstétrica."]
+      ]
+    },
+    {
+      name: "Sebastião", age: 82, sex: "masculino", initials: "SB",
+      vitals: [
+        { label: "PA persistente", value: "152/88", flag: true },
+        { label: "FC", value: "76 bpm", flag: false },
+        { label: "Quedas", value: "2x/mês", flag: true }
+      ],
+      tags: [
+        { t: "Frágil", c: "crit" },
+        { t: "Hipotensão ortostática sintomática", c: "crit" },
+        { t: "Quedas recorrentes", c: "crit" },
+        { t: "Polifarmácia", c: "" }
+      ],
+      qp: "Refere tontura ao levantar da cama pela manhã. Já caiu duas vezes este mês.",
+      options: [
+        { t: "Terapia combinada dupla" },
+        { t: "Monoterapia com IECA em dose baixa" },
+        { t: "Terapia combinada tripla" },
+        { t: "Betabloqueador em monoterapia" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Combinação dupla seria a regra padrão para Estágio 1 + risco elevado.", whyNot: "Não neste paciente: fragilidade e hipotensão ortostática já sintomática tornam o início combinado perigoso — risco de agravar quedas." },
+        { why: "Monoterapia em dose baixa é a conduta correta para idoso frágil com hipotensão ortostática sintomática, minimizando risco de queda enquanto trata a HAS.", whyNot: "" },
+        { why: "Terapia tripla intensificaria ainda mais o risco.", whyNot: "Mesmo motivo da combinação dupla, agravado — inadequado para um paciente já caindo." },
+        { why: "Betabloqueador entraria só com indicação específica.", whyNot: "Não há indicação compelida aqui, e pode agravar bradicardia/tontura em paciente já instável." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>152/88 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 1</strong>."],
+        ["Estratificação de risco?", "Idoso frágil — a prioridade passa a ser evitar iatrogenia (quedas, hipotensão), não só o risco CV isolado."],
+        ["Decisão terapêutica?", "Tratar, mas com cautela redobrada pela fragilidade."],
+        ["Meta terapêutica?", "Individualizada — evitar hipotensão sintomática; meta pode ser menos rígida que 130/80."],
+        ["Mono ou combinada?", "<strong>Monoterapia</strong> — regra explícita para idoso ≥80 anos, frágil ou com hipotensão ortostática sintomática."],
+        ["Contraindicações?", "Evitar início combinado (risco de queda) e betabloqueador sem indicação específica (agrava tontura/bradicardia)."]
+      ]
+    },
+    {
+      name: "Rosa", age: 68, sex: "feminino", initials: "RS",
+      vitals: [
+        { label: "PA persistente", value: "168/98", flag: true },
+        { label: "TFG", value: "25 mL/min", flag: true },
+        { label: "K+", value: "4.8", flag: false }
+      ],
+      tags: [
+        { t: "DRC estágio 4", c: "crit" },
+        { t: "TFG 25 mL/min/1,73m²", c: "crit" },
+        { t: "Edema de MMII", c: "" },
+        { t: "Anemia leve", c: "" }
+      ],
+      qp: "Acompanhamento nefrológico de rotina. Refere cansaço e edema progressivo nas pernas.",
+      options: [
+        { t: "IECA + diurético tiazídico (clortalidona)" },
+        { t: "IECA + diurético de alça (furosemida)" },
+        { t: "BRA em monoterapia" },
+        { t: "BCC + betabloqueador" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Tiazídico é o parceiro padrão do IECA/BRA na maioria dos pacientes.", whyNot: "Não com TFG ≤30: diurético tiazídico perde eficácia nessa faixa de função renal — a diretriz recomenda trocá-lo por diurético de alça." },
+        { why: "IECA mantém a nefroproteção, e o diurético de alça mantém eficácia mesmo com TFG muito reduzida — a combinação correta para DRC estágio 4.", whyNot: "" },
+        { why: "BRA isolado seria insuficiente aqui.", whyNot: "Estágio 2 exige combinação já de início, independente do risco — monoterapia não é a conduta." },
+        { why: "Essa combinação ignora a classe mais nefroprotetora disponível.", whyNot: "Perde o benefício do IECA/BRA (nefroproteção), e não há indicação específica para betabloqueador neste caso." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>168/98 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 2</strong> (PAS 160–179 e/ou PAD 100–109)."],
+        ["Estratificação de risco?", "<strong>Alto risco</strong> — DRC já classifica automaticamente."],
+        ["Decisão terapêutica?", "Combinação dupla, indicada para Estágio 2 independente do risco."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>, com acompanhamento renal."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações?", "TFG ≤30 (estágios 4–5) → trocar diurético tiazídico por <strong>diurético de alça</strong>, que mantém eficácia mesmo com função renal muito reduzida."]
+      ]
+    },
+    {
+      name: "Antônio", age: 65, sex: "masculino", initials: "AN",
+      vitals: [
+        { label: "PA persistente", value: "148/92", flag: true },
+        { label: "FC", value: "112 bpm", flag: true },
+        { label: "IMC", value: "27 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Fibrilação atrial permanente", c: "crit" },
+        { t: "Pós-IAM há 3 anos", c: "crit" },
+        { t: "Palpitações", c: "" },
+        { t: "Dislipidemia", c: "warn" }
+      ],
+      qp: "Refere palpitações frequentes. Já usa AAS e estatina desde o infarto.",
+      options: [
+        { t: "IECA + bloqueador de canal de cálcio" },
+        { t: "IECA + betabloqueador" },
+        { t: "BCC não-diidropiridínico em monoterapia" },
+        { t: "Diurético + BCC diidropiridínico" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "IECA + BCC seria uma combinação padrão de 1ª linha.", whyNot: "Mas não resolve a FA: falta um fármaco para controle de frequência cardíaca (FC 112bpm), papel que o BCC diidropiridínico não cumpre bem." },
+        { why: "Betabloqueador aqui não é opcional — é indicação compelida dupla: fibrilação atrial (controle de frequência) e pós-IAM (cardioproteção). Combinado ao IECA, cobre HAS, FA e proteção pós-infarto ao mesmo tempo.", whyNot: "" },
+        { why: "BCC não-diidropiridínico também controla frequência.", whyNot: "Estágio 1 + alto risco (pós-IAM) pede combinação, não monoterapia — e não é a 1ª escolha diante de indicação clara para betabloqueador." },
+        { why: "Diurético + BCC é combinação válida em outros cenários.", whyNot: "Ignora as duas indicações compelidas (FA e pós-IAM) que apontam diretamente para o betabloqueador." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>148/92 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 1</strong>."],
+        ["Estratificação de risco?", "<strong>Alto risco</strong> — DCV estabelecida (pós-IAM) já classifica automaticamente."],
+        ["Decisão terapêutica?", "Combinação dupla — Estágio 1 + risco alto."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações / indicações especiais?", "<strong>Betabloqueador</strong> indicado por dupla condição compelida: FA (controle de frequência) e pós-IAM (cardioproteção)."]
+      ]
+    },
+    {
+      name: "Carla", age: 54, sex: "feminino", initials: "CL",
+      vitals: [
+        { label: "PA persistente", value: "158/96", flag: true },
+        { label: "FC", value: "78 bpm", flag: false },
+        { label: "K+", value: "4.2", flag: false }
+      ],
+      tags: [
+        { t: "3 classes otimizadas há 3 meses", c: "crit" },
+        { t: "Adesão confirmada", c: "" },
+        { t: "Sem causa secundária identificada", c: "" },
+        { t: "Obesidade grau I", c: "warn" }
+      ],
+      qp: "Em acompanhamento há 3 meses, PA não controlada apesar do esquema atual e adesão confirmada.",
+      options: [
+        { t: "Trocar o BCC por outro BCC" },
+        { t: "Adicionar espironolactona" },
+        { t: "Adicionar betabloqueador como 4º fármaco" },
+        { t: "Apenas aumentar a dose do diurético tiazídico" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Trocar dentro da mesma classe não resolve.", whyNot: "Já em dose otimizada — o problema não é a escolha do BCC, é a necessidade de um 4º mecanismo de ação." },
+        { why: "PA acima da meta com 3 classes diferentes em doses otimizadas, incluindo diurético, adesão confirmada e sem causa secundária = HAS resistente. Espironolactona é o 4º fármaco de escolha, com base no estudo PATHWAY-2 — e o K+ normal permite seu uso com segurança.", whyNot: "" },
+        { why: "Betabloqueador poderia até entrar em algum momento.", whyNot: "Não é a escolha de 1ª linha para o 4º fármaco em HAS resistente — esse lugar é da espironolactona." },
+        { why: "Ajuste de dose é sempre o primeiro passo a considerar.", whyNot: "Mas já está em doses otimizadas — insuficiente isoladamente; o próximo passo correto é adicionar uma 4ª classe." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>158/96 mmHg</strong> apesar do tratamento."],
+        ["Estadiamento?", "Estágio 2 na apresentação atual, apesar de já tratada."],
+        ["Estratificação de risco?", "Alto — permanece elevado enquanto a PA não é controlada."],
+        ["Decisão terapêutica?", "Configura <strong>HAS resistente</strong>: PA acima da meta com 3 classes diferentes em doses otimizadas, incluindo diurético, adesão confirmada e sem causa secundária."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>, ainda não atingida."],
+        ["Mono ou combinada?", "Já em tripla — próximo passo é o <strong>4º fármaco</strong>."],
+        ["Contraindicações?", "Nenhuma para espironolactona (K+ normal, função renal preservada) — 1ª escolha para o 4º fármaco (PATHWAY-2)."]
+      ]
+    },
+    {
+      name: "Roberto", age: 71, sex: "masculino", initials: "RB",
+      vitals: [
+        { label: "PA persistente", value: "142/88", flag: true },
+        { label: "TFG", value: "38 mL/min", flag: true },
+        { label: "K+", value: "5.6", flag: true }
+      ],
+      tags: [
+        { t: "DRC estágio 3b", c: "crit" },
+        { t: "K+ 5.6 mEq/L", c: "crit" },
+        { t: "Já em uso de IECA + BCC", c: "" },
+        { t: "Diabético", c: "warn" }
+      ],
+      qp: "Trouxe exames de rotina — equipe percebeu potássio elevado no último hemograma.",
+      options: [
+        { t: "Adicionar espironolactona" },
+        { t: "Adicionar diurético tiazídico" },
+        { t: "Trocar IECA por BRA em dose dobrada" },
+        { t: "Adicionar mais um BCC" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Espironolactona seria a escolha padrão de 3º/4º fármaco em muitos cenários.", whyNot: "Não aqui: K+ já em 5.6 (hipercalemia) — espironolactona agravaria ainda mais, com risco real de arritmia." },
+        { why: "Diurético tiazídico é seguro nesse cenário — TFG 38 ainda permite seu uso, e ele favorece perda de potássio pela urina, ajudando a compensar a hipercalemia enquanto soma um mecanismo de ação novo.", whyNot: "" },
+        { why: "Trocar por BRA em dose maior pareceria intensificar o bloqueio do SRAA.", whyNot: "Mesma classe de risco de hipercalemia que o IECA — não resolve o problema, e dobrar dessa forma não é estratégia padrão." },
+        { why: "Mais um fármaco da mesma classe pareceria simples.", whyNot: "Já em uso de um BCC — duplicar a classe não substitui a necessidade de um 3º mecanismo de ação (diurético)." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "PA <strong>142/88 mmHg</strong> sob tratamento parcial."],
+        ["Estadiamento?", "Estágio 1 residual, apesar de 2 fármacos."],
+        ["Estratificação de risco?", "<strong>Alto risco</strong> — DRC + diabetes já classificam automaticamente."],
+        ["Decisão terapêutica?", "Precisa de um 3º fármaco para atingir a meta."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "Já em dupla — avançar para <strong>tripla</strong>."],
+        ["Contraindicações?", "K+ 5.6 <strong>contraindica espironolactona</strong>. Diurético tiazídico é seguro e ainda favorável neste cenário."]
+      ]
+    },
+    {
+      name: "Jamile", age: 45, sex: "feminino", initials: "JM",
+      vitals: [
+        { label: "PA persistente", value: "144/92", flag: true },
+        { label: "FC", value: "74 bpm", flag: false },
+        { label: "IMC", value: "24 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Afrodescendente", c: "" },
+        { t: "Estágio 1", c: "warn" },
+        { t: "Risco baixo", c: "" },
+        { t: "MEV tentada há 4 meses sem controle", c: "" }
+      ],
+      qp: "Já ajustou dieta e atividade física por 4 meses, mas a pressão segue elevada nas consultas.",
+      options: [
+        { t: "IECA em monoterapia" },
+        { t: "BCC ou diurético tiazídico em monoterapia" },
+        { t: "Betabloqueador em monoterapia" },
+        { t: "Terapia combinada tripla" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "IECA é opção válida de monoterapia em geral.", whyNot: "Nessa população, a resposta a IECA/BRA usado isoladamente é documentadamente menor — não é a escolha preferencial." },
+        { why: "BCC e diurético tiazídico têm resposta comprovadamente melhor em monoterapia na população negra, sendo a escolha preferencial aqui.", whyNot: "" },
+        { why: "Betabloqueador entraria só com indicação específica.", whyNot: "Não há indicação compelida no quadro dela — não é opção de 1ª linha." },
+        { why: "Terapia tripla pareceria mais 'segura'.", whyNot: "Estágio 1 + risco baixo não justifica essa intensidade — é desproporcional ao quadro." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>144/92 mmHg</strong> persistente mesmo após MEV."],
+        ["Estadiamento?", "<strong>Estágio 1</strong>."],
+        ["Estratificação de risco?", "<strong>Baixo</strong> — sem comorbidades ou lesão de órgão-alvo."],
+        ["Decisão terapêutica?", "MEV isolada já tentada por tempo suficiente (4 meses) sem controle → iniciar monoterapia."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Monoterapia</strong> — Estágio 1 + risco baixo."],
+        ["Contraindicações / preferência?", "Nenhuma contraindicação absoluta — mas <strong>BCC/diurético</strong> têm resposta comprovadamente melhor que IECA/BRA isolados na população negra."]
+      ]
+    },
+    {
+      name: "Eduardo", age: 50, sex: "masculino", initials: "ED",
+      vitals: [
+        { label: "PA persistente", value: "135/86", flag: true },
+        { label: "FC", value: "68 bpm", flag: false },
+        { label: "IMC", value: "26 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "DAC estabelecida — pós-IAM há 2 anos", c: "crit" },
+        { t: "Faixa de pré-hipertensão", c: "warn" },
+        { t: "Ex-tabagista", c: "" },
+        { t: "Estatina em uso", c: "" }
+      ],
+      qp: "Retorno de rotina cardiológica. Assintomático, sem dor torácica ou dispneia.",
+      options: [
+        { t: "MEV isolada, sem fármaco" },
+        { t: "Monoterapia" },
+        { t: "Terapia combinada dupla" },
+        { t: "Terapia combinada tripla imediata" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "MEV isolada seria a conduta padrão em pré-hipertensão de risco baixo/moderado.", whyNot: "Mas não aqui: DAC estabelecida (pós-IAM) já classifica como alto risco, mudando a conduta mesmo dentro da faixa de pré-hipertensão." },
+        { why: "PA 130-139/80-89 (pré-hipertensão) + alto risco (DAC estabelecida) é exatamente a indicação da diretriz para iniciar monoterapia — mesmo sem o paciente ainda estar em Estágio 1.", whyNot: "" },
+        { why: "Combinação dupla pareceria mais cautelosa.", whyNot: "Essa intensidade é reservada a estágios mais avançados (Estágio 1 com risco alto/moderado ou superior) — aqui ainda é pré-hipertensão." },
+        { why: "Tripla imediata seria desproporcional.", whyNot: "Não há justificativa para essa intensidade num paciente ainda em faixa de pré-hipertensão." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Ainda não — está em faixa de <strong>pré-hipertensão</strong> (PA 135/86)."],
+        ["Estadiamento?", "<strong>Pré-hipertensão</strong> (120–139/80–89), especificamente na faixa 130–139/80–89."],
+        ["Estratificação de risco?", "<strong>Alto risco</strong> — DAC estabelecida (pós-IAM) já classifica automaticamente, mesmo sem estágio de HAS."],
+        ["Decisão terapêutica?", "Tratamento farmacológico já indicado, mesmo em pré-hipertensão, pelo alto risco."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Monoterapia</strong> — regra específica da faixa 130–139/80–89 + alto risco."],
+        ["Contraindicações / indicação especial?", "Nenhuma contraindicação identificada; IECA é racional pela cardioproteção pós-IAM."]
+      ]
+    },
+    {
+      name: "Wagner", age: 47, sex: "masculino", initials: "WG",
+      vitals: [
+        { label: "PA persistente", value: "188/114", flag: true },
+        { label: "Ácido úrico", value: "9.2 mg/dL", flag: true },
+        { label: "IMC", value: "34 kg/m²", flag: true }
+      ],
+      tags: [
+        { t: "Estágio 3", c: "crit" },
+        { t: "Gota — crise há 2 meses", c: "crit" },
+        { t: "Obesidade grau II", c: "warn" },
+        { t: "Tabagista", c: "warn" }
+      ],
+      qp: "Refere dor articular recorrente no hálux. Sem cefaleia, sem alterações visuais no momento.",
+      options: [
+        { t: "IECA + diurético tiazídico" },
+        { t: "IECA + bloqueador de canal de cálcio" },
+        { t: "Monoterapia com diurético" },
+        { t: "Betabloqueador isolado" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "IECA + tiazídico é a combinação padrão mais usada.", whyNot: "Não aqui: diurético tiazídico pode precipitar nova crise de gota (hiperuricemia já documentada, crise recente) — evitar nesse paciente." },
+        { why: "IECA mantém a combinação eficaz de 1ª linha, e o BCC não tem impacto negativo sobre o ácido úrico — evita a classe que agravaria a gota.", whyNot: "" },
+        { why: "Monoterapia pareceria um começo mais conservador.", whyNot: "Estágio 3 exige tratamento imediato com combinação dupla ou tripla, não monoterapia." },
+        { why: "Betabloqueador poderia parecer razoável diante da PA muito elevada.", whyNot: "Sem indicação específica aqui, e insuficiente isoladamente para a gravidade do Estágio 3." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>188/114 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 3</strong> (PAS ≥180 e/ou PAD ≥110)."],
+        ["Estratificação de risco?", "Alto — nível pressórico já classifica risco elevado, reforçado por obesidade e tabagismo."],
+        ["Decisão terapêutica?", "Tratamento imediato, sem espera de MEV isolada."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "Combinada <strong>dupla ou tripla</strong>, conforme gravidade."],
+        ["Contraindicações?", "Diurético tiazídico pode precipitar crise de <strong>gota</strong> (histórico recente) — preferir IECA/BRA + BCC."]
+      ]
+    },
+    {
+      name: "Patrícia", age: 39, sex: "feminino", initials: "PT",
+      vitals: [
+        { label: "PA persistente", value: "165/100", flag: true },
+        { label: "FC", value: "92 bpm", flag: false },
+        { label: "IMC", value: "23 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Asma persistente moderada", c: "crit" },
+        { t: "Broncoespasmo recorrente", c: "crit" },
+        { t: "Sem DCV estabelecida", c: "" },
+        { t: "Risco moderado", c: "warn" }
+      ],
+      qp: "Falta de ar aos esforços; usa bombinha de resgate (salbutamol) cerca de 3x por semana.",
+      options: [
+        { t: "IECA ou BRA + betabloqueador" },
+        { t: "IECA ou BRA + bloqueador de canal de cálcio" },
+        { t: "Betabloqueador em monoterapia" },
+        { t: "Diurético tiazídico + betabloqueador" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Combinação dupla é a conduta certa para Estágio 2.", whyNot: "Mas não com betabloqueador aqui: asma persistente com broncoespasmo recorrente é motivo para evitar essa classe — risco de precipitar crise." },
+        { why: "Estágio 2 pede combinação dupla já de início, e BCC é uma das classes de 1ª linha, sem qualquer interação com a asma dela — a escolha mais segura e eficaz aqui.", whyNot: "" },
+        { why: "Monoterapia com BB pareceria controlar a taquicardia leve.", whyNot: "Estágio 2 exige combinação, não monoterapia — e ainda esbarra na mesma contraindicação relativa da asma." },
+        { why: "Diurético é uma classe de 1ª linha válida.", whyNot: "A combinação com betabloqueador mantém o mesmo problema: risco de broncoespasmo numa paciente com asma persistente." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>165/100 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 2</strong> (PAS 160–179 e/ou PAD 100–109)."],
+        ["Estratificação de risco?", "Risco <strong>moderado</strong> — sem DCV estabelecida, mas com fatores agravantes."],
+        ["Decisão terapêutica?", "Combinação dupla, indicada para Estágio 2 independente do risco."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações?", "<strong>Betabloqueador</strong> deve ser evitado — asma persistente com broncoespasmo recorrente, sem indicação compelida que justifique o risco."]
+      ]
+    },
+    {
+      name: "Vitor", age: 63, sex: "masculino", initials: "VT",
+      vitals: [
+        { label: "PA persistente", value: "148/92", flag: true },
+        { label: "FEVE", value: "32%", flag: true },
+        { label: "FC", value: "88 bpm", flag: false }
+      ],
+      tags: [
+        { t: "ICFEr (FEVE 32%)", c: "crit" },
+        { t: "Dispneia aos esforços", c: "crit" },
+        { t: "Pós-alta recente por descompensação", c: "warn" },
+        { t: "Dislipidemia", c: "warn" }
+      ],
+      qp: "Em acompanhamento após internação por insuficiência cardíaca descompensada há 1 mês. Refere cansaço aos médios esforços.",
+      options: [
+        { t: "Bloqueador de canal de cálcio + diurético" },
+        { t: "IECA ou BRA + betabloqueador" },
+        { t: "Monoterapia com bloqueador de canal de cálcio" },
+        { t: "Betabloqueador em monoterapia" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "BCC + diurético é uma combinação de 1ª linha em HAS não complicada.", whyNot: "Não aqui: BCC não tem papel comprovado em ICFEr, e não substitui a terapia de base que o coração dele precisa (IECA/BRA + BB)." },
+        { why: "Essa combinação é a terapia guiada por evidência para ICFEr (reduz mortalidade e reinternação) e, ao mesmo tempo, trata a hipertensão — dois objetivos com o mesmo esquema.", whyNot: "" },
+        { why: "Monoterapia pareceria um começo mais simples.", whyNot: "Estágio 1 + alto risco (DCV estabelecida) já pede combinação, e BCC isolado não trata a insuficiência cardíaca de base." },
+        { why: "Betabloqueador sozinho já ataca parte do problema.", whyNot: "Insuficiente isoladamente — falta o IECA/BRA, também parte essencial da terapia de ICFEr e da combinação exigida pelo estágio/risco." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>148/92 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 1</strong>."],
+        ["Estratificação de risco?", "<strong>Alto risco</strong> — ICFEr é doença cardiovascular estabelecida, classifica automaticamente."],
+        ["Decisão terapêutica?", "Combinação dupla — Estágio 1 + risco alto, reforçada pela indicação cardiológica."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>, com individualização conforme tolerância hemodinâmica."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações / indicação especial?", "<strong>IECA/BRA + betabloqueador</strong> são indicação compelida em ICFEr — tratam a insuficiência cardíaca e a HAS ao mesmo tempo."]
+      ]
+    },
+    {
+      name: "Helena", age: 41, sex: "feminino", initials: "HL",
+      vitals: [
+        { label: "PA persistente", value: "146/94", flag: true },
+        { label: "FC", value: "62 bpm", flag: true },
+        { label: "IMC", value: "29 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Enxaqueca crônica", c: "" },
+        { t: "Em uso de verapamil (neuro)", c: "crit" },
+        { t: "Obesidade grau I", c: "warn" },
+        { t: "Sedentarismo", c: "warn" }
+      ],
+      qp: "Em acompanhamento neurológico para enxaqueca crônica, em uso de verapamil há 8 meses com boa resposta. PA elevada nas últimas consultas.",
+      options: [
+        { t: "Adicionar betabloqueador" },
+        { t: "Adicionar IECA ou BRA" },
+        { t: "Trocar o verapamil por diurético tiazídico" },
+        { t: "Adicionar outro bloqueador de canal de cálcio" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Betabloqueador é uma classe eficaz e comum em combinações.", whyNot: "Não junto com verapamil: a combinação betabloqueador + BCC não-di-idropiridínico tem risco real de bradicardia/bloqueio AV grave — contraindicação direta aqui." },
+        { why: "IECA/BRA soma um mecanismo de ação diferente do verapamil, sem interação relevante, mantendo o controle da enxaqueca já conquistado e tratando a HAS com a combinação padrão.", whyNot: "" },
+        { why: "Trocar o verapamil resolveria a questão da interação.", whyNot: "Sem necessidade: o verapamil está funcionando bem para a enxaqueca dela — trocar um medicamento estável sem motivo clínico não é a conduta, e ainda perderia esse benefício." },
+        { why: "Mais um BCC pareceria reforçar o mesmo mecanismo.", whyNot: "Empilhar dois BCCs não é estratégia padrão de combinação — o parceiro indicado é de outra classe (IECA/BRA)." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>146/94 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 1</strong>."],
+        ["Estratificação de risco?", "Risco <strong>moderado</strong> — obesidade e sedentarismo, sem DCV estabelecida."],
+        ["Decisão terapêutica?", "Combinação dupla — Estágio 1 + risco moderado."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações?", "<strong>Betabloqueador contraindicado</strong> pela combinação com verapamil (BCC não-di-idropiridínico) — risco de bradicardia/bloqueio AV. IECA/BRA é o parceiro seguro."]
+      ]
+    },
+    {
+      name: "Antônia", age: 71, sex: "feminino", initials: "AT",
+      vitals: [
+        { label: "PA persistente", value: "172/104", flag: true },
+        { label: "FC", value: "80 bpm", flag: false },
+        { label: "IMC", value: "27 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Hígida, sem quedas", c: "" },
+        { t: "Sem hipotensão ortostática", c: "" },
+        { t: "Sobrepeso", c: "warn" },
+        { t: "Sedentarismo", c: "warn" }
+      ],
+      qp: "Consulta de rotina, ativa e independente. Nunca teve tontura ou episódios de queda.",
+      options: [
+        { t: "Monoterapia com IECA, reavaliar em 3 meses" },
+        { t: "Combinação dupla" },
+        { t: "MEV isolada por 3 meses" },
+        { t: "Combinação tripla imediata" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Monoterapia pareceria prudente pela idade dela.", whyNot: "A regra de monoterapia por idade vale para ≥80 anos, frágeis, ou com hipotensão ortostática sintomática — ela tem 71 anos, é hígida e sem nenhum desses critérios. Idade isolada não basta." },
+        { why: "Estágio 2 pede combinação dupla já de início, independente do risco — e não há nenhum motivo de fragilidade que justifique começar mais devagar aqui.", whyNot: "" },
+        { why: "MEV isolada seria a conduta em quadros mais leves.", whyNot: "Estágio 2 já exige tratamento farmacológico imediato, não espera de MEV isolada." },
+        { why: "Tripla pareceria mais agressivo, compatível com a PA elevada.", whyNot: "Desproporcional para Estágio 2 sem gravidade adicional — combinação dupla já é a conduta indicada." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>172/104 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 2</strong> (PAS 160–179 e/ou PAD 100–109)."],
+        ["Estratificação de risco?", "Risco <strong>moderado</strong> — sobrepeso e sedentarismo, sem lesão de órgão-alvo."],
+        ["Decisão terapêutica?", "Combinação dupla, indicada para Estágio 2 independente do risco."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações?", "Nenhuma por idade — os critérios de monoterapia (≥80 anos, fragilidade, hipotensão ortostática) não se aplicam a ela."]
+      ]
+    },
+    {
+      name: "Marcelo", age: 56, sex: "masculino", initials: "MC",
+      vitals: [
+        { label: "PA persistente", value: "148/94", flag: true },
+        { label: "K+", value: "3.1", flag: true },
+        { label: "IMC", value: "25 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Uso crônico de laxantes", c: "crit" },
+        { t: "Hipocalemia (K+ 3.1)", c: "crit" },
+        { t: "Diarreia recorrente", c: "warn" },
+        { t: "Sem DCV estabelecida", c: "" }
+      ],
+      qp: "Refere fraqueza muscular leve e cãibras. Uso prolongado de laxantes por constipação autolimitada, sem orientação médica.",
+      options: [
+        { t: "IECA ou BRA + diurético tiazídico" },
+        { t: "IECA ou BRA + bloqueador de canal de cálcio" },
+        { t: "Diurético tiazídico em monoterapia" },
+        { t: "Espironolactona em monoterapia" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Tiazídico é o parceiro mais comum do IECA/BRA.", whyNot: "Não aqui: ele já está hipocalêmico (K+ 3.1) pelo uso crônico de laxantes — tiazídico reduziria ainda mais o potássio, com risco de arritmia." },
+        { why: "IECA/BRA mantém a combinação eficaz de 1ª linha, e o BCC não interfere no potássio — evita agravar a hipocalemia já presente.", whyNot: "" },
+        { why: "Diurético tiazídico isolado seria insuficiente.", whyNot: "Estágio 1 + risco moderado pede combinação, não monoterapia — e ainda pioraria a hipocalemia." },
+        { why: "Espironolactona poupa potássio, o que pareceria lógico aqui.", whyNot: "Não é indicação de 1ª linha fora do contexto de HAS resistente — o caso pede a combinação padrão inicial, não um antagonista mineralocorticoide isolado." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>148/94 mmHg</strong> persistente."],
+        ["Estadiamento?", "<strong>Estágio 1</strong>."],
+        ["Estratificação de risco?", "Risco <strong>moderado</strong> — sem DCV estabelecida."],
+        ["Decisão terapêutica?", "Combinação dupla — Estágio 1 + risco moderado."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
+        ["Contraindicações?", "<strong>Diurético tiazídico contraindicado</strong> — hipocalemia já presente (K+ 3.1) por uso crônico de laxantes; BCC é o parceiro seguro."]
+      ]
+    }
+  ];
+
+  let idx = 0;
+  let answered = false;
+
+  const els = {
+    avatar: document.getElementById("avatar"),
+    pName: document.getElementById("pName"),
+    pMeta: document.getElementById("pMeta"),
+    vitals: document.getElementById("vitals"),
+    tags: document.getElementById("tags"),
+    qpText: document.getElementById("qpText"),
+    options: document.getElementById("options"),
+    feedback: document.getElementById("feedback"),
+    verdictText: document.getElementById("verdictText"),
+    feedbackMain: document.getElementById("feedbackMain"),
+    feedbackWhyNot: document.getElementById("feedbackWhyNot"),
+    steps: document.getElementById("steps"),
+    rationale: document.getElementById("rationale"),
+    caseCounter: document.getElementById("caseCounter"),
+    prevBtn: document.getElementById("prevBtn"),
+    nextBtn: document.getElementById("nextBtn")
+  };
+
+  function renderCase() {
+    const c = CASES[idx];
+    answered = false;
+
+    els.avatar.textContent = c.initials;
+    els.pName.textContent = c.name;
+    els.pMeta.textContent = c.age + " anos · " + c.sex;
+
+    els.vitals.innerHTML = c.vitals.map(v =>
+      '<div class="vital' + (v.flag ? ' flag' : '') + '">' +
+        '<span class="label">' + v.label + '</span>' +
+        '<span class="value">' + v.value + '</span>' +
+      '</div>'
+    ).join("");
+
+    els.tags.innerHTML = c.tags.map(t =>
+      '<span class="tag' + (t.c ? ' ' + t.c : '') + '">' + t.t + '</span>'
+    ).join("");
+
+    els.qpText.textContent = c.qp;
+
+    const letters = ["A", "B", "C", "D"];
+    els.options.innerHTML = c.options.map((o, i) =>
+      '<button class="option" data-i="' + i + '">' +
+        '<span class="letter">' + letters[i] + '</span>' +
+        '<span class="text">' + o.t + '</span>' +
+      '</button>'
+    ).join("");
+
+    els.steps.innerHTML = c.steps.map((s, i) =>
+      '<div class="step">' +
+        '<span class="n">' + (i + 1) + '</span>' +
+        '<div><span class="q">' + s[0] + '</span><span class="a">' + s[1] + '</span></div>' +
+      '</div>'
+    ).join("");
+
+    els.feedback.classList.remove("show", "is-correct", "is-wrong");
+    els.rationale.open = false;
+
+    els.caseCounter.textContent = String(idx + 1).padStart(2, "0") + " / " + CASES.length;
+    els.prevBtn.disabled = idx === 0;
+    els.nextBtn.disabled = idx === CASES.length - 1;
+  }
+
+  els.options.addEventListener("click", (e) => {
+    const btn = e.target.closest(".option");
+    if (!btn || answered) return;
+    answered = true;
+
+    const c = CASES[idx];
+    const i = Number(btn.dataset.i);
+    const data = c.feedback[i];
+    const isCorrect = i === c.answer;
+
+    [...els.options.children].forEach((opt, j) => {
+      opt.disabled = true;
+      if (j === i) {
+        opt.classList.add(isCorrect ? "correct" : "wrong");
+      } else if (j === c.answer) {
+        opt.classList.add("correct");
+      } else {
+        opt.classList.add("dim");
+      }
+    });
+
+    els.feedback.classList.add("show", isCorrect ? "is-correct" : "is-wrong");
+    els.verdictText.textContent = isCorrect ? "Correto." : "Não é essa.";
+    els.feedbackMain.textContent = data.why;
+    els.feedbackWhyNot.textContent = data.whyNot;
+    els.feedbackWhyNot.style.display = data.whyNot ? "block" : "none";
+
+    els.feedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+
+  els.prevBtn.addEventListener("click", () => { if (idx > 0) { idx--; renderCase(); } });
+  els.nextBtn.addEventListener("click", () => { if (idx < CASES.length - 1) { idx++; renderCase(); } });
+
+  renderCase();
+  /* case panel starts hidden (Resumo is the default tab), but its DOM is already populated above */
+
+  /* ---- tabs ---- */
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const panels = {
+    casos: document.getElementById("panelCasos"),
+    resumo: document.getElementById("panelResumo")
+  };
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      tabButtons.forEach((b) => b.setAttribute("aria-selected", "false"));
+      btn.setAttribute("aria-selected", "true");
+      Object.values(panels).forEach((p) => p.classList.remove("active"));
+      panels[btn.dataset.tab].classList.add("active");
+      window.scrollTo({ top: 0 });
+    });
+  });
+
+  /* contador de visitantes (aproximado) — sem elemento visível na página.
+     Soma no máximo 1 vez por navegador/aparelho (marca local), não por
+     visita — se a pessoa limpar os dados do navegador ou usar aba anônima,
+     pode contar de novo. Consulte o total em:
+     https://visitor-badge.laobi.icu/badge?page_id=ianfrantchesco.terapeutica-has-unicos */
+  try {
+    if (!localStorage.getItem("has_rounds_visited")) {
+      localStorage.setItem("has_rounds_visited", "1");
+      fetch("https://visitor-badge.laobi.icu/badge?page_id=ianfrantchesco.terapeutica-has-unicos", { mode: "no-cors" }).catch(() => {});
+    }
+  } catch (e) {}
+</script>
