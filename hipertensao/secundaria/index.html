@@ -18,6 +18,10 @@
     --teal-soft: #dcece9;
     --brick: #b23b2e;
     --brick-soft: #f6e4e1;
+    --sage: #3f7a52;
+    --sage-soft: #e3ede4;
+    --amber: #b8801f;
+    --amber-soft: #f3e6d1;
     --line: rgba(33, 38, 43, 0.13);
     --line-strong: rgba(33, 38, 43, 0.24);
     --shadow: 0 1px 2px rgba(33,38,43,0.06), 0 8px 24px -12px rgba(33,38,43,0.18);
@@ -33,6 +37,10 @@
       --teal-soft: #1c3532;
       --brick: #e37c6e;
       --brick-soft: #3a2422;
+      --sage: #7ec293;
+      --sage-soft: #223228;
+      --amber: #e2ac5f;
+      --amber-soft: #382c1a;
       --line: rgba(236, 232, 223, 0.14);
       --line-strong: rgba(236, 232, 223, 0.26);
       --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
@@ -53,20 +61,33 @@
     justify-content: center;
   }
 
-  @media (prefers-reduced-motion: reduce) { * { transition-duration: 0.001ms !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
 
-  .page { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 26px; }
+  .page { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 18px; }
 
-  .masthead { padding-bottom: 14px; border-bottom: 1px solid var(--line-strong); display: flex; flex-direction: column; gap: 4px; }
+  .masthead { padding-bottom: 14px; border-bottom: 1px solid var(--line-strong); display: flex; flex-direction: column; gap: 12px; }
   .masthead .eyebrow {
     display: block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.66rem;
     letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 2px;
   }
-  .masthead h1 { font-family: "Spectral", Georgia, serif; font-weight: 700; font-size: clamp(1.3rem, 5.5vw, 1.7rem); margin: 0; letter-spacing: -0.01em; }
+  .masthead h1 { font-family: "Spectral", Georgia, serif; font-weight: 700; font-size: clamp(1.25rem, 5.5vw, 1.6rem); margin: 0; letter-spacing: -0.01em; }
   .masthead .byline { margin: 4px 0 0; font-size: 0.85rem; font-weight: 600; }
   .masthead .byline span { font-weight: 400; color: var(--ink-soft); }
   .back-link { font-size: 0.78rem; color: var(--teal); text-decoration: none; }
   .back-link:hover { text-decoration: underline; }
+
+  .tabs { display: flex; gap: 4px; background: var(--paper); border: 1px solid var(--line); border-radius: 100px; padding: 4px; }
+  .tab-btn {
+    flex: 1; border: none; background: transparent; color: var(--ink-soft); font-family: "Public Sans", sans-serif;
+    font-weight: 600; font-size: 0.85rem; padding: 9px 10px; border-radius: 100px; cursor: pointer; transition: background 0.15s ease, color 0.15s ease;
+  }
+  .tab-btn[aria-selected="true"] { background: var(--teal); color: var(--paper-raised); }
+  .tab-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  .panel { display: none; flex-direction: column; gap: 18px; }
+  .panel.active { display: flex; }
 
   .section-title { font-family: "Spectral", Georgia, serif; font-weight: 600; font-size: 1.05rem; margin: 0 0 2px; }
   .section-sub { font-size: 0.82rem; color: var(--ink-soft); margin: 0 0 12px; }
@@ -91,6 +112,97 @@
   .cause-table td:first-child { font-family: "Public Sans", sans-serif; font-weight: 600; color: var(--teal); white-space: nowrap; }
   .cause-table th:first-child { width: 150px; }
 
+  /* ---- case nav row ---- */
+  .case-nav-row { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .navbtn {
+    width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--paper-raised); color: var(--ink);
+    font-family: "IBM Plex Mono", monospace; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s ease, opacity 0.15s ease; flex: none;
+  }
+  .navbtn:hover:not(:disabled) { background: var(--teal-soft); border-color: var(--teal); color: var(--teal); }
+  .navbtn:disabled { opacity: 0.3; cursor: default; }
+  .navbtn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .case-counter {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.76rem; color: var(--ink-soft); white-space: nowrap;
+    font-variant-numeric: tabular-nums; min-width: 68px; text-align: center;
+  }
+
+  /* ---- chart card (caso clínico) ---- */
+  .chart { background: var(--paper-raised); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .chart-id { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+  .avatar {
+    flex: none; width: 52px; height: 52px; border-radius: 50%; background: var(--teal-soft); color: var(--teal);
+    display: flex; align-items: center; justify-content: center; font-family: "Spectral", serif; font-weight: 600; font-size: 1.15rem;
+  }
+  .chart-id-text h2 { margin: 0 0 2px; font-family: "Spectral", Georgia, serif; font-size: 1.15rem; font-weight: 600; }
+  .chart-id-text p { margin: 0; font-size: 0.85rem; color: var(--ink-soft); }
+  .vitals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border-bottom: 1px solid var(--line); }
+  .vital { background: var(--paper-raised); padding: 12px 8px; text-align: center; }
+  .vital.flag { background: var(--brick-soft); }
+  .vital .label { display: block; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); margin-bottom: 4px; }
+  .vital .value { font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 600; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+  .vital.flag .value { color: var(--brick); }
+  .chart-body { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 14px; }
+  .field-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin: 0 0 6px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 0.82rem; padding: 4px 10px; border-radius: 100px; background: var(--teal-soft); color: var(--teal); white-space: nowrap; }
+  .tag.warn { background: var(--amber-soft); color: var(--amber); }
+  .tag.crit { background: var(--brick-soft); color: var(--brick); }
+  .qp { background: var(--paper); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 0.92rem; }
+  .qp strong { display: block; font-family: "Spectral", serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal); margin-bottom: 3px; font-weight: 600; }
+
+  .step-track { display: flex; gap: 6px; margin: 2px 0 0; }
+  .step-dot { flex: 1; height: 4px; border-radius: 4px; background: var(--line); }
+  .step-dot.done { background: var(--teal); }
+  .step-dot.current { background: var(--amber); }
+
+  .prompt { font-family: "Spectral", Georgia, serif; font-size: 1.1rem; font-weight: 600; line-height: 1.35; text-wrap: balance; margin: 0; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option {
+    display: flex; gap: 12px; align-items: flex-start; text-align: left; width: 100%; background: var(--paper-raised);
+    border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; font: inherit; color: var(--ink); cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.1s ease, background 0.15s ease;
+  }
+  .option:hover:not(:disabled) { border-color: var(--line-strong); }
+  .option:active:not(:disabled) { transform: scale(0.99); }
+  .option:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .option .letter {
+    flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--line); color: var(--ink-soft);
+    font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; font-weight: 600; display: flex; align-items: center; justify-content: center;
+  }
+  .option .text { font-size: 0.94rem; padding-top: 2px; }
+  .option:disabled { cursor: default; }
+  .option.correct { border-color: var(--sage); background: var(--sage-soft); }
+  .option.correct .letter { background: var(--sage); color: var(--paper-raised); }
+  .option.wrong { border-color: var(--brick); background: var(--brick-soft); }
+  .option.wrong .letter { background: var(--brick); color: var(--paper-raised); }
+  .option.dim { opacity: 0.5; }
+
+  .feedback {
+    border-radius: 12px; padding: 16px 18px; border: 1px solid var(--line); display: none; flex-direction: column; gap: 10px; animation: rise 0.25s ease;
+  }
+  .feedback.show { display: flex; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .feedback.is-correct { background: var(--sage-soft); border-color: var(--sage); }
+  .feedback.is-wrong { background: var(--brick-soft); border-color: var(--brick); }
+  .feedback .verdict { display: flex; align-items: center; gap: 8px; font-family: "Spectral", serif; font-weight: 700; font-size: 1rem; }
+  .feedback.is-correct .verdict { color: var(--sage); }
+  .feedback.is-wrong .verdict { color: var(--brick); }
+  .feedback p { margin: 0; font-size: 0.9rem; color: var(--ink); }
+  .feedback p.muted { color: var(--ink-soft); }
+
+  .next-btn {
+    align-self: flex-start; margin-top: 2px; background: var(--teal); color: var(--paper-raised); border: none;
+    border-radius: 100px; padding: 10px 20px; font: inherit; font-weight: 600; font-size: 0.88rem; cursor: pointer; display: none;
+  }
+  .next-btn.show { display: inline-flex; }
+  .next-btn:hover { opacity: 0.92; }
+
+  .done-card { background: var(--teal-soft); border: 1px solid var(--teal); border-radius: 14px; padding: 20px; text-align: center; display: none; }
+  .done-card.show { display: block; }
+  .done-card h3 { margin: 0 0 6px; font-family: "Spectral", serif; color: var(--teal); font-size: 1.05rem; }
+  .done-card p { margin: 0; font-size: 0.88rem; color: var(--ink); }
+
   footer { text-align: center; padding: 4px 8px 0; font-size: 0.75rem; color: var(--ink-soft); }
 </style>
 </head>
@@ -99,115 +211,931 @@
 <div class="page">
 
   <div class="masthead">
-    <a class="back-link" href="../../">&lsaquo; Rounds de Terapêutica</a>
-    <span class="eyebrow">Rounds &middot; HAS &middot; Diretriz SBC 2025</span>
-    <h1>HAS Secundária</h1>
-    <p class="byline"><span>por</span> Ian Frantchesco</p>
-  </div>
-
-  <div>
-    <p class="section-title">Sinais de alerta</p>
-    <p class="section-sub">Quadro 15.1 — quando suspeitar de uma causa identificável</p>
-    <div class="flags">
-      <div class="flag-row"><span class="flag-num">1</span><p>Hipertensão estágio 3 antes dos 30 anos ou após os 55 anos</p></div>
-      <div class="flag-row"><span class="flag-num">2</span><p>Hipertensão resistente ou refratária</p></div>
-      <div class="flag-row"><span class="flag-num">3</span><p>Utilização de hormônios exógenos, fármacos ou substâncias que possam elevar a PA</p></div>
-      <div class="flag-row"><span class="flag-num">4</span><p>Tríade do feocromocitoma: crises de palpitações, sudorese e cefaleia</p></div>
-      <div class="flag-row"><span class="flag-num">5</span><p>Indícios de apneia obstrutiva do sono</p></div>
-      <div class="flag-row"><span class="flag-num">6</span><p>Fácies típica ou biótipo de doenças que cursam com hipertensão arterial</p></div>
-      <div class="flag-row"><span class="flag-num">7</span><p>Presença de sopros em territórios arteriais ou massas abdominais</p></div>
-      <div class="flag-row"><span class="flag-num">8</span><p>Assimetria ou ausência de pulsos em membros inferiores</p></div>
-      <div class="flag-row"><span class="flag-num">9</span><p>Hipopotassemia espontânea ou severa induzida por diuréticos (&lt;3,0 mEq/L)</p></div>
-      <div class="flag-row"><span class="flag-num">10</span><p>Exame de urina anormal (hematúria dismórfica, albuminúria/proteinúria), queda do RFG estimado, creatinina elevada ou alteração de imagem renal</p></div>
+    <div>
+      <a class="back-link" href="../../">&lsaquo; Rounds de Terapêutica</a><br>
+      <span class="eyebrow">Rounds &middot; HAS &middot; Diretriz SBC 2025</span>
+      <h1>HAS Secundária</h1>
+      <p class="byline"><span>por</span> Ian Frantchesco</p>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn" role="tab" data-tab="resumo" aria-selected="true">Resumo</button>
+      <button class="tab-btn" role="tab" data-tab="casos" aria-selected="false">Casos clínicos</button>
     </div>
   </div>
 
-  <div>
-    <p class="section-title">Causas não-endócrinas</p>
-    <p class="section-sub">Doença renal, estenose de artéria renal, apneia do sono e coarctação de aorta</p>
-    <div class="table-wrap">
-      <table class="cause-table">
-        <thead><tr><th>Causa</th><th>Achados clínicos</th><th>Rastreamento</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>Doença renal parenquimatosa</td>
-            <td>Edema, anemia, creatinina elevada, alterações urinárias</td>
-            <td>Creatinina + RFG-e, urina tipo I, relação albuminúria/creatininúria, USG renal</td>
-          </tr>
-          <tr>
-            <td>Estenose de artéria renal</td>
-            <td>HAS súbita ou refratária antes dos 30 ou após os 55a; sopro abdominal; EAP súbito; piora de função renal com IECA/BRA; assimetria renal &gt;1,5cm</td>
-            <td>USG Doppler renal; angioTC ou RNM (ou TC espiral); padrão-ouro: arteriografia renal</td>
-          </tr>
-          <tr>
-            <td>Apneia obstrutiva do sono</td>
-            <td>Ronco, pausas/engasgos no sono, sonolência diurna excessiva, sono não reparador, cefaleia matinal, nictúria</td>
-            <td>Padrão-ouro: polissonografia ou poligrafia residencial (IAH ≥5/h = AOS)</td>
-          </tr>
-          <tr>
-            <td>Coarctação da aorta</td>
-            <td>Fraqueza em MMII, pulsos de MMII diminuídos/ausentes, PAS em MMSS &gt;10mmHg vs MMII, sopro sistólico interescapular</td>
-            <td>Rx de tórax, ecocardiograma para rastreio; padrão-ouro: angio-RNM de aorta</td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- ===== PAINEL: RESUMO ===== -->
+  <div class="panel active" id="panelResumo">
+
+    <div>
+      <p class="section-title">Sinais de alerta</p>
+      <p class="section-sub">Quadro 15.1 — quando suspeitar de uma causa identificável</p>
+      <div class="flags">
+        <div class="flag-row"><span class="flag-num">1</span><p>Hipertensão estágio 3 antes dos 30 anos ou após os 55 anos</p></div>
+        <div class="flag-row"><span class="flag-num">2</span><p>Hipertensão resistente ou refratária</p></div>
+        <div class="flag-row"><span class="flag-num">3</span><p>Utilização de hormônios exógenos, fármacos ou substâncias que possam elevar a PA</p></div>
+        <div class="flag-row"><span class="flag-num">4</span><p>Tríade do feocromocitoma: crises de palpitações, sudorese e cefaleia</p></div>
+        <div class="flag-row"><span class="flag-num">5</span><p>Indícios de apneia obstrutiva do sono</p></div>
+        <div class="flag-row"><span class="flag-num">6</span><p>Fácies típica ou biótipo de doenças que cursam com hipertensão arterial</p></div>
+        <div class="flag-row"><span class="flag-num">7</span><p>Presença de sopros em territórios arteriais ou massas abdominais</p></div>
+        <div class="flag-row"><span class="flag-num">8</span><p>Assimetria ou ausência de pulsos em membros inferiores</p></div>
+        <div class="flag-row"><span class="flag-num">9</span><p>Hipopotassemia espontânea ou severa induzida por diuréticos (&lt;3,0 mEq/L)</p></div>
+        <div class="flag-row"><span class="flag-num">10</span><p>Exame de urina anormal (hematúria dismórfica, albuminúria/proteinúria), queda do RFG estimado, creatinina elevada ou alteração de imagem renal</p></div>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-title">Causas não-endócrinas</p>
+      <p class="section-sub">Doença renal, estenose de artéria renal, apneia do sono e coarctação de aorta</p>
+      <div class="table-wrap">
+        <table class="cause-table">
+          <thead><tr><th>Causa</th><th>Achados clínicos</th><th>Rastreamento</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Doença renal parenquimatosa</td>
+              <td>Edema, anemia, creatinina elevada, alterações urinárias</td>
+              <td>Creatinina + RFG-e, urina tipo I, relação albuminúria/creatininúria, USG renal</td>
+            </tr>
+            <tr>
+              <td>Estenose de artéria renal</td>
+              <td>HAS súbita ou refratária antes dos 30 ou após os 55a; sopro abdominal; EAP súbito; piora de função renal com IECA/BRA; assimetria renal &gt;1,5cm</td>
+              <td>USG Doppler renal; angioTC ou RNM (ou TC espiral); padrão-ouro: arteriografia renal</td>
+            </tr>
+            <tr>
+              <td>Apneia obstrutiva do sono</td>
+              <td>Ronco, pausas/engasgos no sono, sonolência diurna excessiva, sono não reparador, cefaleia matinal, nictúria</td>
+              <td>Padrão-ouro: polissonografia ou poligrafia residencial (IAH ≥5/h = AOS)</td>
+            </tr>
+            <tr>
+              <td>Coarctação da aorta</td>
+              <td>Fraqueza em MMII, pulsos de MMII diminuídos/ausentes, PAS em MMSS &gt;10mmHg vs MMII, sopro sistólico interescapular</td>
+              <td>Rx de tórax, ecocardiograma para rastreio; padrão-ouro: angio-RNM de aorta</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-title">Causas endócrinas</p>
+      <p class="section-sub">Da mais comum às mais raras</p>
+      <div class="table-wrap">
+        <table class="cause-table">
+          <thead><tr><th>Causa</th><th>Achados clínicos</th><th>Achados adicionais / rastreamento</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Hiperaldosteronismo primário</td>
+              <td>HA resistente/refratária ± hipopotassemia (não obrigatória) ± nódulo adrenal</td>
+              <td>Aldosterona + renina plasmática (relação aldosterona/renina &gt;30); TC de cortes finos ou RNM de adrenais</td>
+            </tr>
+            <tr>
+              <td>Feocromocitoma / paraganglioma</td>
+              <td>HA paroxística — tríade cefaleia, sudorese e palpitações</td>
+              <td>Metanefrinas plasmáticas livres e/ou urinárias fracionadas; TC, RNM, cintilografia</td>
+            </tr>
+            <tr>
+              <td>Hipotireoidismo</td>
+              <td>Fadiga, ganho de peso, HA diastólica, fraqueza muscular, sonolência</td>
+              <td>TSH e T4 livre</td>
+            </tr>
+            <tr>
+              <td>Hipertireoidismo</td>
+              <td>Intolerância ao calor, perda de peso, taquicardia/palpitações, exoftalmia, tremores, bócio</td>
+              <td>TSH e T4 livre</td>
+            </tr>
+            <tr>
+              <td>Hiperparatireoidismo</td>
+              <td>Litíase urinária, osteoporose, fraqueza muscular, poliúria, polidipsia, constipação</td>
+              <td>Cálcio total/iônico, fósforo, PTH, calciúria de 24h, vitamina D</td>
+            </tr>
+            <tr>
+              <td>Síndrome de Cushing</td>
+              <td>Fácies em "lua cheia", "giba dorsal", estrias purpúreas, obesidade central, hipopotassemia</td>
+              <td>Cortisol basal/salivar à meia-noite/urinário 24h; teste de supressão com dexametasona</td>
+            </tr>
+            <tr>
+              <td>Obesidade</td>
+              <td>Gordura central ou generalizada — classe 1 (IMC 30–&lt;35), classe 2 (35–&lt;40), classe 3 (≥40)</td>
+              <td>IMC + circunferência abdominal (&gt;102cm ♂ / &gt;88cm ♀); DEXA (padrão-ouro), TC, RNM</td>
+            </tr>
+            <tr>
+              <td>Acromegalia</td>
+              <td>HA em até 30% dos casos + DM, HVE, AOS; macrognatia, crescimento de mãos/pés, macroglossia</td>
+              <td>IGF-1, GH basal e pós-sobrecarga oral de glicose; RNM de sela túrsica (preferencial) ou TC</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
-  <div>
-    <p class="section-title">Causas endócrinas</p>
-    <p class="section-sub">Da mais comum às mais raras</p>
-    <div class="table-wrap">
-      <table class="cause-table">
-        <thead><tr><th>Causa</th><th>Achados clínicos</th><th>Achados adicionais / rastreamento</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>Hiperaldosteronismo primário</td>
-            <td>HA resistente/refratária ± hipopotassemia (não obrigatória) ± nódulo adrenal</td>
-            <td>Aldosterona + renina plasmática (relação aldosterona/renina &gt;30); TC de cortes finos ou RNM de adrenais</td>
-          </tr>
-          <tr>
-            <td>Feocromocitoma / paraganglioma</td>
-            <td>HA paroxística — tríade cefaleia, sudorese e palpitações</td>
-            <td>Metanefrinas plasmáticas livres e/ou urinárias fracionadas; TC, RNM, cintilografia</td>
-          </tr>
-          <tr>
-            <td>Hipotireoidismo</td>
-            <td>Fadiga, ganho de peso, HA diastólica, fraqueza muscular, sonolência</td>
-            <td>TSH e T4 livre</td>
-          </tr>
-          <tr>
-            <td>Hipertireoidismo</td>
-            <td>Intolerância ao calor, perda de peso, taquicardia/palpitações, exoftalmia, tremores, bócio</td>
-            <td>TSH e T4 livre</td>
-          </tr>
-          <tr>
-            <td>Hiperparatireoidismo</td>
-            <td>Litíase urinária, osteoporose, fraqueza muscular, poliúria, polidipsia, constipação</td>
-            <td>Cálcio total/iônico, fósforo, PTH, calciúria de 24h, vitamina D</td>
-          </tr>
-          <tr>
-            <td>Síndrome de Cushing</td>
-            <td>Fácies em "lua cheia", "giba dorsal", estrias purpúreas, obesidade central, hipopotassemia</td>
-            <td>Cortisol basal/salivar à meia-noite/urinário 24h; teste de supressão com dexametasona</td>
-          </tr>
-          <tr>
-            <td>Obesidade</td>
-            <td>Gordura central ou generalizada — classe 1 (IMC 30–&lt;35), classe 2 (35–&lt;40), classe 3 (≥40)</td>
-            <td>IMC + circunferência abdominal (&gt;102cm ♂ / &gt;88cm ♀); DEXA (padrão-ouro), TC, RNM</td>
-          </tr>
-          <tr>
-            <td>Acromegalia</td>
-            <td>HA em até 30% dos casos + DM, HVE, AOS; macrognatia, crescimento de mãos/pés, macroglossia</td>
-            <td>IGF-1, GH basal e pós-sobrecarga oral de glicose; RNM de sela túrsica (preferencial) ou TC</td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- ===== PAINEL: CASOS CLÍNICOS ===== -->
+  <div class="panel" id="panelCasos">
+
+    <div class="case-nav-row">
+      <button class="navbtn" id="prevBtn" aria-label="Caso anterior">&lsaquo;</button>
+      <span class="case-counter" id="caseCounter">01 / 10</span>
+      <button class="navbtn" id="nextBtn" aria-label="Próximo caso">&rsaquo;</button>
+    </div>
+
+    <div class="chart">
+      <div class="chart-id">
+        <div class="avatar" id="avatar">SN</div>
+        <div class="chart-id-text">
+          <h2 id="pName">—</h2>
+          <p id="pMeta">—</p>
+        </div>
+      </div>
+      <div class="vitals" id="vitals"></div>
+      <div class="chart-body">
+        <div>
+          <p class="field-label">Achados</p>
+          <div class="tags" id="tags"></div>
+        </div>
+        <div class="qp">
+          <strong>Queixa principal</strong>
+          <span id="qpText">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-track" id="stepTrack"></div>
+    <p class="prompt" id="promptText"></p>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback">
+      <div class="verdict" id="verdictText"></div>
+      <p id="feedbackMain"></p>
+      <p class="muted" id="feedbackWhyNot"></p>
+    </div>
+    <button class="next-btn" id="nextBtn2">Próxima pergunta &rsaquo;</button>
+
+    <div class="done-card" id="doneCard">
+      <h3>Caso concluído</h3>
+      <p id="doneText"></p>
     </div>
   </div>
 
   <footer>Diretriz Brasileira de Hipertensão Arterial &mdash; SBC/SBN/SBH, 2025</footer>
 </div>
+
+<script>
+  const CASES = [
+    {
+      name: "Sônia", age: 62, sex: "feminino", initials: "SN",
+      vitals: [
+        { label: "PA", value: "168/102", flag: true },
+        { label: "Creatinina", value: "2.1 mg/dL", flag: true },
+        { label: "TFG", value: "34 mL/min", flag: true }
+      ],
+      tags: [
+        { t: "Edema de MMII", c: "crit" },
+        { t: "Anemia", c: "warn" },
+        { t: "Alterações urinárias", c: "crit" },
+        { t: "DM2 de longa data", c: "warn" }
+      ],
+      qp: "Acompanhamento por edema progressivo nas pernas e cansaço. Exames de rotina mostraram alteração de função renal.",
+      steps: [
+        {
+          prompt: "Qual sinal de alerta para HAS secundária está presente?",
+          options: ["Hipertensão estágio 3 antes dos 30 anos", "Exame de urina anormal, com queda do RFG estimado e creatinina elevada", "Tríade do feocromocitoma", "Assimetria de pulsos em MMII"],
+          answer: 1,
+          feedback: [
+            { why: "Esse é um dos sinais de alerta do Quadro 15.1.", whyNot: "Não é o achado presente neste caso — a idade dela e o padrão de início não se encaixam aqui." },
+            { why: "Alteração de exame de urina, queda do RFG estimado e creatinina elevada são sinais de alerta diretos para investigar causa renal de HAS secundária.", whyNot: "" },
+            { why: "Tríade do feocromocitoma é outro sinal de alerta possível.", whyNot: "Não há relato de cefaleia, sudorese e palpitações paroxísticas neste caso." },
+            { why: "Assimetria de pulsos sugeriria outra causa.", whyNot: "Não é o achado presente — o quadro aponta para outra direção." }
+          ]
+        },
+        {
+          prompt: "Qual a causa mais provável?",
+          options: ["Estenose de artéria renal", "Doença renal parenquimatosa", "Hiperaldosteronismo primário", "Coarctação da aorta"],
+          answer: 1,
+          feedback: [
+            { why: "Estenose de artéria renal teria outro padrão de apresentação.", whyNot: "Não há HAS de início súbito nem sopro abdominal relatado — o quadro é mais compatível com doença renal parenquimatosa." },
+            { why: "Edema, anemia, creatinina elevada e alterações urinárias formam o padrão clássico de doença renal parenquimatosa.", whyNot: "" },
+            { why: "Hiperaldosteronismo cursaria com outro perfil.", whyNot: "Sem hipopotassemia ou HAS resistente relatada — não é o quadro mais provável aqui." },
+            { why: "Coarctação de aorta teria outros achados.", whyNot: "Sem assimetria de pulsos ou sopro interescapular — não é compatível." }
+          ]
+        },
+        {
+          prompt: "Qual o exame de rastreamento inicial mais indicado?",
+          options: ["Metanefrinas plasmáticas", "Creatinina + RFG-e, urina tipo I e relação albuminúria/creatininúria", "TSH e T4 livre", "Cortisol salivar noturno"],
+          answer: 1,
+          feedback: [
+            { why: "Metanefrinas seriam para investigar feocromocitoma.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Esse é o conjunto de exames de rastreio inicial para doença renal parenquimatosa, avaliando função renal e alterações urinárias.", whyNot: "" },
+            { why: "TSH e T4 livre investigariam causa tireoidiana.", whyNot: "Não é a suspeita principal neste caso." },
+            { why: "Cortisol salivar investigaria Cushing.", whyNot: "Sem achados sugestivos dessa causa aqui." }
+          ]
+        },
+        {
+          prompt: "Qual exame de imagem complementa a investigação nesse caso?",
+          options: ["Angiotomografia de aorta", "Ultrassonografia renal", "RNM de sela túrsica", "Ecocardiograma"],
+          answer: 1,
+          feedback: [
+            { why: "Angiotomografia de aorta seria para investigar coarctação.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "A ultrassonografia renal complementa a avaliação de doença renal parenquimatosa, avaliando estrutura e tamanho dos rins.", whyNot: "" },
+            { why: "RNM de sela túrsica investigaria acromegalia.", whyNot: "Sem achados sugestivos dessa causa aqui." },
+            { why: "Ecocardiograma teria outro papel.", whyNot: "Não é o exame de imagem mais direcionado para essa suspeita." }
+          ]
+        }
+      ],
+      done: "Edema, anemia, creatinina elevada e alterações urinárias apontam para doença renal parenquimatosa — rastreio com creatinina/RFG-e, urina tipo I e USG renal."
+    },
+    {
+      name: "Aparecido", age: 68, sex: "masculino", initials: "AP",
+      vitals: [
+        { label: "PA", value: "182/108", flag: true },
+        { label: "Creatinina", value: "1.6 mg/dL", flag: true },
+        { label: "FC", value: "80 bpm", flag: false }
+      ],
+      tags: [
+        { t: "HAS refratária, início após os 55 anos", c: "crit" },
+        { t: "Sopro abdominal", c: "crit" },
+        { t: "Piora de função renal ao iniciar IECA", c: "crit" },
+        { t: "Assimetria de tamanho renal", c: "warn" }
+      ],
+      qp: "HAS de início recente, de difícil controle mesmo com 3 medicações. Piora da função renal desde que iniciou IECA há 2 meses.",
+      steps: [
+        {
+          prompt: "Qual sinal de alerta está presente?",
+          options: ["Hipopotassemia severa", "HAS refratária + piora de função renal ao usar medicamento que bloqueia o SRAA", "Tríade do feocromocitoma", "Fácies típica"],
+          answer: 1,
+          feedback: [
+            { why: "Hipopotassemia não foi relatada aqui.", whyNot: "Não é o achado presente neste caso." },
+            { why: "HAS refratária de início após os 55 anos, associada a piora de função renal ao iniciar IECA (que bloqueia o SRAA), é sinal de alerta clássico para estenose de artéria renal.", whyNot: "" },
+            { why: "Tríade do feocromocitoma seria outro sinal de alerta.", whyNot: "Não há relato de crises de cefaleia, sudorese e palpitações aqui." },
+            { why: "Fácies típica sugeriria outra causa.", whyNot: "Não é o achado direcionador neste caso." }
+          ]
+        },
+        {
+          prompt: "Qual a causa mais provável?",
+          options: ["Estenose de artéria renal", "Hipotireoidismo", "Síndrome de Cushing", "Apneia obstrutiva do sono"],
+          answer: 0,
+          feedback: [
+            { why: "HAS refratária de início tardio + sopro abdominal + piora de função renal com IECA formam o padrão clássico de estenose de artéria renal.", whyNot: "" },
+            { why: "Hipotireoidismo teria outro conjunto de achados.", whyNot: "Sem fadiga, ganho de peso ou HA diastólica isolada relatados." },
+            { why: "Cushing teria achados físicos característicos.", whyNot: "Sem fácies em lua cheia, giba dorsal ou estrias — não é compatível." },
+            { why: "AOS teria outro padrão de queixas.", whyNot: "Sem ronco, sonolência diurna ou pausas respiratórias relatadas." }
+          ]
+        },
+        {
+          prompt: "Qual exame de rastreio inicial (mesmo sendo observador-dependente)?",
+          options: ["TSH", "USG com Doppler renal (velocidade de fluxo e índice de resistividade)", "Cortisol urinário 24h", "Polissonografia"],
+          answer: 1,
+          feedback: [
+            { why: "TSH investigaria causa tireoidiana.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "USG Doppler renal é o exame de rastreio inicial para estenose de artéria renal, embora seja observador-dependente.", whyNot: "" },
+            { why: "Cortisol urinário investigaria Cushing.", whyNot: "Não é a suspeita principal neste caso." },
+            { why: "Polissonografia investigaria apneia do sono.", whyNot: "Não é a suspeita principal aqui." }
+          ]
+        },
+        {
+          prompt: "Qual é o padrão-ouro diagnóstico?",
+          options: ["Arteriografia renal convencional", "Ressonância de sela túrsica", "Ecocardiograma", "TC de crânio"],
+          answer: 0,
+          feedback: [
+            { why: "A arteriografia renal convencional é o padrão-ouro para confirmação de estenose de artéria renal.", whyNot: "" },
+            { why: "RNM de sela túrsica seria para acromegalia.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Ecocardiograma teria outro papel.", whyNot: "Não é o padrão-ouro para essa suspeita." },
+            { why: "TC de crânio não tem relação com essa investigação.", whyNot: "Irrelevante para o diagnóstico de estenose renal." }
+          ]
+        }
+      ],
+      done: "HAS refratária de início tardio, sopro abdominal e piora de função renal com IECA/BRA apontam para estenose de artéria renal — USG Doppler como rastreio, arteriografia como padrão-ouro."
+    },
+    {
+      name: "Marcos", age: 50, sex: "masculino", initials: "MK",
+      vitals: [
+        { label: "PA", value: "158/96", flag: true },
+        { label: "IMC", value: "34 kg/m²", flag: true },
+        { label: "Circ. cervical", value: "44 cm", flag: true }
+      ],
+      tags: [
+        { t: "Ronco alto todas as noites", c: "crit" },
+        { t: "Pausas respiratórias observadas pela esposa", c: "crit" },
+        { t: "Sonolência diurna excessiva", c: "warn" },
+        { t: "Cefaleia matinal", c: "warn" }
+      ],
+      qp: "Esposa relata ronco muito alto com pausas respiratórias durante o sono. Ele refere sonolência diurna importante e cefaleia ao acordar.",
+      steps: [
+        {
+          prompt: "Qual sinal de alerta está presente?",
+          options: ["Assimetria de pulsos em MMII", "Indícios de apneia obstrutiva do sono", "Hipopotassemia espontânea", "Sopro abdominal"],
+          answer: 1,
+          feedback: [
+            { why: "Assimetria de pulsos não é o achado deste caso.", whyNot: "Não há relato de pulsos alterados." },
+            { why: "Ronco alto, pausas respiratórias observadas, sonolência diurna e cefaleia matinal são indícios clássicos de apneia obstrutiva do sono — sinal de alerta explícito do Quadro 15.1.", whyNot: "" },
+            { why: "Hipopotassemia não foi relatada.", whyNot: "Não é o achado presente neste caso." },
+            { why: "Sopro abdominal não foi relatado.", whyNot: "Não é o achado presente neste caso." }
+          ]
+        },
+        {
+          prompt: "Qual a causa mais provável?",
+          options: ["Feocromocitoma", "Apneia obstrutiva do sono", "Coarctação da aorta", "Hipertireoidismo"],
+          answer: 1,
+          feedback: [
+            { why: "Feocromocitoma teria outro padrão de crises.", whyNot: "Sem tríade de cefaleia, sudorese e palpitações paroxísticas." },
+            { why: "Ronco, pausas respiratórias, sonolência diurna e cefaleia matinal formam o quadro clássico de apneia obstrutiva do sono, causa não-endócrina comum de HAS secundária.", whyNot: "" },
+            { why: "Coarctação teria outros achados.", whyNot: "Sem assimetria de pulsos ou sopro interescapular." },
+            { why: "Hipertireoidismo teria outro conjunto de sintomas.", whyNot: "Sem intolerância ao calor, perda de peso ou taquicardia relatadas." }
+          ]
+        },
+        {
+          prompt: "Qual o padrão-ouro para diagnóstico?",
+          options: ["Polissonografia ou poligrafia residencial", "TC de crânio", "Cortisol salivar", "USG Doppler renal"],
+          answer: 0,
+          feedback: [
+            { why: "A polissonografia (ou poligrafia residencial) é o padrão-ouro para diagnóstico de apneia obstrutiva do sono.", whyNot: "" },
+            { why: "TC de crânio não é o exame indicado aqui.", whyNot: "Sem relação com o diagnóstico de AOS." },
+            { why: "Cortisol salivar investigaria Cushing.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "USG Doppler renal investigaria estenose renal.", whyNot: "Não é a suspeita principal aqui." }
+          ]
+        },
+        {
+          prompt: "Segundo o índice de apneia-hipopneia (IAH), a partir de qual valor se considera AOS presente?",
+          options: ["IAH <5 eventos/h", "IAH ≥5 eventos/h", "Só a partir de IAH ≥30", "O IAH não define o diagnóstico"],
+          answer: 1,
+          feedback: [
+            { why: "IAH <5 é considerado sem AOS.", whyNot: "Esse valor exclui, não confirma, o diagnóstico." },
+            { why: "IAH ≥5 eventos/h já caracteriza AOS (leve, moderada ou importante, conforme o valor exato).", whyNot: "" },
+            { why: "IAH ≥30 seria só a faixa mais grave.", whyNot: "AOS já está presente a partir de valores bem menores." },
+            { why: "O IAH pareceria só um número de referência.", whyNot: "Na verdade, é o critério central de definição e gravidade do diagnóstico." }
+          ]
+        }
+      ],
+      done: "Ronco, pausas respiratórias, sonolência diurna e cefaleia matinal apontam para apneia obstrutiva do sono — polissonografia é o padrão-ouro, com IAH ≥5/h definindo o diagnóstico."
+    },
+    {
+      name: "Bruno", age: 19, sex: "masculino", initials: "BR",
+      vitals: [
+        { label: "PA (braço)", value: "168/98", flag: true },
+        { label: "PA (perna)", value: "142/88", flag: true },
+        { label: "Pulsos femorais", value: "diminuídos", flag: true }
+      ],
+      tags: [
+        { t: "Fraqueza em MMII aos esforços", c: "crit" },
+        { t: "Pulsos femorais diminuídos", c: "crit" },
+        { t: "Sopro sistólico interescapular", c: "warn" },
+        { t: "PAS braço > PAS perna em >10mmHg", c: "crit" }
+      ],
+      qp: "Jovem atlético, refere cansaço nas pernas durante corrida. Exame físico com pulsos femorais diminuídos comparados aos radiais.",
+      steps: [
+        {
+          prompt: "Qual sinal de alerta está presente?",
+          options: ["Hipertensão estágio 3 antes dos 30 anos", "Assimetria ou ausência de pulsos em membros inferiores", "Tríade do feocromocitoma", "Hipopotassemia severa"],
+          answer: 1,
+          feedback: [
+            { why: "Esse sinal também existe, mas não é o mais direto aqui.", whyNot: "O quadro tem um achado ainda mais específico e característico." },
+            { why: "Pulsos femorais diminuídos, com PAS maior nos braços que nas pernas, é sinal de alerta explícito do Quadro 15.1 para coarctação da aorta.", whyNot: "" },
+            { why: "Tríade do feocromocitoma não está presente.", whyNot: "Sem cefaleia, sudorese e palpitações paroxísticas relatadas." },
+            { why: "Hipopotassemia não foi relatada.", whyNot: "Não é o achado presente neste caso." }
+          ]
+        },
+        {
+          prompt: "Qual a causa mais provável?",
+          options: ["Coarctação da aorta", "Hiperaldosteronismo primário", "Hipertireoidismo", "Doença renal parenquimatosa"],
+          answer: 0,
+          feedback: [
+            { why: "Fraqueza em MMII, pulsos femorais diminuídos, PAS maior nos braços e sopro interescapular formam o padrão clássico de coarctação da aorta.", whyNot: "" },
+            { why: "Hiperaldosteronismo teria outro perfil.", whyNot: "Sem hipopotassemia ou HAS resistente relatada." },
+            { why: "Hipertireoidismo teria outros achados.", whyNot: "Sem intolerância ao calor, tremores ou bócio." },
+            { why: "Doença renal teria outro conjunto de achados.", whyNot: "Sem edema, alteração de creatinina ou urina anormal relatados." }
+          ]
+        },
+        {
+          prompt: "Qual o exame de rastreio inicial mais indicado?",
+          options: ["Radiografia de tórax e ecocardiograma", "Metanefrinas urinárias", "TSH e T4 livre", "Polissonografia"],
+          answer: 0,
+          feedback: [
+            { why: "Radiografia de tórax e ecocardiograma são os exames de rastreio inicial para coarctação da aorta.", whyNot: "" },
+            { why: "Metanefrinas investigariam feocromocitoma.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "TSH e T4 livre investigariam causa tireoidiana.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Polissonografia investigaria apneia do sono.", whyNot: "Não é a suspeita principal aqui." }
+          ]
+        },
+        {
+          prompt: "Qual o exame padrão-ouro para confirmação diagnóstica?",
+          options: ["Angio-RNM de aorta (preferencial) ou angiotomografia", "Arteriografia renal convencional", "RNM de sela túrsica", "Polissonografia"],
+          answer: 0,
+          feedback: [
+            { why: "Angio-RNM de aorta é o padrão-ouro preferencial para confirmar coarctação, com angiotomografia como alternativa; angiografia invasiva fica reservada para dados adicionais.", whyNot: "" },
+            { why: "Arteriografia renal seria para estenose de artéria renal.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "RNM de sela túrsica seria para acromegalia.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Polissonografia seria para apneia do sono.", whyNot: "Não é a suspeita principal aqui." }
+          ]
+        }
+      ],
+      done: "Pulsos femorais diminuídos e PAS maior nos braços que nas pernas apontam para coarctação da aorta — rastreio com Rx de tórax e ecocardiograma, confirmação por angio-RNM de aorta."
+    },
+    {
+      name: "Regina", age: 47, sex: "feminino", initials: "RG",
+      vitals: [
+        { label: "PA", value: "170/104", flag: true },
+        { label: "K+", value: "2.9 mEq/L", flag: true },
+        { label: "FC", value: "76 bpm", flag: false }
+      ],
+      tags: [
+        { t: "HAS resistente (4 medicações)", c: "crit" },
+        { t: "Hipopotassemia espontânea", c: "crit" },
+        { t: "Cãibras e fraqueza muscular", c: "warn" },
+        { t: "Nódulo adrenal em exame prévio", c: "warn" }
+      ],
+      qp: "HAS de difícil controle apesar de 4 classes de anti-hipertensivos. Refere cãibras frequentes. Exame de imagem prévio mostrou nódulo em adrenal.",
+      steps: [
+        {
+          prompt: "Qual sinal de alerta está presente?",
+          options: ["Sopro abdominal", "HAS resistente + hipopotassemia espontânea + nódulo adrenal", "Assimetria de pulsos", "Fácies típica"],
+          answer: 1,
+          feedback: [
+            { why: "Sopro abdominal sugeriria outra causa.", whyNot: "Não é o achado presente neste caso." },
+            { why: "HAS resistente associada a hipopotassemia espontânea e nódulo adrenal é a combinação clássica de sinais de alerta para hiperaldosteronismo primário.", whyNot: "" },
+            { why: "Assimetria de pulsos sugeriria coarctação.", whyNot: "Não é o achado presente aqui." },
+            { why: "Fácies típica sugeriria outra síndrome.", whyNot: "Não é o achado presente neste caso." }
+          ]
+        },
+        {
+          prompt: "Qual a causa mais provável?",
+          options: ["Hipotireoidismo", "Hiperaldosteronismo primário", "Coarctação da aorta", "Doença renal parenquimatosa"],
+          answer: 1,
+          feedback: [
+            { why: "Hipotireoidismo teria outro conjunto de achados.", whyNot: "Sem fadiga, ganho de peso ou HA diastólica isolada relatados." },
+            { why: "HAS resistente + hipopotassemia (não obrigatória, mas presente aqui) + nódulo adrenal formam o padrão clássico de hiperaldosteronismo primário.", whyNot: "" },
+            { why: "Coarctação teria outros achados físicos.", whyNot: "Sem assimetria de pulsos relatada." },
+            { why: "Doença renal teria outro perfil de exames.", whyNot: "Sem alteração de creatinina ou urina relatada." }
+          ]
+        },
+        {
+          prompt: "Qual exame de rastreamento inicial?",
+          options: ["Aldosterona plasmática e atividade/concentração de renina (relação aldosterona/renina)", "TSH e T4 livre", "Metanefrinas urinárias", "Polissonografia"],
+          answer: 0,
+          feedback: [
+            { why: "A relação aldosterona/renina plasmática é o exame de rastreio inicial para hiperaldosteronismo primário.", whyNot: "" },
+            { why: "TSH e T4 livre investigariam causa tireoidiana.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Metanefrinas investigariam feocromocitoma.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Polissonografia investigaria apneia do sono.", whyNot: "Não é a suspeita principal aqui." }
+          ]
+        },
+        {
+          prompt: "Qual valor de relação aldosterona/renina sugere a suspeita?",
+          options: ["Relação >30", "Relação <5", "Não existe valor de referência", "A relação não é usada nesse rastreio"],
+          answer: 0,
+          feedback: [
+            { why: "Uma relação aldosterona/renina acima de 30 sugere hiperaldosteronismo primário, indicando testes confirmatórios adicionais.", whyNot: "" },
+            { why: "Um valor baixo não sugeriria a suspeita.", whyNot: "Não é o valor de corte usado para essa suspeita." },
+            { why: "Existe sim um valor de referência estabelecido.", whyNot: "A relação >30 é o parâmetro de rastreio." },
+            { why: "A relação é, na verdade, a base do rastreio inicial.", whyNot: "É amplamente utilizada nessa investigação." }
+          ]
+        }
+      ],
+      done: "HAS resistente com hipopotassemia espontânea e nódulo adrenal aponta para hiperaldosteronismo primário — relação aldosterona/renina >30 como rastreio, seguida de exames confirmatórios e de imagem."
+    },
+    {
+      name: "Tereza", age: 53, sex: "feminino", initials: "TR",
+      vitals: [
+        { label: "PA", value: "164/100", flag: true },
+        { label: "FC", value: "88 bpm", flag: false },
+        { label: "Perda de peso", value: "6kg/3 meses", flag: true }
+      ],
+      tags: [
+        { t: "Episódios recorrentes de cefaleia, sudorese e palpitações", c: "crit" },
+        { t: "PA muito variável entre consultas", c: "warn" },
+        { t: "Perda de peso não intencional", c: "warn" }
+      ],
+      qp: "Relata episódios recorrentes de mal-estar com cefaleia, sudorese e palpitações, que melhoram espontaneamente. PA muito variável entre as consultas.",
+      steps: [
+        {
+          prompt: "Qual sinal de alerta está presente?",
+          options: ["Sopro abdominal", "Tríade do feocromocitoma: cefaleia, sudorese e palpitações", "Assimetria de pulsos", "Hipopotassemia severa"],
+          answer: 1,
+          feedback: [
+            { why: "Sopro abdominal sugeriria outra causa.", whyNot: "Não é o achado presente neste caso." },
+            { why: "A combinação de crises de cefaleia, sudorese e palpitações é a tríade clássica descrita como sinal de alerta explícito do Quadro 15.1.", whyNot: "" },
+            { why: "Assimetria de pulsos sugeriria coarctação.", whyNot: "Não é o achado presente aqui." },
+            { why: "Hipopotassemia não foi relatada.", whyNot: "Não é o achado presente neste caso." }
+          ]
+        },
+        {
+          prompt: "Qual a causa mais provável?",
+          options: ["Hipertireoidismo", "Feocromocitoma/paraganglioma", "Síndrome de Cushing", "Hiperparatireoidismo"],
+          answer: 1,
+          feedback: [
+            { why: "Hipertireoidismo pode causar palpitações e perda de peso.", whyNot: "Mas o padrão de crises paroxísticas com a tríade completa aponta mais especificamente para outra causa." },
+            { why: "Crises paroxísticas com a tríade cefaleia-sudorese-palpitações e PA muito variável são o padrão clássico de feocromocitoma/paraganglioma.", whyNot: "" },
+            { why: "Cushing teria achados físicos característicos.", whyNot: "Sem fácies em lua cheia ou estrias relatadas, e o padrão de ganho de peso não bate." },
+            { why: "Hiperparatireoidismo teria outro conjunto de sintomas.", whyNot: "Sem litíase urinária ou alterações de cálcio relatadas." }
+          ]
+        },
+        {
+          prompt: "Qual exame de rastreamento inicial?",
+          options: ["Metanefrinas plasmáticas livres e/ou urinárias fracionadas", "TSH e T4 livre", "Cortisol salivar", "PTH e cálcio"],
+          answer: 0,
+          feedback: [
+            { why: "Metanefrinas plasmáticas livres ou urinárias fracionadas são o exame de rastreio inicial para feocromocitoma/paraganglioma.", whyNot: "" },
+            { why: "TSH e T4 livre investigariam causa tireoidiana.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Cortisol salivar investigaria Cushing.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "PTH e cálcio investigariam hiperparatireoidismo.", whyNot: "Não é a suspeita principal aqui." }
+          ]
+        },
+        {
+          prompt: "Qual exame de imagem é usado para localização, após confirmação bioquímica?",
+          options: ["TC ou RNM de abdome", "RNM de sela túrsica", "USG Doppler renal", "Ecocardiograma"],
+          answer: 0,
+          feedback: [
+            { why: "Após a confirmação bioquímica, TC ou RNM de abdome localizam o tumor produtor de catecolaminas; cintilografia pode ser usada em casos indicados.", whyNot: "" },
+            { why: "RNM de sela túrsica seria para acromegalia.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "USG Doppler renal seria para estenose de artéria renal.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Ecocardiograma teria outro papel.", whyNot: "Não é o exame de localização indicado aqui." }
+          ]
+        }
+      ],
+      done: "Crises paroxísticas com cefaleia, sudorese e palpitações apontam para feocromocitoma — metanefrinas plasmáticas/urinárias como rastreio, TC/RNM de abdome para localização após confirmação bioquímica."
+    },
+    {
+      name: "Cristina", age: 55, sex: "feminino", initials: "CR",
+      vitals: [
+        { label: "PA", value: "148/96", flag: true },
+        { label: "FC", value: "58 bpm", flag: true },
+        { label: "Peso", value: "+6kg/6 meses", flag: true }
+      ],
+      tags: [
+        { t: "Fadiga importante", c: "warn" },
+        { t: "Ganho de peso", c: "warn" },
+        { t: "Sonolência", c: "warn" },
+        { t: "Pele seca, queda de cabelo", c: "warn" }
+      ],
+      qp: "Refere cansaço importante, ganho de peso, sonolência excessiva e queda de cabelo nos últimos meses.",
+      steps: [
+        {
+          prompt: "Qual achado direciona a investigação de uma causa endócrina específica?",
+          options: ["HAS diastólica predominante associada a fadiga, ganho de peso e sonolência", "Sopro abdominal", "Assimetria de pulsos", "Hipopotassemia"],
+          answer: 0,
+          feedback: [
+            { why: "A combinação de HAS diastólica, fadiga, ganho de peso, sonolência, pele seca e queda de cabelo é o sinal de alerta — fácies/biótipo típico de doença que cursa com HAS.", whyNot: "" },
+            { why: "Sopro abdominal sugeriria outra causa.", whyNot: "Não é o achado presente neste caso." },
+            { why: "Assimetria de pulsos sugeriria coarctação.", whyNot: "Não é o achado presente aqui." },
+            { why: "Hipopotassemia não foi relatada.", whyNot: "Não é o achado presente neste caso." }
+          ]
+        },
+        {
+          prompt: "Qual a causa mais provável?",
+          options: ["Hipertireoidismo", "Hipotireoidismo", "Feocromocitoma", "Síndrome de Cushing"],
+          answer: 1,
+          feedback: [
+            { why: "Hipertireoidismo teria o padrão oposto — perda de peso, taquicardia, intolerância ao calor.", whyNot: "Não bate com o quadro apresentado aqui." },
+            { why: "Fadiga, ganho de peso, HA diastólica, fraqueza muscular e sonolência formam o padrão clássico de hipotireoidismo.", whyNot: "" },
+            { why: "Feocromocitoma teria crises paroxísticas.", whyNot: "Não é o padrão aqui — o quadro é mais insidioso e persistente." },
+            { why: "Cushing teria achados físicos característicos.", whyNot: "Sem fácies em lua cheia, estrias ou giba dorsal relatadas." }
+          ]
+        },
+        {
+          prompt: "Qual o exame de rastreamento?",
+          options: ["TSH e T4 livre", "Aldosterona e renina", "Metanefrinas", "Cortisol urinário 24h"],
+          answer: 0,
+          feedback: [
+            { why: "TSH e T4 livre são o rastreio padrão para hipotireoidismo.", whyNot: "" },
+            { why: "Aldosterona e renina investigariam hiperaldosteronismo.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Metanefrinas investigariam feocromocitoma.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Cortisol urinário investigaria Cushing.", whyNot: "Não é a suspeita principal aqui." }
+          ]
+        },
+        {
+          prompt: "Qual padrão de TSH/T4 confirma hipotireoidismo primário?",
+          options: ["TSH elevado e T4 livre baixo", "TSH baixo e T4 livre elevado", "TSH e T4 livre normais", "TSH baixo e T4 livre baixo"],
+          answer: 0,
+          feedback: [
+            { why: "TSH elevado com T4 livre baixo é o padrão clássico de hipotireoidismo primário — a glândula não produz hormônio suficiente, e a hipófise aumenta o TSH tentando compensar.", whyNot: "" },
+            { why: "Esse padrão seria de hipertireoidismo.", whyNot: "É o oposto do que confirma hipotireoidismo." },
+            { why: "Valores normais não confirmariam a suspeita clínica.", whyNot: "Não seria compatível com o diagnóstico." },
+            { why: "Esse padrão sugeriria uma causa central (hipofisária), não a mais comum.", whyNot: "Não é o padrão típico do hipotireoidismo primário." }
+          ]
+        }
+      ],
+      done: "Fadiga, ganho de peso, HA diastólica e sonolência apontam para hipotireoidismo — TSH elevado com T4 livre baixo confirma a causa primária."
+    },
+    {
+      name: "Fernanda", age: 38, sex: "feminino", initials: "FR",
+      vitals: [
+        { label: "PA", value: "150/78", flag: true },
+        { label: "FC", value: "112 bpm", flag: true },
+        { label: "Temperatura", value: "37.8°C", flag: true }
+      ],
+      tags: [
+        { t: "Bócio palpável", c: "crit" },
+        { t: "Exoftalmia", c: "crit" },
+        { t: "Intolerância ao calor", c: "warn" },
+        { t: "Perda de peso, tremores", c: "warn" }
+      ],
+      qp: "Refere intolerância ao calor, perda de peso apesar de apetite aumentado, tremores nas mãos e palpitações. Ao exame, bócio difuso e certo grau de exoftalmia.",
+      steps: [
+        {
+          prompt: "Qual sinal de alerta está presente?",
+          options: ["Assimetria de pulsos", "Fácies/biótipo típico (bócio, exoftalmia) associado a taquicardia", "Hipopotassemia severa", "Sopro abdominal"],
+          answer: 1,
+          feedback: [
+            { why: "Assimetria de pulsos sugeriria outra causa.", whyNot: "Não é o achado presente neste caso." },
+            { why: "Bócio e exoftalmia são fácies/biótipo típico de doença que cursa com HAS — sinal de alerta explícito do Quadro 15.1.", whyNot: "" },
+            { why: "Hipopotassemia não foi relatada.", whyNot: "Não é o achado presente neste caso." },
+            { why: "Sopro abdominal não foi relatado.", whyNot: "Não é o achado presente neste caso." }
+          ]
+        },
+        {
+          prompt: "Qual a causa mais provável?",
+          options: ["Hipotireoidismo", "Hipertireoidismo", "Hiperparatireoidismo", "Acromegalia"],
+          answer: 1,
+          feedback: [
+            { why: "Hipotireoidismo teria o padrão oposto.", whyNot: "Não bate com intolerância ao calor, perda de peso e taquicardia." },
+            { why: "Intolerância ao calor, perda de peso, taquicardia, exoftalmia, tremores e bócio formam o padrão clássico de hipertireoidismo.", whyNot: "" },
+            { why: "Hiperparatireoidismo teria outro conjunto de sintomas.", whyNot: "Sem litíase urinária ou alterações de cálcio relatadas." },
+            { why: "Acromegalia teria alterações de extremidades.", whyNot: "Sem crescimento de mãos, pés ou macrognatia relatados." }
+          ]
+        },
+        {
+          prompt: "Qual o exame de rastreamento?",
+          options: ["TSH e T4 livre", "IGF-1 e GH", "Cálcio e PTH", "Cortisol basal"],
+          answer: 0,
+          feedback: [
+            { why: "TSH e T4 livre são o rastreio padrão também para hipertireoidismo.", whyNot: "" },
+            { why: "IGF-1 e GH investigariam acromegalia.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Cálcio e PTH investigariam hiperparatireoidismo.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Cortisol basal investigaria Cushing.", whyNot: "Não é a suspeita principal aqui." }
+          ]
+        },
+        {
+          prompt: "Qual padrão de TSH/T4 confirma hipertireoidismo?",
+          options: ["TSH baixo e T4 livre elevado", "TSH elevado e T4 livre baixo", "TSH e T4 livre normais", "TSH elevado e T4 livre elevado"],
+          answer: 0,
+          feedback: [
+            { why: "TSH baixo (suprimido) com T4 livre elevado é o padrão clássico de hipertireoidismo — excesso de hormônio tireoidiano suprime o TSH hipofisário.", whyNot: "" },
+            { why: "Esse padrão seria de hipotireoidismo.", whyNot: "É o oposto do que confirma hipertireoidismo." },
+            { why: "Valores normais não confirmariam a suspeita clínica.", whyNot: "Não seria compatível com o diagnóstico." },
+            { why: "TSH elevado não é compatível com hipertireoidismo primário.", whyNot: "Nesse padrão o TSH está tipicamente suprimido, não elevado." }
+          ]
+        }
+      ],
+      done: "Bócio, exoftalmia, intolerância ao calor, perda de peso e taquicardia apontam para hipertireoidismo — TSH suprimido com T4 livre elevado confirma o diagnóstico."
+    },
+    {
+      name: "Adriana", age: 41, sex: "feminino", initials: "AD",
+      vitals: [
+        { label: "PA", value: "156/98", flag: true },
+        { label: "Glicemia", value: "142 mg/dL", flag: true },
+        { label: "K+", value: "3.0 mEq/L", flag: true }
+      ],
+      tags: [
+        { t: "Fácies em 'lua cheia'", c: "crit" },
+        { t: "Giba dorsal", c: "crit" },
+        { t: "Estrias purpúreas abdominais", c: "crit" },
+        { t: "Obesidade central", c: "warn" },
+        { t: "Fraqueza muscular proximal", c: "warn" }
+      ],
+      qp: "Ganho de peso centrípeto nos últimos meses, com estrias purpúreas no abdome. Refere fraqueza muscular e diminuição da libido.",
+      steps: [
+        {
+          prompt: "Qual sinal de alerta está presente?",
+          options: ["Assimetria de pulsos", "Fácies/biótipo típico de doença que cursa com HAS (lua cheia, giba dorsal, estrias)", "Tríade do feocromocitoma", "Sopro abdominal"],
+          answer: 1,
+          feedback: [
+            { why: "Assimetria de pulsos sugeriria outra causa.", whyNot: "Não é o achado presente neste caso." },
+            { why: "Fácies em lua cheia, giba dorsal e estrias purpúreas são fácies/biótipo típico de doença que cursa com HAS — sinal de alerta explícito do Quadro 15.1.", whyNot: "" },
+            { why: "Tríade do feocromocitoma seria outro padrão.", whyNot: "Sem crises de cefaleia, sudorese e palpitações relatadas." },
+            { why: "Sopro abdominal não foi relatado.", whyNot: "Não é o achado presente neste caso." }
+          ]
+        },
+        {
+          prompt: "Qual a causa mais provável?",
+          options: ["Hipotireoidismo", "Síndrome de Cushing", "Estenose de artéria renal", "Apneia obstrutiva do sono"],
+          answer: 1,
+          feedback: [
+            { why: "Hipotireoidismo não explicaria as estrias e a fácies típica.", whyNot: "Não é compatível com o conjunto de achados aqui." },
+            { why: "Fácies em lua cheia, giba dorsal, estrias purpúreas, obesidade central, hipopotassemia e fraqueza muscular formam o padrão clássico de síndrome de Cushing.", whyNot: "" },
+            { why: "Estenose de artéria renal teria outro padrão.", whyNot: "Sem HAS refratária de início súbito ou sopro abdominal." },
+            { why: "AOS teria outro conjunto de queixas.", whyNot: "Sem ronco ou pausas respiratórias relatadas." }
+          ]
+        },
+        {
+          prompt: "Qual exame inicial de rastreio?",
+          options: ["Cortisol basal, cortisol salivar à meia-noite ou cortisol urinário livre de 24h", "TSH e T4 livre", "Aldosterona e renina", "Metanefrinas"],
+          answer: 0,
+          feedback: [
+            { why: "Cortisol basal, cortisol salivar à meia-noite ou cortisol urinário livre de 24h são os exames de rastreio inicial para síndrome de Cushing.", whyNot: "" },
+            { why: "TSH e T4 livre investigariam causa tireoidiana.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Aldosterona e renina investigariam hiperaldosteronismo.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Metanefrinas investigariam feocromocitoma.", whyNot: "Não é a suspeita principal aqui." }
+          ]
+        },
+        {
+          prompt: "Qual teste confirmatório é frequentemente utilizado?",
+          options: ["Teste de supressão com dexametasona", "Teste de supressão com captopril", "Polissonografia", "USG Doppler renal"],
+          answer: 0,
+          feedback: [
+            { why: "O teste de supressão com dexametasona (1mg às 23-24h, com dosagem de cortisol matinal no dia seguinte) é usado para confirmar a suspeita de síndrome de Cushing.", whyNot: "" },
+            { why: "Teste com captopril é usado em outra investigação.", whyNot: "Relaciona-se à investigação de hipertensão renovascular, não de Cushing." },
+            { why: "Polissonografia investigaria apneia do sono.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "USG Doppler renal investigaria estenose renal.", whyNot: "Não é a suspeita principal aqui." }
+          ]
+        }
+      ],
+      done: "Fácies em lua cheia, giba dorsal, estrias purpúreas e obesidade central apontam para síndrome de Cushing — cortisol basal/salivar/urinário como rastreio, teste de supressão com dexametasona como confirmação."
+    },
+    {
+      name: "Ricardo", age: 44, sex: "masculino", initials: "RC",
+      vitals: [
+        { label: "PA", value: "158/98", flag: true },
+        { label: "Glicemia", value: "138 mg/dL", flag: true },
+        { label: "IGF-1", value: "elevado", flag: true }
+      ],
+      tags: [
+        { t: "Crescimento de mãos e pés", c: "crit" },
+        { t: "Macrognatia", c: "crit" },
+        { t: "Cefaleia", c: "warn" },
+        { t: "Alterações visuais", c: "warn" },
+        { t: "HVE", c: "warn" }
+      ],
+      qp: "Notou aumento progressivo do número de calçado e das luvas nos últimos anos. Refere cefaleia frequente e alterações visuais recentes.",
+      steps: [
+        {
+          prompt: "Qual sinal de alerta está presente?",
+          options: ["Assimetria de pulsos", "Fácies/biótipo típico de doença que cursa com HAS (crescimento de extremidades, macrognatia)", "Hipopotassemia severa", "Sopro abdominal"],
+          answer: 1,
+          feedback: [
+            { why: "Assimetria de pulsos sugeriria outra causa.", whyNot: "Não é o achado presente neste caso." },
+            { why: "Crescimento progressivo de mãos, pés e macrognatia são fácies/biótipo típico de doença que cursa com HAS — sinal de alerta explícito do Quadro 15.1.", whyNot: "" },
+            { why: "Hipopotassemia não foi relatada.", whyNot: "Não é o achado presente neste caso." },
+            { why: "Sopro abdominal não foi relatado.", whyNot: "Não é o achado presente neste caso." }
+          ]
+        },
+        {
+          prompt: "Qual a causa mais provável?",
+          options: ["Síndrome de Cushing", "Acromegalia", "Hiperparatireoidismo", "Hipertireoidismo"],
+          answer: 1,
+          feedback: [
+            { why: "Cushing teria outro padrão de achados físicos (fácies em lua cheia, estrias).", whyNot: "Não é compatível com crescimento de extremidades e macrognatia." },
+            { why: "Crescimento progressivo de mãos e pés, macrognatia, cefaleia e alterações visuais (por possível efeito compressivo) formam o padrão clássico de acromegalia.", whyNot: "" },
+            { why: "Hiperparatireoidismo teria outro conjunto de sintomas.", whyNot: "Sem litíase urinária ou sintomas de hipercalcemia relatados." },
+            { why: "Hipertireoidismo teria outro padrão.", whyNot: "Sem intolerância ao calor, perda de peso ou taquicardia relatadas." }
+          ]
+        },
+        {
+          prompt: "Qual o exame de rastreamento?",
+          options: ["Dosagem de IGF-1, GH basal e GH pós-sobrecarga oral de glicose", "TSH e T4 livre", "Cortisol urinário 24h", "Aldosterona e renina"],
+          answer: 0,
+          feedback: [
+            { why: "IGF-1, GH basal e GH pós-sobrecarga oral de glicose são os exames de rastreio para acromegalia.", whyNot: "" },
+            { why: "TSH e T4 livre investigariam causa tireoidiana.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Cortisol urinário investigaria Cushing.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Aldosterona e renina investigariam hiperaldosteronismo.", whyNot: "Não é a suspeita principal aqui." }
+          ]
+        },
+        {
+          prompt: "Qual exame de imagem localiza a causa mais provável?",
+          options: ["RNM de sela túrsica (preferencial) ou TC de sela túrsica", "USG Doppler renal", "TC de abdome", "Ecocardiograma"],
+          answer: 0,
+          feedback: [
+            { why: "RNM de sela túrsica é o exame de imagem preferencial para localizar a causa (geralmente um adenoma hipofisário produtor de GH), com TC como alternativa.", whyNot: "" },
+            { why: "USG Doppler renal seria para estenose de artéria renal.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "TC de abdome seria para feocromocitoma.", whyNot: "Não é a suspeita principal aqui." },
+            { why: "Ecocardiograma teria outro papel — avaliar repercussão cardíaca, não localizar a causa.", whyNot: "Não é o exame de localização indicado aqui." }
+          ]
+        }
+      ],
+      done: "Crescimento de extremidades, macrognatia, cefaleia e alterações visuais apontam para acromegalia — IGF-1 e GH (basal e pós-sobrecarga) como rastreio, RNM de sela túrsica para localização."
+    }
+  ];
+
+  let idx = 0;
+  let step = 0;
+  let answered = false;
+
+  const els = {
+    avatar: document.getElementById("avatar"),
+    pName: document.getElementById("pName"),
+    pMeta: document.getElementById("pMeta"),
+    vitals: document.getElementById("vitals"),
+    tags: document.getElementById("tags"),
+    qpText: document.getElementById("qpText"),
+    stepTrack: document.getElementById("stepTrack"),
+    promptText: document.getElementById("promptText"),
+    options: document.getElementById("options"),
+    feedback: document.getElementById("feedback"),
+    verdictText: document.getElementById("verdictText"),
+    feedbackMain: document.getElementById("feedbackMain"),
+    feedbackWhyNot: document.getElementById("feedbackWhyNot"),
+    nextBtn2: document.getElementById("nextBtn2"),
+    doneCard: document.getElementById("doneCard"),
+    doneText: document.getElementById("doneText"),
+    caseCounter: document.getElementById("caseCounter"),
+    prevBtn: document.getElementById("prevBtn"),
+    nextBtn: document.getElementById("nextBtn")
+  };
+
+  function renderTrack() {
+    const total = CASES[idx].steps.length;
+    els.stepTrack.innerHTML = Array.from({ length: total }, (_, i) => {
+      let cls = "step-dot";
+      if (i < step) cls += " done";
+      else if (i === step) cls += " current";
+      return '<span class="' + cls + '"></span>';
+    }).join("");
+  }
+
+  function renderCase() {
+    const c = CASES[idx];
+    step = 0;
+
+    els.avatar.textContent = c.initials;
+    els.pName.textContent = c.name;
+    els.pMeta.textContent = c.age + " anos · " + c.sex;
+
+    els.vitals.innerHTML = c.vitals.map(v =>
+      '<div class="vital' + (v.flag ? ' flag' : '') + '">' +
+        '<span class="label">' + v.label + '</span>' +
+        '<span class="value">' + v.value + '</span>' +
+      '</div>'
+    ).join("");
+
+    els.tags.innerHTML = c.tags.map(t =>
+      '<span class="tag' + (t.c ? ' ' + t.c : '') + '">' + t.t + '</span>'
+    ).join("");
+
+    els.qpText.textContent = c.qp;
+    els.doneText.textContent = c.done;
+
+    els.caseCounter.textContent = String(idx + 1).padStart(2, "0") + " / " + String(CASES.length).padStart(2, "0");
+    els.prevBtn.disabled = idx === 0;
+    els.nextBtn.disabled = idx === CASES.length - 1;
+
+    renderStep();
+  }
+
+  function renderStep() {
+    answered = false;
+    const c = CASES[idx];
+    const s = c.steps[step];
+    const letters = ["A", "B", "C", "D"];
+
+    renderTrack();
+    els.promptText.textContent = s.prompt;
+    els.options.innerHTML = s.options.map((t, i) =>
+      '<button class="option" data-i="' + i + '"><span class="letter">' + letters[i] + '</span><span class="text">' + t + '</span></button>'
+    ).join("");
+    els.feedback.classList.remove("show", "is-correct", "is-wrong");
+    els.nextBtn2.classList.remove("show");
+    els.doneCard.classList.remove("show");
+  }
+
+  els.options.addEventListener("click", (e) => {
+    const btn = e.target.closest(".option");
+    if (!btn || answered) return;
+    answered = true;
+
+    const c = CASES[idx];
+    const s = c.steps[step];
+    const i = Number(btn.dataset.i);
+    const data = s.feedback[i];
+    const isCorrect = i === s.answer;
+
+    [...els.options.children].forEach((opt, j) => {
+      opt.disabled = true;
+      if (j === i) opt.classList.add(isCorrect ? "correct" : "wrong");
+      else if (j === s.answer) opt.classList.add("correct");
+      else opt.classList.add("dim");
+    });
+
+    els.feedback.classList.add("show", isCorrect ? "is-correct" : "is-wrong");
+    els.verdictText.textContent = isCorrect ? "Correto." : "Não é essa.";
+    els.feedbackMain.textContent = data.why;
+    els.feedbackWhyNot.textContent = data.whyNot;
+    els.feedbackWhyNot.style.display = data.whyNot ? "block" : "none";
+
+    if (step < c.steps.length - 1) {
+      els.nextBtn2.classList.add("show");
+    } else {
+      renderTrack();
+      els.doneCard.classList.add("show");
+    }
+
+    els.feedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+
+  els.nextBtn2.addEventListener("click", () => { step++; renderStep(); });
+  els.prevBtn.addEventListener("click", () => { if (idx > 0) { idx--; renderCase(); } });
+  els.nextBtn.addEventListener("click", () => { if (idx < CASES.length - 1) { idx++; renderCase(); } });
+
+  renderCase();
+
+  /* ---- tabs ---- */
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const panels = { resumo: document.getElementById("panelResumo"), casos: document.getElementById("panelCasos") };
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      tabButtons.forEach((b) => b.setAttribute("aria-selected", "false"));
+      btn.setAttribute("aria-selected", "true");
+      Object.values(panels).forEach((p) => p.classList.remove("active"));
+      panels[btn.dataset.tab].classList.add("active");
+      window.scrollTo({ top: 0 });
+    });
+  });
+</script>
 
 </body>
 </html>
