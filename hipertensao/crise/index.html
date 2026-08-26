@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crise Hipertensiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #f6f3ec;
+    --paper-raised: #fffdf8;
+    --ink: #21262b;
+    --ink-soft: #565f63;
+    --teal: #0e6b63;
+    --teal-soft: #dcece9;
+    --brick: #b23b2e;
+    --brick-soft: #f6e4e1;
+    --sage: #3f7a52;
+    --sage-soft: #e3ede4;
+    --amber: #b8801f;
+    --amber-soft: #f3e6d1;
+    --line: rgba(33, 38, 43, 0.13);
+    --line-strong: rgba(33, 38, 43, 0.24);
+    --shadow: 0 1px 2px rgba(33,38,43,0.06), 0 8px 24px -12px rgba(33,38,43,0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14181a;
+      --paper-raised: #1b2124;
+      --ink: #ece8df;
+      --ink-soft: #a4aca9;
+      --teal: #55c4ba;
+      --teal-soft: #1c3532;
+      --brick: #e37c6e;
+      --brick-soft: #3a2422;
+      --sage: #7ec293;
+      --sage-soft: #223228;
+      --amber: #e2ac5f;
+      --amber-soft: #382c1a;
+      --line: rgba(236, 232, 223, 0.14);
+      --line-strong: rgba(236, 232, 223, 0.26);
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Public Sans", system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: clamp(14px, 4vw, 32px);
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  .page { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 26px; }
+
+  .masthead { padding-bottom: 14px; border-bottom: 1px solid var(--line-strong); display: flex; flex-direction: column; gap: 4px; }
+  .masthead .eyebrow {
+    display: block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.66rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 2px;
+  }
+  .masthead h1 { font-family: "Spectral", Georgia, serif; font-weight: 700; font-size: clamp(1.3rem, 5.5vw, 1.7rem); margin: 0; letter-spacing: -0.01em; }
+  .masthead .byline { margin: 4px 0 0; font-size: 0.85rem; font-weight: 600; }
+  .masthead .byline span { font-weight: 400; color: var(--ink-soft); }
+  .back-link { font-size: 0.78rem; color: var(--teal); text-decoration: none; }
+  .back-link:hover { text-decoration: underline; }
+
+  .section-title { font-family: "Spectral", Georgia, serif; font-weight: 600; font-size: 1.05rem; margin: 0 0 2px; }
+  .section-sub { font-size: 0.82rem; color: var(--ink-soft); margin: 0 0 12px; }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-raised); }
+  .class-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; min-width: 340px; }
+  .class-table th {
+    font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--ink-soft); text-align: left; padding: 10px 10px; border-bottom: 1px solid var(--line-strong);
+  }
+  .class-table td { padding: 9px 10px; border-bottom: 1px solid var(--line); font-size: 0.8rem; vertical-align: top; }
+  .class-table tr:last-child td { border-bottom: none; }
+  .class-table td:first-child { font-family: "Public Sans", sans-serif; font-weight: 600; }
+  .class-table.emergencia th:first-child, .class-table.emergencia td:first-child { color: var(--brick); }
+  .class-table.emergencia th:nth-child(2), .class-table.emergencia td:nth-child(2) { color: var(--teal); }
+
+  .diagram { background: var(--paper-raised); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 16px; margin: 0; }
+  .diagram svg { width: 100%; height: auto; display: block; color: var(--ink-soft); }
+  .diagram figcaption { font-size: 0.78rem; color: var(--ink-soft); margin-top: 10px; text-align: center; }
+
+  .cat-grid { display: flex; flex-direction: column; gap: 10px; }
+  .cat-card { background: var(--paper-raised); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+  .cat-card.highlight { border-color: var(--brick); background: var(--brick-soft); }
+  .cat-card h3 { margin: 0 0 8px; font-family: "Spectral", Georgia, serif; font-size: 0.95rem; font-weight: 600; }
+  .cat-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; }
+  .cat-card li { display: flex; gap: 7px; align-items: flex-start; }
+  .cat-card li::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--brick); margin-top: 6px; }
+
+  /* ---- chart card (caso clínico) ---- */
+  .chart { background: var(--paper-raised); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .chart-id { display: flex; align-items: center; gap: 14px; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+  .avatar {
+    flex: none; width: 52px; height: 52px; border-radius: 50%; background: var(--teal-soft); color: var(--teal);
+    display: flex; align-items: center; justify-content: center; font-family: "Spectral", serif; font-weight: 600; font-size: 1.15rem;
+  }
+  .chart-id-text h2 { margin: 0 0 2px; font-family: "Spectral", Georgia, serif; font-size: 1.15rem; font-weight: 600; }
+  .chart-id-text p { margin: 0; font-size: 0.85rem; color: var(--ink-soft); }
+  .vitals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border-bottom: 1px solid var(--line); }
+  .vital { background: var(--paper-raised); padding: 12px 10px; text-align: center; }
+  .vital.flag { background: var(--brick-soft); }
+  .vital .label { display: block; font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); margin-bottom: 4px; }
+  .vital .value { font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 600; font-size: 0.98rem; font-variant-numeric: tabular-nums; }
+  .vital.flag .value { color: var(--brick); }
+  .chart-body { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 14px; }
+  .field-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin: 0 0 6px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 0.82rem; padding: 4px 10px; border-radius: 100px; background: var(--teal-soft); color: var(--teal); white-space: nowrap; }
+  .tag.warn { background: var(--amber-soft); color: var(--amber); }
+  .tag.crit { background: var(--brick-soft); color: var(--brick); }
+  .qp { background: var(--paper); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 0.92rem; }
+  .qp strong { display: block; font-family: "Spectral", serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--teal); margin-bottom: 3px; font-weight: 600; }
+
+  .step-track { display: flex; gap: 6px; margin: 2px 0 0; }
+  .step-dot { flex: 1; height: 4px; border-radius: 4px; background: var(--line); }
+  .step-dot.done { background: var(--teal); }
+  .step-dot.current { background: var(--amber); }
+
+  .prompt { font-family: "Spectral", Georgia, serif; font-size: 1.1rem; font-weight: 600; line-height: 1.35; text-wrap: balance; margin: 0; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option {
+    display: flex; gap: 12px; align-items: flex-start; text-align: left; width: 100%; background: var(--paper-raised);
+    border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; font: inherit; color: var(--ink); cursor: pointer;
+    transition: border-color 0.15s ease, transform 0.1s ease, background 0.15s ease;
+  }
+  .option:hover:not(:disabled) { border-color: var(--line-strong); }
+  .option:active:not(:disabled) { transform: scale(0.99); }
+  .option:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .option .letter {
+    flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--line); color: var(--ink-soft);
+    font-family: "IBM Plex Mono", monospace; font-size: 0.78rem; font-weight: 600; display: flex; align-items: center; justify-content: center;
+  }
+  .option .text { font-size: 0.94rem; padding-top: 2px; }
+  .option:disabled { cursor: default; }
+  .option.correct { border-color: var(--sage); background: var(--sage-soft); }
+  .option.correct .letter { background: var(--sage); color: var(--paper-raised); }
+  .option.wrong { border-color: var(--brick); background: var(--brick-soft); }
+  .option.wrong .letter { background: var(--brick); color: var(--paper-raised); }
+  .option.dim { opacity: 0.5; }
+
+  .feedback {
+    border-radius: 12px; padding: 16px 18px; border: 1px solid var(--line); display: none; flex-direction: column; gap: 10px; animation: rise 0.25s ease;
+  }
+  .feedback.show { display: flex; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .feedback.is-correct { background: var(--sage-soft); border-color: var(--sage); }
+  .feedback.is-wrong { background: var(--brick-soft); border-color: var(--brick); }
+  .feedback .verdict { display: flex; align-items: center; gap: 8px; font-family: "Spectral", serif; font-weight: 700; font-size: 1rem; }
+  .feedback.is-correct .verdict { color: var(--sage); }
+  .feedback.is-wrong .verdict { color: var(--brick); }
+  .feedback p { margin: 0; font-size: 0.9rem; color: var(--ink); }
+  .feedback p.muted { color: var(--ink-soft); }
+
+  .next-btn {
+    align-self: flex-start; margin-top: 2px; background: var(--teal); color: var(--paper-raised); border: none;
+    border-radius: 100px; padding: 10px 20px; font: inherit; font-weight: 600; font-size: 0.88rem; cursor: pointer; display: none;
+  }
+  .next-btn.show { display: inline-flex; }
+  .next-btn:hover { opacity: 0.92; }
+
+  .done-card {
+    background: var(--teal-soft); border: 1px solid var(--teal); border-radius: 14px; padding: 20px; text-align: center; display: none;
+  }
+  .done-card.show { display: block; }
+  .done-card h3 { margin: 0 0 6px; font-family: "Spectral", serif; color: var(--teal); font-size: 1.05rem; }
+  .done-card p { margin: 0; font-size: 0.88rem; color: var(--ink); }
+
+  footer { text-align: center; padding: 4px 8px 0; font-size: 0.75rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="masthead">
+    <a class="back-link" href="../../">&lsaquo; Rounds de Terapêutica</a>
+    <span class="eyebrow">Rounds &middot; HAS &middot; Diretriz SBC 2025</span>
+    <h1>Crise Hipertensiva</h1>
+    <p class="byline"><span>por</span> Ian Frantchesco</p>
+  </div>
+
+  <div>
+    <p class="section-title">Classificação</p>
+    <p class="section-sub">A diretriz 2025 não usa mais o termo "urgência hipertensiva"</p>
+    <div class="table-wrap">
+      <table class="class-table emergencia">
+        <thead><tr><th>Elevação importante da PA (sem LOA aguda)</th><th>Emergência</th></tr></thead>
+        <tbody>
+          <tr><td>Nível de PA elevado acentuado</td><td>Nível de PA elevado acentuado</td></tr>
+          <tr><td>Sem LOA aguda e progressiva</td><td>Com LOA aguda e progressiva</td></tr>
+          <tr><td>Combinação medicamentosa oral</td><td>Medicamentos parenterais</td></tr>
+          <tr><td>Sem risco iminente de morte</td><td>Com risco iminente de morte</td></tr>
+          <tr><td>Acompanhamento ambulatorial precoce (1–7 dias)</td><td>Internação em UTI</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-title">Fluxo de decisão</p>
+    <p class="section-sub">PAS ≥ 180 e/ou PAD ≥ 110 mmHg — o que define a conduta é a lesão de órgão-alvo (LOA), não só o número da PA</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 360 246" role="img" aria-label="Fluxograma: diante de PA muito elevada, se há lesão de órgão-alvo nova ou progressiva, é emergência hipertensiva, tratada de forma intensiva em UTI; se não há, é elevação importante da PA, tratada com ajuste do esquema oral e reavaliação ambulatorial em até 7 dias.">
+        <defs>
+          <marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
+          </marker>
+        </defs>
+
+        <rect x="20" y="8" width="320" height="32" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+        <text x="180" y="28" text-anchor="middle" font-size="11" fill="var(--ink)" font-family="Public Sans, sans-serif">PAS ≥180 e/ou PAD ≥110 mmHg</text>
+
+        <line x1="180" y1="40" x2="180" y2="50.5" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrowC)"></line>
+
+        <rect x="15" y="52" width="330" height="36" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+        <text x="180" y="66" text-anchor="middle" font-size="9.5" fill="var(--ink)" font-family="Public Sans, sans-serif">Lesão de órgão-alvo nova,</text>
+        <text x="180" y="79" text-anchor="middle" font-size="9.5" fill="var(--ink)" font-family="Public Sans, sans-serif">progressiva ou em piora?</text>
+
+        <line x1="95" y1="88" x2="95" y2="108.5" stroke="var(--brick)" stroke-width="1.3" marker-end="url(#arrowC)"></line>
+        <text x="95" y="99" text-anchor="middle" font-size="8.5" font-weight="700" fill="var(--brick)" font-family="IBM Plex Mono, monospace">SIM</text>
+
+        <line x1="265" y1="88" x2="265" y2="108.5" stroke="var(--teal)" stroke-width="1.3" marker-end="url(#arrowC)"></line>
+        <text x="265" y="99" text-anchor="middle" font-size="8.5" font-weight="700" fill="var(--teal)" font-family="IBM Plex Mono, monospace">NÃO</text>
+
+        <rect x="15" y="110" width="160" height="32" rx="7" fill="var(--brick-soft)" stroke="var(--brick)" stroke-width="1.1"></rect>
+        <text x="95" y="130" text-anchor="middle" font-size="9.3" fill="var(--brick)" font-family="Public Sans, sans-serif">Emergência hipertensiva</text>
+
+        <line x1="95" y1="142" x2="95" y2="152.5" stroke="var(--brick)" stroke-width="1.2" marker-end="url(#arrowC)"></line>
+
+        <rect x="15" y="154" width="160" height="36" rx="7" fill="var(--brick-soft)" stroke="var(--brick)" stroke-width="1.1"></rect>
+        <text x="95" y="169" text-anchor="middle" font-size="8.6" fill="var(--brick)" font-family="Public Sans, sans-serif">Tratamento intensivo</text>
+        <text x="95" y="181" text-anchor="middle" font-size="8.6" fill="var(--brick)" font-family="Public Sans, sans-serif">UTI &middot; medicação IV</text>
+
+        <rect x="185" y="110" width="160" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
+        <text x="265" y="130" text-anchor="middle" font-size="9" fill="var(--teal)" font-family="Public Sans, sans-serif">Elevação importante da PA</text>
+
+        <line x1="265" y1="142" x2="265" y2="152.5" stroke="var(--teal)" stroke-width="1.2" marker-end="url(#arrowC)"></line>
+
+        <rect x="185" y="154" width="160" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
+        <text x="265" y="174" text-anchor="middle" font-size="8.6" fill="var(--teal)" font-family="Public Sans, sans-serif">Introduzir/readequar tto oral</text>
+
+        <line x1="265" y1="186" x2="265" y2="196.5" stroke="var(--teal)" stroke-width="1.2" marker-end="url(#arrowC)"></line>
+
+        <rect x="185" y="198" width="160" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
+        <text x="265" y="214" text-anchor="middle" font-size="8.3" fill="var(--teal)" font-family="Public Sans, sans-serif">Reavaliação ambulatorial</text>
+        <text x="265" y="224" text-anchor="middle" font-size="8" fill="var(--teal)" font-family="Public Sans, sans-serif">em até 7 dias</text>
+      </svg>
+      <figcaption>Diagnóstico, prognóstico e conduta nas crises hipertensivas (Quadro 11.1).</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <p class="section-title">Metas de redução da PA na emergência</p>
+    <p class="section-sub">Redução aguda pode ser prejudicial — a intensidade depende do quadro</p>
+    <div class="table-wrap">
+      <table class="class-table">
+        <thead><tr><th>Quadro</th><th>Meta de redução</th></tr></thead>
+        <tbody>
+          <tr><td>Crise catecolaminérgica, edema agudo de pulmão ou dissecção aguda de aorta</td><td>PAS &lt;140 mmHg na 1ª hora (&lt;120 mmHg se dissecção)</td></tr>
+          <tr><td>Demais emergências hipertensivas</td><td>↓25% na 1ª hora &rarr; 160/100–110 mmHg em 2–6h &rarr; valores normais em 24–48h</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-title">Emergências hipertensivas por categoria</p>
+    <p class="section-sub">O que caracteriza cada grupo</p>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <h3>Cerebrovasculares</h3>
+        <ul><li>Encefalopatia hipertensiva</li><li>Hemorragia intracerebral</li><li>Hemorragia subaracnóidea</li><li>AVC isquêmico</li></ul>
+      </div>
+      <div class="cat-card">
+        <h3>Cardiocirculatórias</h3>
+        <ul><li>Dissecção aguda da aorta</li><li>Edema agudo de pulmão com IVE</li><li>Infarto agudo do miocárdio</li><li>Angina instável</li></ul>
+      </div>
+      <div class="cat-card">
+        <h3>Sistêmicas</h3>
+        <ul><li>Hipertensão acelerada/maligna</li><li>Hipertensão com múltiplos danos a órgãos-alvo (MOD)</li></ul>
+      </div>
+      <div class="cat-card">
+        <h3>Crises adrenérgicas graves</h3>
+        <ul><li>Crise do feocromocitoma</li><li>Dose excessiva de drogas ilícitas (cocaína, crack, LSD)</li></ul>
+      </div>
+      <div class="cat-card">
+        <h3>Hipertensão na gestação</h3>
+        <ul><li>Eclâmpsia</li><li>Pré-eclâmpsia grave</li><li>Síndrome HELLP</li><li>Hipertensão grave em final de gestação</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-title">Medicamentos parenterais</p>
+    <p class="section-sub">Uso em UTI, com monitorização de PA, FC, SatO₂ e diurese</p>
+    <div class="table-wrap">
+      <table class="class-table">
+        <thead><tr><th>Medicamento</th><th>Início / Duração</th><th>Indicações</th><th>Eventos adversos</th></tr></thead>
+        <tbody>
+          <tr><td>Nitroprussiato de sódio</td><td>Imediato / 1–2 min</td><td>Maioria das emergências</td><td>Intoxicação por cianeto, hipotensão grave; cuidado na IRA/hepatopatia; proteger da luz</td></tr>
+          <tr><td>Nitroglicerina</td><td>2–5 min / 3–5 min</td><td>Insuficiência coronariana, EAP</td><td>Cefaleia, taquicardia reflexa, taquifilaxia, rubor</td></tr>
+          <tr><td>Metoprolol (IV)</td><td>5–10 min / 3–4h</td><td>Insuficiência coronariana, dissecção aguda de aorta</td><td>Bradicardia, BAV avançado, broncoespasmo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-title">Caso clínico</p>
+    <p class="section-sub">Raciocínio passo a passo — responda em sequência</p>
+
+    <div class="chart">
+      <div class="chart-id">
+        <div class="avatar">LC</div>
+        <div class="chart-id-text">
+          <h2>Lucas</h2>
+          <p>29 anos &middot; masculino &middot; estudante de Educação Física</p>
+        </div>
+      </div>
+      <div class="vitals">
+        <div class="vital flag"><span class="label">PA</span><span class="value">220/130</span></div>
+        <div class="vital flag"><span class="label">FC</span><span class="value">112 bpm</span></div>
+        <div class="vital"><span class="label">IMC</span><span class="value">33 kg/m²</span></div>
+      </div>
+      <div class="chart-body">
+        <div>
+          <p class="field-label">Achados &amp; substâncias em uso</p>
+          <div class="tags">
+            <span class="tag crit">Cipionato de testosterona</span>
+            <span class="tag crit">Trembolona</span>
+            <span class="tag crit">Hormônio do crescimento</span>
+            <span class="tag warn">Pré-treino, altas doses de cafeína</span>
+            <span class="tag warn">HVE ao ECG</span>
+            <span class="tag">Ganho de 12kg em 8 meses</span>
+          </div>
+        </div>
+        <div class="qp">
+          <strong>Queixa principal</strong>
+          Cefaleia intensa, palpitações, ansiedade, sensação de pressão na cabeça e episódios recorrentes de epistaxe há 3 dias, com piora progressiva nas últimas 24h. Nega diabetes, DRC e antecedentes cardiovasculares. Exame neurológico sem déficits focais; exame cardiovascular com taquicardia, sem sopros.
+        </div>
+      </div>
+    </div>
+
+    <div class="step-track" id="stepTrack"></div>
+    <p class="prompt" id="promptText"></p>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback">
+      <div class="verdict" id="verdictText"></div>
+      <p id="feedbackMain"></p>
+      <p class="muted" id="feedbackWhyNot"></p>
+    </div>
+    <button class="next-btn" id="nextBtn">Próxima pergunta &rsaquo;</button>
+
+    <div class="done-card" id="doneCard">
+      <h3>Caso concluído</h3>
+      <p>PA muito elevada não é sinônimo de emergência — o que muda a conduta é a lesão de órgão-alvo. Etiologia identificada (esteroides anabolizantes) orienta suspensão da causa; betabloqueador cardiosseletivo trata a taquicardia e a ativação simpática, com boa tolerância em pacientes jovens.</p>
+    </div>
+  </div>
+
+  <footer>Diretriz Brasileira de Hipertensão Arterial &mdash; SBC/SBN/SBH, 2025</footer>
+</div>
+
+<script>
+  const STEPS = [
+    {
+      prompt: "Como você classificaria esse quadro?",
+      options: ["Hipertensão estágio 2", "Hipertensão resistente", "Elevação importante da pressão arterial", "Emergência hipertensiva"],
+      answer: 2,
+      feedback: [
+        { why: "Isso descreveria só o nível de PA, sem considerar o critério que realmente define a gravidade da crise.", whyNot: "Nesse contexto (PA ≥180/110 com repercussão sistêmica), a classificação por estágio de PA não é a resposta clínica esperada." },
+        { why: "HAS resistente é sobre falha de tratamento otimizado.", whyNot: "Lucas nem sequer tem diagnóstico de HAS tratada há tempo suficiente para esse conceito — é uma crise aguda, não resistência terapêutica." },
+        { why: "Apesar da PA muito elevada (220x130), não há evidências de lesão aguda e progressiva em órgão-alvo: sem déficit neurológico, sem edema agudo de pulmão, sem síndrome coronariana aguda, sem insuficiência renal aguda. Por definição, isso é elevação importante da PA — não emergência.", whyNot: "" },
+        { why: "Emergência exigiria lesão de órgão-alvo aguda e progressiva.", whyNot: "Apesar da gravidade do número da PA, os achados até agora não confirmam LOA aguda — por isso não é emergência (ainda)." }
+      ]
+    },
+    {
+      prompt: "Qual fator etiológico parece estar mais relacionado ao quadro?",
+      options: ["Doença renal crônica", "Hiperaldosteronismo primário", "Uso de hormônios exógenos", "Feocromocitoma"],
+      answer: 2,
+      feedback: [
+        { why: "DRC é uma causa clássica de HAS secundária.", whyNot: "Nada no caso aponta pra isso — sem histórico, sem alteração de função renal, sem exame de urina alterado." },
+        { why: "Hiperaldosteronismo é uma causa endócrina relevante de HAS secundária.", whyNot: "Sem hipopotassemia, sem os achados típicos — o quadro aponta para outra causa mais evidente." },
+        { why: "Vários elementos apontam junto: idade jovem, ganho ponderal rápido, uso declarado de testosterona, trembolona e hormônio do crescimento, além de cafeína em excesso. Esteroides anabolizantes elevam a PA por retenção hidrossalina, ativação simpática, disfunção endotelial e aumento da resistência vascular periférica.", whyNot: "" },
+        { why: "Feocromocitoma cursa com a tríade cefaleia, sudorese e palpitações — tem alguma sobreposição de sintomas aqui.", whyNot: "Mas a causa mais evidente e diretamente relatada pelo paciente é o uso das substâncias exógenas — não há necessidade de hipotetizar uma causa mais rara sem investigá-la primeiro." }
+      ]
+    },
+    {
+      prompt: "Qual deve ser a primeira conduta?",
+      options: ["Prescrever clonidina", "Prescrever minoxidil", "Introduzir atenolol", "Investigar a presença de lesão aguda em órgãos-alvo"],
+      answer: 3,
+      feedback: [
+        { why: "Clonidina poderia parecer uma resposta rápida à PA elevada.", whyNot: "Prescrever qualquer anti-hipertensivo antes de excluir lesão aguda de órgão-alvo inverte a ordem correta do raciocínio clínico." },
+        { why: "Minoxidil é reservado para HAS grave refratária a outros tratamentos.", whyNot: "Não é a primeira conduta em nenhum cenário agudo, e o passo inicial aqui nem é escolher fármaco ainda." },
+        { why: "Atenolol até seria racional pela taquicardia.", whyNot: "Escolher a classe de medicamento não é o primeiro passo — antes disso, é preciso confirmar se há ou não lesão aguda de órgão-alvo, o que muda toda a conduta." },
+        { why: "Antes de escolher o anti-hipertensivo, é fundamental excluir lesão aguda em órgãos-alvo: encefalopatia hipertensiva, síndrome coronariana aguda, dissecção aguda de aorta, insuficiência cardíaca aguda, insuficiência renal aguda. Só depois dessa avaliação se define a melhor estratégia terapêutica.", whyNot: "" }
+      ]
+    },
+    {
+      prompt: "Diante do quadro (sem LOA aguda, taquicardia, ativação simpática por anabolizantes), qual a melhor escolha terapêutica?",
+      options: ["IECA + bloqueador de canal de cálcio", "Betabloqueador cardiosseletivo (ex. metoprolol)", "Diurético tiazídico isolado", "Vasodilatador direto (minoxidil)"],
+      answer: 1,
+      feedback: [
+        { why: "IECA + BCC é uma combinação padrão de 1ª linha em HAS crônica.", whyNot: "Não é o alvo certo aqui: não ataca o mecanismo central do quadro — a taquicardia e a ativação simpática pelo uso de anabolizantes." },
+        { why: "Betabloqueador cardiosseletivo (metoprolol succinato) controla a taquicardia, reduz a ativação simpática, o débito cardíaco e a liberação de renina — além de trazer benefício sobre a hipertrofia ventricular esquerda já presente no ECG. Bem tolerado em pacientes jovens, com boa evidência de benefício cardiovascular nesse contexto.", whyNot: "" },
+        { why: "Diurético isolado poderia parecer uma opção simples.", whyNot: "Não trata o mecanismo predominante (ativação simpática/taquicardia) e é insuficiente isoladamente para esse quadro." },
+        { why: "Minoxidil é potente redutor de PA.", whyNot: "Reservado para HAS grave refratária — causa taquicardia reflexa e retenção de sódio/água, exatamente o oposto do que esse paciente precisa." }
+      ]
+    }
+  ];
+
+  let step = 0;
+  let answered = false;
+
+  const els = {
+    stepTrack: document.getElementById("stepTrack"),
+    promptText: document.getElementById("promptText"),
+    options: document.getElementById("options"),
+    feedback: document.getElementById("feedback"),
+    verdictText: document.getElementById("verdictText"),
+    feedbackMain: document.getElementById("feedbackMain"),
+    feedbackWhyNot: document.getElementById("feedbackWhyNot"),
+    nextBtn: document.getElementById("nextBtn"),
+    doneCard: document.getElementById("doneCard")
+  };
+
+  function renderTrack() {
+    els.stepTrack.innerHTML = STEPS.map((_, i) => {
+      let cls = "step-dot";
+      if (i < step) cls += " done";
+      else if (i === step) cls += " current";
+      return '<span class="' + cls + '"></span>';
+    }).join("");
+  }
+
+  function renderStep() {
+    answered = false;
+    const s = STEPS[step];
+    const letters = ["A", "B", "C", "D"];
+
+    renderTrack();
+    els.promptText.textContent = s.prompt;
+    els.options.innerHTML = s.options.map((t, i) =>
+      '<button class="option" data-i="' + i + '"><span class="letter">' + letters[i] + '</span><span class="text">' + t + '</span></button>'
+    ).join("");
+    els.feedback.classList.remove("show", "is-correct", "is-wrong");
+    els.nextBtn.classList.remove("show");
+  }
+
+  els.options.addEventListener("click", (e) => {
+    const btn = e.target.closest(".option");
+    if (!btn || answered) return;
+    answered = true;
+
+    const s = STEPS[step];
+    const i = Number(btn.dataset.i);
+    const data = s.feedback[i];
+    const isCorrect = i === s.answer;
+
+    [...els.options.children].forEach((opt, j) => {
+      opt.disabled = true;
+      if (j === i) opt.classList.add(isCorrect ? "correct" : "wrong");
+      else if (j === s.answer) opt.classList.add("correct");
+      else opt.classList.add("dim");
+    });
+
+    els.feedback.classList.add("show", isCorrect ? "is-correct" : "is-wrong");
+    els.verdictText.textContent = isCorrect ? "Correto." : "Não é essa.";
+    els.feedbackMain.textContent = data.why;
+    els.feedbackWhyNot.textContent = data.whyNot;
+    els.feedbackWhyNot.style.display = data.whyNot ? "block" : "none";
+
+    if (step < STEPS.length - 1) {
+      els.nextBtn.classList.add("show");
+    } else {
+      renderTrack();
+      els.doneCard.classList.add("show");
+    }
+
+    els.feedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+
+  els.nextBtn.addEventListener("click", () => {
+    step++;
+    renderStep();
+  });
+
+  renderStep();
+</script>
+
+</body>
+</html>

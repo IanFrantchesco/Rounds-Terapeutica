@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAS Secundária</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #f6f3ec;
+    --paper-raised: #fffdf8;
+    --ink: #21262b;
+    --ink-soft: #565f63;
+    --teal: #0e6b63;
+    --teal-soft: #dcece9;
+    --brick: #b23b2e;
+    --brick-soft: #f6e4e1;
+    --line: rgba(33, 38, 43, 0.13);
+    --line-strong: rgba(33, 38, 43, 0.24);
+    --shadow: 0 1px 2px rgba(33,38,43,0.06), 0 8px 24px -12px rgba(33,38,43,0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14181a;
+      --paper-raised: #1b2124;
+      --ink: #ece8df;
+      --ink-soft: #a4aca9;
+      --teal: #55c4ba;
+      --teal-soft: #1c3532;
+      --brick: #e37c6e;
+      --brick-soft: #3a2422;
+      --line: rgba(236, 232, 223, 0.14);
+      --line-strong: rgba(236, 232, 223, 0.26);
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Public Sans", system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: clamp(14px, 4vw, 32px);
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition-duration: 0.001ms !important; } }
+
+  .page { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 26px; }
+
+  .masthead { padding-bottom: 14px; border-bottom: 1px solid var(--line-strong); display: flex; flex-direction: column; gap: 4px; }
+  .masthead .eyebrow {
+    display: block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.66rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 2px;
+  }
+  .masthead h1 { font-family: "Spectral", Georgia, serif; font-weight: 700; font-size: clamp(1.3rem, 5.5vw, 1.7rem); margin: 0; letter-spacing: -0.01em; }
+  .masthead .byline { margin: 4px 0 0; font-size: 0.85rem; font-weight: 600; }
+  .masthead .byline span { font-weight: 400; color: var(--ink-soft); }
+  .back-link { font-size: 0.78rem; color: var(--teal); text-decoration: none; }
+  .back-link:hover { text-decoration: underline; }
+
+  .section-title { font-family: "Spectral", Georgia, serif; font-weight: 600; font-size: 1.05rem; margin: 0 0 2px; }
+  .section-sub { font-size: 0.82rem; color: var(--ink-soft); margin: 0 0 12px; }
+
+  .flags { background: var(--paper-raised); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
+  .flag-row { display: flex; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); align-items: flex-start; }
+  .flag-row:last-child { border-bottom: none; }
+  .flag-num {
+    flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--brick-soft); color: var(--brick);
+    display: flex; align-items: center; justify-content: center; font-family: "IBM Plex Mono", monospace; font-size: 0.75rem; font-weight: 600; margin-top: 1px;
+  }
+  .flag-row p { margin: 0; font-size: 0.87rem; padding-top: 2px; }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-raised); }
+  .cause-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; min-width: 620px; }
+  .cause-table th {
+    font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--ink-soft); text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-strong);
+  }
+  .cause-table td { padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 0.8rem; vertical-align: top; }
+  .cause-table tr:last-child td { border-bottom: none; }
+  .cause-table td:first-child { font-family: "Public Sans", sans-serif; font-weight: 600; color: var(--teal); white-space: nowrap; }
+  .cause-table th:first-child { width: 150px; }
+
+  footer { text-align: center; padding: 4px 8px 0; font-size: 0.75rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="masthead">
+    <a class="back-link" href="../../">&lsaquo; Rounds de Terapêutica</a>
+    <span class="eyebrow">Rounds &middot; HAS &middot; Diretriz SBC 2025</span>
+    <h1>HAS Secundária</h1>
+    <p class="byline"><span>por</span> Ian Frantchesco</p>
+  </div>
+
+  <div>
+    <p class="section-title">Sinais de alerta</p>
+    <p class="section-sub">Quadro 15.1 — quando suspeitar de uma causa identificável</p>
+    <div class="flags">
+      <div class="flag-row"><span class="flag-num">1</span><p>Hipertensão estágio 3 antes dos 30 anos ou após os 55 anos</p></div>
+      <div class="flag-row"><span class="flag-num">2</span><p>Hipertensão resistente ou refratária</p></div>
+      <div class="flag-row"><span class="flag-num">3</span><p>Utilização de hormônios exógenos, fármacos ou substâncias que possam elevar a PA</p></div>
+      <div class="flag-row"><span class="flag-num">4</span><p>Tríade do feocromocitoma: crises de palpitações, sudorese e cefaleia</p></div>
+      <div class="flag-row"><span class="flag-num">5</span><p>Indícios de apneia obstrutiva do sono</p></div>
+      <div class="flag-row"><span class="flag-num">6</span><p>Fácies típica ou biótipo de doenças que cursam com hipertensão arterial</p></div>
+      <div class="flag-row"><span class="flag-num">7</span><p>Presença de sopros em territórios arteriais ou massas abdominais</p></div>
+      <div class="flag-row"><span class="flag-num">8</span><p>Assimetria ou ausência de pulsos em membros inferiores</p></div>
+      <div class="flag-row"><span class="flag-num">9</span><p>Hipopotassemia espontânea ou severa induzida por diuréticos (&lt;3,0 mEq/L)</p></div>
+      <div class="flag-row"><span class="flag-num">10</span><p>Exame de urina anormal (hematúria dismórfica, albuminúria/proteinúria), queda do RFG estimado, creatinina elevada ou alteração de imagem renal</p></div>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-title">Causas não-endócrinas</p>
+    <p class="section-sub">Doença renal, estenose de artéria renal, apneia do sono e coarctação de aorta</p>
+    <div class="table-wrap">
+      <table class="cause-table">
+        <thead><tr><th>Causa</th><th>Achados clínicos</th><th>Rastreamento</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Doença renal parenquimatosa</td>
+            <td>Edema, anemia, creatinina elevada, alterações urinárias</td>
+            <td>Creatinina + RFG-e, urina tipo I, relação albuminúria/creatininúria, USG renal</td>
+          </tr>
+          <tr>
+            <td>Estenose de artéria renal</td>
+            <td>HAS súbita ou refratária antes dos 30 ou após os 55a; sopro abdominal; EAP súbito; piora de função renal com IECA/BRA; assimetria renal &gt;1,5cm</td>
+            <td>USG Doppler renal; angioTC ou RNM (ou TC espiral); padrão-ouro: arteriografia renal</td>
+          </tr>
+          <tr>
+            <td>Apneia obstrutiva do sono</td>
+            <td>Ronco, pausas/engasgos no sono, sonolência diurna excessiva, sono não reparador, cefaleia matinal, nictúria</td>
+            <td>Padrão-ouro: polissonografia ou poligrafia residencial (IAH ≥5/h = AOS)</td>
+          </tr>
+          <tr>
+            <td>Coarctação da aorta</td>
+            <td>Fraqueza em MMII, pulsos de MMII diminuídos/ausentes, PAS em MMSS &gt;10mmHg vs MMII, sopro sistólico interescapular</td>
+            <td>Rx de tórax, ecocardiograma para rastreio; padrão-ouro: angio-RNM de aorta</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-title">Causas endócrinas</p>
+    <p class="section-sub">Da mais comum às mais raras</p>
+    <div class="table-wrap">
+      <table class="cause-table">
+        <thead><tr><th>Causa</th><th>Achados clínicos</th><th>Achados adicionais / rastreamento</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Hiperaldosteronismo primário</td>
+            <td>HA resistente/refratária ± hipopotassemia (não obrigatória) ± nódulo adrenal</td>
+            <td>Aldosterona + renina plasmática (relação aldosterona/renina &gt;30); TC de cortes finos ou RNM de adrenais</td>
+          </tr>
+          <tr>
+            <td>Feocromocitoma / paraganglioma</td>
+            <td>HA paroxística — tríade cefaleia, sudorese e palpitações</td>
+            <td>Metanefrinas plasmáticas livres e/ou urinárias fracionadas; TC, RNM, cintilografia</td>
+          </tr>
+          <tr>
+            <td>Hipotireoidismo</td>
+            <td>Fadiga, ganho de peso, HA diastólica, fraqueza muscular, sonolência</td>
+            <td>TSH e T4 livre</td>
+          </tr>
+          <tr>
+            <td>Hipertireoidismo</td>
+            <td>Intolerância ao calor, perda de peso, taquicardia/palpitações, exoftalmia, tremores, bócio</td>
+            <td>TSH e T4 livre</td>
+          </tr>
+          <tr>
+            <td>Hiperparatireoidismo</td>
+            <td>Litíase urinária, osteoporose, fraqueza muscular, poliúria, polidipsia, constipação</td>
+            <td>Cálcio total/iônico, fósforo, PTH, calciúria de 24h, vitamina D</td>
+          </tr>
+          <tr>
+            <td>Síndrome de Cushing</td>
+            <td>Fácies em "lua cheia", "giba dorsal", estrias purpúreas, obesidade central, hipopotassemia</td>
+            <td>Cortisol basal/salivar à meia-noite/urinário 24h; teste de supressão com dexametasona</td>
+          </tr>
+          <tr>
+            <td>Obesidade</td>
+            <td>Gordura central ou generalizada — classe 1 (IMC 30–&lt;35), classe 2 (35–&lt;40), classe 3 (≥40)</td>
+            <td>IMC + circunferência abdominal (&gt;102cm ♂ / &gt;88cm ♀); DEXA (padrão-ouro), TC, RNM</td>
+          </tr>
+          <tr>
+            <td>Acromegalia</td>
+            <td>HA em até 30% dos casos + DM, HVE, AOS; macrognatia, crescimento de mãos/pés, macroglossia</td>
+            <td>IGF-1, GH basal e pós-sobrecarga oral de glicose; RNM de sela túrsica (preferencial) ou TC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>Diretriz Brasileira de Hipertensão Arterial &mdash; SBC/SBN/SBH, 2025</footer>
+</div>
+
+</body>
+</html>
