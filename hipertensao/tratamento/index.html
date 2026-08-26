@@ -535,6 +535,14 @@
   .drug-list.good li::before { background: var(--sage); }
   .drug-list.bad li::before { background: var(--brick); }
 
+  .mol-note { border-top: 1px dashed var(--line-strong); padding-top: 10px; font-size: 0.84rem; }
+  .mol-line { margin: 3px 0; }
+  .mol-line strong { color: var(--ink); }
+  .mol-foot { margin: 7px 0 0; font-size: 0.77rem; color: var(--ink-soft); }
+
+  /* ---- pirâmide de tratamento ---- */
+  .pyramid text { font-family: "Public Sans", sans-serif; }
+
   footer { text-align: center; padding: 4px 8px 0; }
   footer p { margin: 0; }
   footer .credit { font-size: 0.82rem; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
@@ -745,11 +753,67 @@
           <div class="drug-card-head"><h3>Betabloqueador</h3><span class="badge special">Situação especial</span></div>
           <div class="drug-grid">
             <div><p class="list-label">Indicado</p>
-              <ul class="drug-list good"><li>ICFEr, angina, pós-IAM</li><li>Fibrilação atrial (frequência)</li><li>Diálise · gestante/desejo gestacional</li></ul>
+              <ul class="drug-list good"><li>ICFEr, SCA, pós-IAM, angina</li><li>Fibrilação atrial / arritmias (frequência)</li><li>Enxaqueca, tremor essencial, hipertireoidismo</li><li>Diálise · gestante/desejo gestacional</li></ul>
             </div>
             <div><p class="list-label">Evitar</p>
-              <ul class="drug-list bad"><li>Bradicardia/bloqueio AV</li><li>Asma/DPOC com broncoespasmo</li><li>Nunca com BCC não-di-idropiridínico</li></ul>
+              <ul class="drug-list bad"><li>Bradicardia (FC &lt;50bpm), bloqueio sinoatrial/AV</li><li>Broncopatia grave/descompensada</li><li>DAOP (exceto BB vasodilatador)</li><li>Nunca com BCC não-di-idropiridínico</li></ul>
             </div>
+          </div>
+          <div class="mol-note">
+            <p class="list-label">Moléculas</p>
+            <p class="mol-line"><strong>Não-cardiosseletivos:</strong> propranolol, nadolol, pindolol</p>
+            <p class="mol-line"><strong>Cardiosseletivos:</strong> atenolol, bisoprolol, metoprolol, nebivolol*, carvedilol*</p>
+            <p class="mol-foot">* ação vasodilatadora adicional — carvedilol é o preferido em ICFEr</p>
+          </div>
+        </div>
+
+        <div class="drug-card">
+          <div class="drug-card-head"><h3>Simpatolíticos de ação central</h3><span class="badge special">Situação especial</span></div>
+          <div class="drug-grid">
+            <div><p class="list-label">Indicado</p>
+              <ul class="drug-list good"><li>Metildopa: 1ª escolha na gestação (praticamente única indicação)</li><li>Clonidina: HAS resistente/refratária, elevação aguda da PA</li></ul>
+            </div>
+            <div><p class="list-label">Evitar</p>
+              <ul class="drug-list bad"><li>Clonidina: nunca suspender abruptamente (hipertensão rebote/crise)</li><li>Metildopa: disfunção hepática, anemia hemolítica prévia</li></ul>
+            </div>
+          </div>
+          <div class="mol-note">
+            <p class="list-label">Efeitos adversos comuns</p>
+            <p class="mol-line">Sonolência, sedação, boca seca, fadiga, hipotensão postural, disfunção erétil</p>
+            <p class="mol-foot">Retirada da clonidina: gradual, em 2–4 semanas — efeito rebote é mais perigoso se associada a betabloqueador</p>
+          </div>
+        </div>
+
+        <div class="drug-card">
+          <div class="drug-card-head"><h3>Alfabloqueadores (ação periférica)</h3><span class="badge special">Situação especial</span></div>
+          <div class="drug-grid">
+            <div><p class="list-label">Indicado</p>
+              <ul class="drug-list good"><li>Não são 1ª linha para HAS</li><li>Indicação principal: hiperplasia prostática benigna (HPB)</li></ul>
+            </div>
+            <div><p class="list-label">Evitar</p>
+              <ul class="drug-list bad"><li>Hipotensão ortostática — iniciar com dose baixa, à noite</li></ul>
+            </div>
+          </div>
+          <div class="mol-note">
+            <p class="list-label">Moléculas</p>
+            <p class="mol-line">Prazosina, doxazosina, terazosina — também tansulosina, alfuzosina, silodosina (uso quase exclusivo em HPB)</p>
+          </div>
+        </div>
+
+        <div class="drug-card">
+          <div class="drug-card-head"><h3>Vasodilatadores diretos</h3><span class="badge special">Situação especial</span></div>
+          <div class="drug-grid">
+            <div><p class="list-label">Indicado</p>
+              <ul class="drug-list good"><li>Hidralazina: pré-eclâmpsia (gestante)</li><li>Minoxidil: HAS grave refratária a outros tratamentos</li></ul>
+            </div>
+            <div><p class="list-label">Evitar</p>
+              <ul class="drug-list bad"><li>Minoxidil: contraindicado na gestação</li><li>Retenção de sódio/água e taquicardia reflexa — associar diurético + BB</li></ul>
+            </div>
+          </div>
+          <div class="mol-note">
+            <p class="list-label">Efeitos adversos comuns</p>
+            <p class="mol-line">Hidralazina: cefaleia, taquicardia reflexa, reação lupus-like (dose-dependente)</p>
+            <p class="mol-line">Minoxidil: hirsutismo (até 80% dos casos)</p>
           </div>
         </div>
 
@@ -766,6 +830,38 @@
         </div>
 
       </div>
+    </div>
+
+    <div>
+      <p class="section-title">Pirâmide terapêutica</p>
+      <p class="section-sub">Hierarquia das classes, da base (MEV) ao topo (situações especiais)</p>
+      <figure class="diagram">
+        <svg class="pyramid" viewBox="0 0 360 210" role="img" aria-label="Pirâmide de tratamento: na base, mudanças no estilo de vida; acima, as três classes de 1ª linha (tiazídico, IECA ou BRA, BCC); em seguida a espironolactona como 4º fármaco; depois betabloqueador e agonista alfa-2 central; no topo, alfabloqueador e vasodilatador direto, reservados a situações especiais.">
+          <rect x="20" y="10" width="320" height="32" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="180" y="30" text-anchor="middle" font-size="11" fill="var(--ink)">Mudanças no estilo de vida (MEV)</text>
+
+          <rect x="30" y="48" width="96" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
+          <text x="78" y="68" text-anchor="middle" font-size="9.5" fill="var(--teal)">Tiazídico</text>
+          <rect x="132" y="48" width="96" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
+          <text x="180" y="68" text-anchor="middle" font-size="9.5" fill="var(--teal)">IECA/BRA</text>
+          <rect x="234" y="48" width="96" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
+          <text x="282" y="68" text-anchor="middle" font-size="9.5" fill="var(--teal)">BCC</text>
+
+          <rect x="45" y="86" width="270" height="32" rx="7" fill="var(--brick-soft)" stroke="var(--brick)" stroke-width="1.1"></rect>
+          <text x="180" y="106" text-anchor="middle" font-size="10.5" fill="var(--brick)">Espironolactona (4º fármaco)</text>
+
+          <rect x="60" y="124" width="114" height="32" rx="7" fill="var(--amber-soft)" stroke="var(--amber)" stroke-width="1.1"></rect>
+          <text x="117" y="144" text-anchor="middle" font-size="9" fill="var(--amber)">Betabloqueador*</text>
+          <rect x="186" y="124" width="114" height="32" rx="7" fill="var(--amber-soft)" stroke="var(--amber)" stroke-width="1.1"></rect>
+          <text x="243" y="144" text-anchor="middle" font-size="9" fill="var(--amber)">Agonista α2A</text>
+
+          <rect x="80" y="162" width="94" height="32" rx="7" fill="var(--amber-soft)" stroke="var(--amber)" stroke-width="1.1"></rect>
+          <text x="127" y="182" text-anchor="middle" font-size="8.7" fill="var(--amber)">Alfabloqueador</text>
+          <rect x="186" y="162" width="94" height="32" rx="7" fill="var(--amber-soft)" stroke="var(--amber)" stroke-width="1.1"></rect>
+          <text x="233" y="182" text-anchor="middle" font-size="8.7" fill="var(--amber)">Vasodilatador</text>
+        </svg>
+        <figcaption>* Betabloqueador pode ser escolha inicial fora da ordem da pirâmide quando há indicação específica: angina, pós-IAM, IC, FA, DRC em diálise, ou mulher que deseja engravidar.</figcaption>
+      </figure>
     </div>
   </div>
 
