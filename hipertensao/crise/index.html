@@ -361,7 +361,7 @@
 
     <div class="case-nav-row">
       <button class="navbtn" id="prevBtn" aria-label="Caso anterior">&lsaquo;</button>
-      <span class="case-counter" id="caseCounter">01 / 05</span>
+      <span class="case-counter" id="caseCounter">01 / 10</span>
       <button class="navbtn" id="nextBtn" aria-label="Próximo caso">&rsaquo;</button>
     </div>
 
@@ -720,6 +720,316 @@
         }
       ],
       done: "Crise adrenérgica grave (feocromocitoma): tríade cefaleia-sudorese-palpitações em crises paroxísticas. Nitroprussiato é seguro; betabloqueador isolado, sem bloqueio alfa prévio, pode piorar a crise por estimulação alfa sem oposição."
+    },
+    {
+      name: "Antônio", age: 70, sex: "masculino", initials: "AT",
+      vitals: [
+        { label: "PA", value: "195/105", flag: true },
+        { label: "Glasgow", value: "14/15", flag: true },
+        { label: "FC", value: "88 bpm", flag: false }
+      ],
+      tags: [
+        { t: "Hemiparesia direita súbita", c: "crit" },
+        { t: "Disartria", c: "crit" },
+        { t: "Início há 2 horas", c: "warn" },
+        { t: "Fibrilação atrial prévia", c: "warn" }
+      ],
+      qp: "Familiares notaram fraqueza súbita no lado direito do corpo e dificuldade para falar há cerca de 2 horas. Sem histórico de trauma.",
+      steps: [
+        {
+          prompt: "Como você classificaria esse quadro?",
+          options: ["Elevação importante da PA", "Emergência hipertensiva", "HAS estágio 2", "Crise adrenérgica"],
+          answer: 1,
+          feedback: [
+            { why: "Elevação importante seria PA alta sem LOA aguda.", whyNot: "Déficit neurológico focal agudo (hemiparesia + disartria) é LOA aguda cerebrovascular — emergência." },
+            { why: "Déficit neurológico focal de início súbito (hemiparesia + disartria) caracteriza emergência hipertensiva, categoria cerebrovascular, com suspeita de AVC.", whyNot: "" },
+            { why: "Classificar só pelo número da PA.", whyNot: "Ignora o achado mais grave e específico — o déficit neurológico agudo." },
+            { why: "Crise adrenérgica tem outro padrão de apresentação.", whyNot: "Não há tríade adrenérgica aqui — o quadro é neurológico focal." }
+          ]
+        },
+        {
+          prompt: "Qual exame é prioritário antes de qualquer decisão sobre redução da PA?",
+          options: ["Tomografia de crânio sem contraste", "Ecocardiograma", "Radiografia de tórax", "Ultrassonografia abdominal"],
+          answer: 0,
+          feedback: [
+            { why: "TC de crânio sem contraste diferencia AVC isquêmico de hemorrágico — decisão essencial, já que a meta de PA e a elegibilidade para trombólise dependem diretamente disso.", whyNot: "" },
+            { why: "Ecocardiograma pode ser útil depois, para investigar fonte embólica.", whyNot: "Não responde à pergunta mais urgente da fase hiperaguda." },
+            { why: "Radiografia de tórax é rotina, mas não prioritária aqui.", whyNot: "Não influencia a decisão imediata sobre a PA." },
+            { why: "USG abdominal não tem papel nesse quadro.", whyNot: "Irrelevante para a fase aguda do déficit neurológico." }
+          ]
+        },
+        {
+          prompt: "Sobre a redução da PA no AVC isquêmico agudo, qual afirmação está correta?",
+          options: ["Deve-se sempre normalizar a PA rapidamente, como em qualquer emergência", "A redução deve ser cautelosa — hipertensão permissiva é geralmente preferida, exceto se PA muito elevada ou paciente candidato à trombólise", "A meta é idêntica à da dissecção de aorta (PAS <120mmHg na 1ªh)", "Não há nenhuma recomendação sobre PA no AVC isquêmico"],
+          answer: 1,
+          feedback: [
+            { why: "Normalizar rapidamente pareceria a conduta padrão de emergência.", whyNot: "Perigoso aqui: reduzir a PA de forma agressiva pode piorar a perfusão da zona de penumbra isquêmica ainda viável." },
+            { why: "No AVC isquêmico agudo, a abordagem costuma ser mais conservadora — hipertensão permissiva —, diferente da maioria das outras emergências hipertensivas, exceto quando a PA está muito elevada ou há indicação de trombólise.", whyNot: "" },
+            { why: "Essa meta é específica de dissecção de aorta.", whyNot: "Não se aplica ao AVC isquêmico, que segue lógica diferente (mais conservadora)." },
+            { why: "Parece uma resposta segura.", whyNot: "Existe sim orientação específica — só que mais cautelosa que o padrão geral de emergências." }
+          ]
+        },
+        {
+          prompt: "Se esse paciente for candidato à trombólise, qual cuidado é necessário?",
+          options: ["Não há necessidade de controlar a PA antes da trombólise", "A PA deve estar abaixo de um limiar definido (ex. <185/110mmHg) antes de iniciar o trombolítico", "Trombólise é sempre contraindicada se houver hipertensão", "A meta de PA para trombólise é a mesma da dissecção de aorta"],
+          answer: 1,
+          feedback: [
+            { why: "Pareceria mais simples não se preocupar com a PA antes.", whyNot: "Arriscado — PA muito elevada aumenta o risco de sangramento após trombólise." },
+            { why: "Para reduzir o risco de sangramento, a PA precisa estar controlada abaixo de um limiar (tipicamente <185/110mmHg) antes de iniciar o trombolítico, com controle cuidadoso também depois.", whyNot: "" },
+            { why: "Hipertensão sempre contraindicaria a trombólise.", whyNot: "Não é bem assim — a PA pode e deve ser controlada antes, viabilizando a trombólise quando indicada." },
+            { why: "A meta da dissecção pareceria conservadora o suficiente.", whyNot: "São contextos e limiares diferentes — não devem ser confundidos." }
+          ]
+        }
+      ],
+      done: "AVC isquêmico agudo é uma exceção importante: diferente da maioria das emergências, a redução da PA deve ser cautelosa (hipertensão permissiva), exceto quando há indicação de trombólise, que exige controle específico da PA antes da infusão."
+    },
+    {
+      name: "Ivone", age: 66, sex: "feminino", initials: "IV",
+      vitals: [
+        { label: "PA", value: "200/110", flag: true },
+        { label: "SatO₂", value: "88%", flag: true },
+        { label: "FC", value: "118 bpm", flag: true }
+      ],
+      tags: [
+        { t: "Dispneia súbita", c: "crit" },
+        { t: "Ortopneia", c: "crit" },
+        { t: "Estertores bilaterais", c: "crit" },
+        { t: "Usa 3 travesseiros para dormir", c: "warn" }
+      ],
+      qp: "Falta de ar de início súbito, pior deitada, com necessidade de ficar sentada para respirar melhor. Ausculta com estertores crepitantes bilaterais até terços médios.",
+      steps: [
+        {
+          prompt: "Como você classificaria esse quadro?",
+          options: ["Elevação importante da PA", "Emergência hipertensiva", "HAS resistente", "Pré-hipertensão"],
+          answer: 1,
+          feedback: [
+            { why: "Elevação importante seria sem LOA aguda.", whyNot: "Edema agudo de pulmão com insuficiência ventricular esquerda é LOA aguda cardiocirculatória — emergência." },
+            { why: "Dispneia súbita, ortopneia e estertores bilaterais com PA muito elevada caracterizam edema agudo de pulmão hipertensivo — uma emergência cardiocirculatória.", whyNot: "" },
+            { why: "HAS resistente é sobre falha terapêutica otimizada.", whyNot: "Este é um quadro agudo grave, não uma questão de resistência a tratamento prévio." },
+            { why: "Pré-hipertensão é PA levemente elevada.", whyNot: "Muito distante do quadro — PA de 200/110 com insuficiência respiratória é grave." }
+          ]
+        },
+        {
+          prompt: "Qual medicamento IV é preferencial nesse quadro, entre os disponíveis?",
+          options: ["Nitroprussiato de sódio", "Nitroglicerina", "Metoprolol isolado", "Diurético tiazídico oral"],
+          answer: 1,
+          feedback: [
+            { why: "Nitroprussiato é eficaz na maioria das emergências.", whyNot: "Mas nitroglicerina tem indicação mais específica para este quadro, reduzindo pré-carga com maior efeito venodilatador." },
+            { why: "Nitroglicerina tem indicação específica para insuficiência coronariana e edema agudo de pulmão, reduzindo a pré-carga e melhorando a congestão pulmonar.", whyNot: "" },
+            { why: "Metoprolol controla frequência cardíaca.", whyNot: "Isolado, sem indicação clara aqui, e pode piorar o quadro se houver componente de baixo débito cardíaco." },
+            { why: "Diurético tiazídico via oral pareceria lógico pela congestão.", whyNot: "Via e velocidade de ação inadequadas para o quadro agudo — precisa de diurético de alça IV." }
+          ]
+        },
+        {
+          prompt: "Qual a meta de redução da PA para este quadro (EAP)?",
+          options: ["PAS <140mmHg na 1ª hora", "↓25% na 1ª hora, sem meta mais agressiva", "Normalizar totalmente em minutos", "Não reduzir a PA, focar só na oxigenação"],
+          answer: 0,
+          feedback: [
+            { why: "EAP está no grupo de crises com meta mais agressiva de redução — junto de crises catecolaminérgicas e dissecção de aorta: PAS <140mmHg já na 1ª hora.", whyNot: "" },
+            { why: "Essa é a meta para a maioria das demais emergências.", whyNot: "EAP está no grupo de meta mais agressiva, não no grupo geral." },
+            { why: "Normalizar totalmente em minutos pareceria mais eficaz.", whyNot: "Excessivo e arriscado — a meta padronizada já é suficientemente agressiva sem normalizar por completo." },
+            { why: "Focar só na oxigenação ignoraria o componente pressórico.", whyNot: "O controle da PA é parte central do tratamento do EAP hipertensivo, não pode ser deixado de lado." }
+          ]
+        },
+        {
+          prompt: "Além do vasodilatador, qual classe é frequentemente associada no manejo do EAP hipertensivo?",
+          options: ["Diurético de alça (ex. furosemida)", "Betabloqueador não-cardiosseletivo", "Alfabloqueador", "Simpatolítico de ação central"],
+          answer: 0,
+          feedback: [
+            { why: "Diurético de alça auxilia na redução da congestão pulmonar por sobrecarga de volume, sendo associado ao vasodilatador no manejo agudo do EAP.", whyNot: "" },
+            { why: "Betabloqueador não-cardiosseletivo poderia parecer útil pela taquicardia.", whyNot: "Não é a associação padrão nesse contexto agudo, e pode ter efeito inotrópico negativo indesejado." },
+            { why: "Alfabloqueador não tem papel nesse cenário agudo.", whyNot: "Sua indicação principal é HPB, sem relação com o manejo do EAP." },
+            { why: "Simpatolítico central não é a associação padrão.", whyNot: "Ação mais lenta, sem papel estabelecido no EAP agudo." }
+          ]
+        }
+      ],
+      done: "EAP com PA muito elevada é emergência cardiocirculatória com meta agressiva de redução (PAS <140mmHg na 1ªh); nitroglicerina reduz pré-carga e é a indicação mais específica, geralmente associada a diurético de alça."
+    },
+    {
+      name: "Diego", age: 24, sex: "masculino", initials: "DG",
+      vitals: [
+        { label: "PA", value: "205/115", flag: true },
+        { label: "FC", value: "132 bpm", flag: true },
+        { label: "Temperatura", value: "38.2°C", flag: true }
+      ],
+      tags: [
+        { t: "Agitação psicomotora", c: "crit" },
+        { t: "Dor torácica", c: "crit" },
+        { t: "Uso recente de cocaína (relatado por amigos)", c: "crit" },
+        { t: "Midríase", c: "warn" }
+      ],
+      qp: "Trazido por amigos após festa, agitado, taquicárdico, referindo dor no peito e muito ansioso. Amigos relatam uso de cocaína há cerca de 1 hora.",
+      steps: [
+        {
+          prompt: "Como você classificaria esse quadro?",
+          options: ["Elevação importante da PA", "Emergência hipertensiva (crise adrenérgica grave)", "HAS do avental branco", "Pré-hipertensão"],
+          answer: 1,
+          feedback: [
+            { why: "Elevação importante não descreveria esse quadro tão agudo e grave.", whyNot: "Dose excessiva de droga ilícita é uma categoria específica de emergência — crise adrenérgica grave." },
+            { why: "PA muito elevada associada a agitação, taquicardia e dor torácica após uso de cocaína caracteriza crise adrenérgica grave — categoria própria de emergência hipertensiva.", whyNot: "" },
+            { why: "Avental branco seria PA elevada só no consultório.", whyNot: "Não é o padrão aqui — há um gatilho farmacológico claro e sintomas graves." },
+            { why: "Pré-hipertensão é PA levemente elevada e persistente.", whyNot: "Muito distante da gravidade e do padrão agudo desse quadro." }
+          ]
+        },
+        {
+          prompt: "Qual classe medicamentosa deve ser evitada isoladamente neste quadro, pelo mesmo motivo já visto em outras crises adrenérgicas?",
+          options: ["Benzodiazepínicos", "Betabloqueador isolado", "Vasodilatadores diretos IV", "Nitroprussiato de sódio"],
+          answer: 1,
+          feedback: [
+            { why: "Benzodiazepínicos são seguros e, na verdade, a 1ª linha nesse contexto.", whyNot: "Não é a classe a ser evitada — é justamente a mais indicada." },
+            { why: "Mesmo raciocínio do feocromocitoma: betabloqueador isolado, sem bloqueio alfa prévio, pode deixar a vasoconstrição alfa-adrenérgica sem oposição, piorando a crise hipertensiva e o vasoespasmo coronariano induzido pela cocaína.", whyNot: "" },
+            { why: "Vasodilatadores diretos IV são seguros nesse contexto.", whyNot: "Não são a classe problemática aqui." },
+            { why: "Nitroprussiato é seguro na maioria das emergências.", whyNot: "Não é a classe a evitar neste quadro." }
+          ]
+        },
+        {
+          prompt: "Qual é a primeira linha de tratamento para agitação e componente adrenérgico nesse contexto?",
+          options: ["Benzodiazepínicos (ex. diazepam)", "Betabloqueador cardiosseletivo", "IECA", "Diurético tiazídico"],
+          answer: 0,
+          feedback: [
+            { why: "Benzodiazepínicos são 1ª linha na intoxicação por cocaína, reduzindo a ativação simpática central, a agitação e, indiretamente, ajudando a controlar PA e FC antes de considerar outros anti-hipertensivos.", whyNot: "" },
+            { why: "Betabloqueador cardiosseletivo poderia parecer razoável pela taquicardia.", whyNot: "Mesmo cardiosseletivo, isolado, mantém algum risco nesse contexto — não é a 1ª linha." },
+            { why: "IECA é fármaco oral de ação lenta.", whyNot: "Não tem papel na fase aguda desse quadro." },
+            { why: "Diurético tiazídico é via oral, de ação lenta.", whyNot: "Sem papel em controle agudo de crise adrenérgica grave." }
+          ]
+        },
+        {
+          prompt: "Se, mesmo após benzodiazepínico, a PA permanecer muito elevada, qual classe é segura para associar?",
+          options: ["Betabloqueador não-cardiosseletivo isolado", "Vasodilatador direto IV (ex. nitroprussiato ou nitroglicerina)", "IECA em dose alta", "Diurético de alça isolado"],
+          answer: 1,
+          feedback: [
+            { why: "Betabloqueador não-cardiosseletivo isolado mantém o risco de estimulação alfa sem oposição.", whyNot: "Ainda contraindicado isoladamente nesse contexto." },
+            { why: "Vasodilatadores diretos IV são seguros e eficazes para complementar o controle da PA, sem o risco do betabloqueador isolado.", whyNot: "" },
+            { why: "IECA em dose alta não é uma opção parenteral de emergência.", whyNot: "Ação lenta, via oral — inadequado para controle agudo." },
+            { why: "Diurético de alça isolado não ataca o mecanismo predominante.", whyNot: "A crise aqui é por ativação simpática, não por sobrecarga de volume." }
+          ]
+        }
+      ],
+      done: "Intoxicação por cocaína é crise adrenérgica grave: benzodiazepínico é 1ª linha (reduz ativação simpática central); betabloqueador isolado deve ser evitado pelo mesmo risco de vasoconstrição alfa sem oposição visto no feocromocitoma."
+    },
+    {
+      name: "Jorge", age: 55, sex: "masculino", initials: "JG",
+      vitals: [
+        { label: "PA", value: "205/118", flag: true },
+        { label: "Glasgow", value: "10/15", flag: true },
+        { label: "FC", value: "72 bpm", flag: false }
+      ],
+      tags: [
+        { t: "Cefaleia súbita intensa ('a pior da vida')", c: "crit" },
+        { t: "Vômitos", c: "crit" },
+        { t: "Rebaixamento do nível de consciência", c: "crit" },
+        { t: "Hemiparesia esquerda", c: "crit" }
+      ],
+      qp: "Cefaleia de início súbito, descrita pela esposa como 'a pior dor de cabeça da vida dele', seguida de vômitos e progressiva diminuição do nível de consciência.",
+      steps: [
+        {
+          prompt: "Como você classificaria esse quadro?",
+          options: ["Elevação importante da PA", "Emergência hipertensiva", "HAS estágio 2", "HAS resistente"],
+          answer: 1,
+          feedback: [
+            { why: "Elevação importante seria sem LOA aguda.", whyNot: "Cefaleia súbita intensa + rebaixamento do nível de consciência + déficit focal é LOA aguda cerebrovascular — emergência." },
+            { why: "Cefaleia súbita e intensa, vômitos, rebaixamento do nível de consciência e hemiparesia formam um quadro neurológico agudo grave — emergência hipertensiva, categoria cerebrovascular.", whyNot: "" },
+            { why: "Classificar só pelo estágio da PA.", whyNot: "Ignora o achado mais grave — o quadro neurológico agudo." },
+            { why: "HAS resistente é sobre falha de tratamento otimizado.", whyNot: "Este é um quadro agudo, não uma questão de resistência terapêutica." }
+          ]
+        },
+        {
+          prompt: "Diante de cefaleia súbita intensa + rebaixamento do nível de consciência, qual a prioridade imediata?",
+          options: ["Iniciar imediatamente vasodilatador IV em dose plena, sem outros exames", "Tomografia de crânio sem contraste, para diferenciar isquêmico de hemorrágico", "Aguardar reavaliação em algumas horas", "Solicitar apenas exames laboratoriais de rotina"],
+          answer: 1,
+          feedback: [
+            { why: "Iniciar vasodilatador sem saber o tipo de lesão é arriscado.", whyNot: "Sem saber se é isquêmico ou hemorrágico, reduzir a PA de forma inadequada pode ser prejudicial." },
+            { why: "A TC de crânio é essencial e urgente para diferenciar AVC isquêmico de hemorrágico, já que a conduta — incluindo a meta de PA — muda conforme o diagnóstico.", whyNot: "" },
+            { why: "Aguardar horas pareceria mais seguro.", whyNot: "Perigoso — o quadro é agudo e grave, exige avaliação imediata." },
+            { why: "Exames laboratoriais de rotina são complementares.", whyNot: "Não respondem à pergunta mais urgente: qual o tipo de lesão cerebral presente." }
+          ]
+        },
+        {
+          prompt: "Por que não se deve reduzir a PA de forma agressiva e não controlada nesse tipo de quadro?",
+          options: ["Porque pode comprometer a perfusão cerebral em uma área já comprometida", "Porque a PA não tem relação com o prognóstico nesse quadro", "Porque reduzir a PA sempre piora o sangramento", "Não há motivo, deve-se sempre normalizar rapidamente"],
+          answer: 0,
+          feedback: [
+            { why: "Assim como no AVC isquêmico, reduções abruptas e não controladas da PA podem comprometer ainda mais a perfusão cerebral — o controle deve ser cuidadoso e guiado por protocolo, não uma normalização às pressas.", whyNot: "" },
+            { why: "A PA sem relação com o prognóstico.", whyNot: "Pelo contrário — o manejo da PA é central no prognóstico desses quadros." },
+            { why: "Reduzir sempre pioraria o sangramento.", whyNot: "Simplificação incorreta — o cuidado é com a magnitude e velocidade da redução, não com reduzir ou não." },
+            { why: "Normalizar rapidamente pareceria a conduta padrão.", whyNot: "Justamente o oposto do recomendado nesse contexto." }
+          ]
+        },
+        {
+          prompt: "Qual o ambiente adequado para conduzir esse caso?",
+          options: ["Observação ambulatorial", "Internação em UTI, com neuroimagem e avaliação neurológica/neurocirúrgica urgentes", "Alta com anti-hipertensivo oral e retorno em 7 dias", "Encaminhamento eletivo ao ambulatório de neurologia"],
+          answer: 1,
+          feedback: [
+            { why: "Observação ambulatorial seria a conduta para elevação importante sem LOA.", whyNot: "Não se aplica — há LOA aguda grave, exigindo conduta hospitalar imediata." },
+            { why: "Quadro neurológico agudo grave exige internação em UTI, com neuroimagem e avaliação neurológica/neurocirúrgica urgentes.", whyNot: "" },
+            { why: "Alta pareceria resolver rapidamente.", whyNot: "Extremamente inseguro diante da gravidade e do risco iminente de morte." },
+            { why: "Encaminhamento eletivo é para acompanhamento não urgente.", whyNot: "Incompatível com a gravidade aguda do quadro." }
+          ]
+        }
+      ],
+      done: "Cefaleia súbita intensa com rebaixamento do nível de consciência é emergência cerebrovascular: TC de crânio sem contraste é prioridade antes de qualquer conduta farmacológica, e a redução da PA deve ser cuidadosa, guiada por protocolo, em ambiente de UTI."
+    },
+    {
+      name: "Élcio", age: 59, sex: "masculino", initials: "EL",
+      vitals: [
+        { label: "PA", value: "192/108", flag: true },
+        { label: "FC", value: "96 bpm", flag: false },
+        { label: "Troponina", value: "elevada", flag: true }
+      ],
+      tags: [
+        { t: "Dor torácica em aperto, irradia p/ braço esquerdo", c: "crit" },
+        { t: "Sudorese fria", c: "crit" },
+        { t: "Diabético", c: "warn" },
+        { t: "Tabagista", c: "warn" }
+      ],
+      qp: "Dor torácica em aperto, de início há 40 minutos, irradiando para o braço esquerdo, associada a sudorese fria e náuseas.",
+      steps: [
+        {
+          prompt: "Como você classificaria esse quadro?",
+          options: ["Elevação importante da PA", "Emergência hipertensiva (cardiocirculatória)", "HAS resistente", "Pré-hipertensão"],
+          answer: 1,
+          feedback: [
+            { why: "Elevação importante seria sem LOA aguda.", whyNot: "Síndrome coronariana aguda é LOA aguda cardiocirculatória — emergência hipertensiva." },
+            { why: "Dor torácica típica com sudorese fria e troponina elevada, associada a PA muito elevada, caracteriza síndrome coronariana aguda — uma emergência hipertensiva cardiocirculatória.", whyNot: "" },
+            { why: "HAS resistente é sobre falha terapêutica otimizada.", whyNot: "Este é um quadro agudo, não uma questão de resistência a tratamento prévio." },
+            { why: "Pré-hipertensão é PA levemente elevada.", whyNot: "Muito distante da gravidade desse quadro." }
+          ]
+        },
+        {
+          prompt: "Quais medicamentos parenterais têm indicação específica para insuficiência coronariana, entre os já estudados?",
+          options: ["Nitroglicerina e metoprolol IV", "Nitroprussiato e minoxidil", "Diurético tiazídico e espironolactona", "Hidralazina e clonidina"],
+          answer: 0,
+          feedback: [
+            { why: "Ambos têm indicação específica para insuficiência coronariana: nitroglicerina reduz pré-carga e melhora a perfusão coronariana; metoprolol IV controla frequência e reduz o consumo de oxigênio pelo miocárdio.", whyNot: "" },
+            { why: "Nitroprussiato é usado na maioria das emergências.", whyNot: "Minoxidil é via oral, sem papel em emergência — a dupla certa é outra." },
+            { why: "Diurético tiazídico e espironolactona são orais, de ação lenta.", whyNot: "Sem papel no controle agudo de síndrome coronariana." },
+            { why: "Hidralazina e clonidina têm outras indicações específicas.", whyNot: "Não são a dupla com indicação direta para insuficiência coronariana nesse contexto." }
+          ]
+        },
+        {
+          prompt: "Por que evitar nitroprussiato de sódio como escolha preferencial na síndrome coronariana aguda, quando há alternativa mais específica disponível?",
+          options: ["Nitroprussiato é contraindicado em qualquer emergência cardíaca", "Nitroprussiato pode causar fenômeno de roubo coronariano, redistribuindo fluxo para longe de áreas isquêmicas", "Nitroprussiato não reduz a PA de forma eficaz", "Não há motivo, ambos são equivalentes aqui"],
+          answer: 1,
+          feedback: [
+            { why: "Nitroprussiato não é contraindicado de forma geral.", whyNot: "É seguro na maioria das emergências — o ponto aqui é a preferência por uma alternativa mais específica." },
+            { why: "Nitroprussiato pode causar redistribuição de fluxo coronariano ('roubo coronariano'), sendo a nitroglicerina preferível quando há suspeita de isquemia miocárdica ativa.", whyNot: "" },
+            { why: "Nitroprussiato é, na verdade, bastante eficaz na redução da PA.", whyNot: "A eficácia não é o problema — é o efeito específico sobre o fluxo coronariano." },
+            { why: "Pareceria que qualquer vasodilatador serviria igualmente.", whyNot: "Existe um motivo fisiopatológico específico para a preferência pela nitroglicerina aqui." }
+          ]
+        },
+        {
+          prompt: "Qual o cuidado ao usar metoprolol IV nesse paciente?",
+          options: ["Nenhum cuidado especial é necessário", "Monitorizar sinais de bradicardia, BAV avançado e broncoespasmo", "Metoprolol deve ser sempre evitado em síndrome coronariana", "Deve ser associado obrigatoriamente a vasodilatador direto"],
+          answer: 1,
+          feedback: [
+            { why: "Todo medicamento nessa classe exige monitorização.", whyNot: "Não é seguro assumir que nenhum cuidado é necessário." },
+            { why: "Metoprolol IV pode causar bradicardia, bloqueio AV avançado e broncoespasmo — eventos adversos já vistos na tabela de medicamentos parenterais, que exigem monitorização.", whyNot: "" },
+            { why: "Metoprolol tem, na verdade, indicação específica em insuficiência coronariana.", whyNot: "Não deve ser evitado — deve ser usado com monitorização adequada." },
+            { why: "Associação obrigatória a vasodilatador direto não é a regra.", whyNot: "Pode ser usado conforme o quadro clínico, sem essa exigência automática." }
+          ]
+        }
+      ],
+      done: "Síndrome coronariana aguda com PA elevada tem duas medicações parenterais com indicação específica: nitroglicerina (evita o efeito de roubo coronariano do nitroprussiato) e metoprolol IV (reduz consumo de O₂ miocárdico), com monitorização para bradicardia/BAV/broncoespasmo."
     }
   ];
 
