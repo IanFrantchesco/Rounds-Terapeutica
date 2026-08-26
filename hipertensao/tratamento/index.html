@@ -1246,188 +1246,188 @@
       ]
     },
     {
-      name: "Patrícia", age: 39, sex: "feminino", initials: "PT",
+      name: "Nelson", age: 63, sex: "masculino", initials: "NL",
       vitals: [
-        { label: "PA persistente", value: "165/100", flag: true },
-        { label: "FC", value: "92 bpm", flag: false },
-        { label: "IMC", value: "23 kg/m²", flag: false }
+        { label: "PA persistente", value: "168/98", flag: true },
+        { label: "K+", value: "4.6", flag: false },
+        { label: "FC", value: "74 bpm", flag: false }
       ],
       tags: [
-        { t: "Asma persistente moderada", c: "crit" },
-        { t: "Broncoespasmo recorrente", c: "crit" },
-        { t: "Sem DCV estabelecida", c: "" },
-        { t: "Risco moderado", c: "warn" }
+        { t: "HAS resistente (4 classes otimizadas)", c: "crit" },
+        { t: "Ginecomastia dolorosa com espironolactona", c: "crit" },
+        { t: "Trocou para eplerenona — ainda com efeitos intoleráveis", c: "crit" },
+        { t: "Sem causa secundária identificada", c: "" }
       ],
-      qp: "Falta de ar aos esforços; usa bombinha de resgate (salbutamol) cerca de 3x por semana.",
+      qp: "Em acompanhamento há 6 meses. Já tentou espironolactona (suspensa por ginecomastia dolorosa) e depois eplerenona (também com efeitos intoleráveis). PA ainda fora da meta.",
       options: [
-        { t: "IECA ou BRA + betabloqueador" },
-        { t: "IECA ou BRA + bloqueador de canal de cálcio" },
-        { t: "Betabloqueador em monoterapia" },
-        { t: "Diurético tiazídico + betabloqueador" }
+        { t: "Reintroduzir espironolactona em dose menor" },
+        { t: "Adicionar clonidina" },
+        { t: "Suspender todo o tratamento farmacológico e reavaliar em 6 meses" },
+        { t: "Adicionar mais um bloqueador de canal de cálcio" }
       ],
       answer: 1,
       feedback: [
-        { why: "Combinação dupla é a conduta certa para Estágio 2.", whyNot: "Mas não com betabloqueador aqui: asma persistente com broncoespasmo recorrente é motivo para evitar essa classe — risco de precipitar crise." },
-        { why: "Estágio 2 pede combinação dupla já de início, e BCC é uma das classes de 1ª linha, sem qualquer interação com a asma dela — a escolha mais segura e eficaz aqui.", whyNot: "" },
-        { why: "Monoterapia com BB pareceria controlar a taquicardia leve.", whyNot: "Estágio 2 exige combinação, não monoterapia — e ainda esbarra na mesma contraindicação relativa da asma." },
-        { why: "Diurético é uma classe de 1ª linha válida.", whyNot: "A combinação com betabloqueador mantém o mesmo problema: risco de broncoespasmo numa paciente com asma persistente." }
+        { why: "Reduzir a dose poderia parecer uma forma de contornar o efeito adverso.", whyNot: "A ginecomastia já causou intolerância significativa, inclusive com a alternativa (eplerenona) — reintroduzir não é a conduta mais segura." },
+        { why: "Clonidina é indicada justamente na HAS resistente/refratária, especialmente quando há efeitos adversos intoleráveis com espironolactona ou eplerenona — exatamente o cenário deste paciente.", whyNot: "" },
+        { why: "Suspender pareceria uma pausa razoável.", whyNot: "HAS resistente não controlada não deve ficar sem tratamento — o risco cardiovascular permanece alto enquanto a PA está fora da meta." },
+        { why: "Mais um BCC pareceria intensificar o tratamento.", whyNot: "Empilhar uma classe já em uso não é a estratégia padrão — o próximo passo é somar um mecanismo de ação diferente." }
       ],
       steps: [
-        ["Paciente é HAS?", "Sim — PA <strong>165/100 mmHg</strong> persistente."],
-        ["Estadiamento?", "<strong>Estágio 2</strong> (PAS 160–179 e/ou PAD 100–109)."],
-        ["Estratificação de risco?", "Risco <strong>moderado</strong> — sem DCV estabelecida, mas com fatores agravantes."],
-        ["Decisão terapêutica?", "Combinação dupla, indicada para Estágio 2 independente do risco."],
-        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
-        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
-        ["Contraindicações?", "<strong>Betabloqueador</strong> deve ser evitado — asma persistente com broncoespasmo recorrente, sem indicação compelida que justifique o risco."]
+        ["Paciente é HAS?", "Sim — PA <strong>168/98 mmHg</strong> persistente apesar do tratamento."],
+        ["Estadiamento?", "Estágio 1 residual, apesar de 4 classes."],
+        ["Estratificação de risco?", "<strong>Alto risco</strong> — HAS resistente já eleva o risco cardiovascular."],
+        ["Decisão terapêutica?", "Configura <strong>HAS resistente</strong>: 4 classes otimizadas (incluindo diurético e ARM), sem controle."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>, ainda não atingida."],
+        ["Mono ou combinada?", "Já em quádrupla — avançar para uma <strong>5ª classe</strong>."],
+        ["Contraindicações / próxima escolha?", "Espironolactona e eplerenona já intoleráveis (ginecomastia) — <strong>clonidina</strong> é a opção indicada nesse cenário específico."]
       ]
     },
     {
-      name: "Vitor", age: 63, sex: "masculino", initials: "VT",
+      name: "Osvaldo", age: 70, sex: "masculino", initials: "OV",
       vitals: [
         { label: "PA persistente", value: "148/92", flag: true },
-        { label: "FEVE", value: "32%", flag: true },
+        { label: "FC", value: "76 bpm", flag: false },
+        { label: "IPSS urinário", value: "22 (grave)", flag: true }
+      ],
+      tags: [
+        { t: "Hiperplasia prostática benigna sintomática", c: "crit" },
+        { t: "Jato urinário fraco, noctúria 3x/noite", c: "crit" },
+        { t: "Estágio 1", c: "warn" },
+        { t: "Risco baixo/moderado", c: "" }
+      ],
+      qp: "Já em MEV há 3 meses sem controle adequado da PA. Refere dificuldade miccional importante, jato urinário fraco e necessidade de urinar 3 vezes por noite, com impacto na qualidade de vida.",
+      options: [
+        { t: "Betabloqueador em monoterapia" },
+        { t: "Alfabloqueador (ex. doxazosina) em monoterapia" },
+        { t: "Diurético de alça em monoterapia" },
+        { t: "Vasodilatador direto (minoxidil) em monoterapia" }
+      ],
+      answer: 1,
+      feedback: [
+        { why: "Monoterapia é a conduta certa para Estágio 1 + risco baixo/moderado.", whyNot: "Mas betabloqueador não trata os sintomas urinários, e não é 1ª linha de rotina para HAS sem indicação específica." },
+        { why: "Alfabloqueador não é 1ª linha isolada para HAS, mas sua indicação principal é justamente a hiperplasia prostática benigna — nesse paciente, tratar os dois problemas com uma única classe é racional, mesmo sabendo que não seria a escolha padrão para hipertensão sem essa comorbidade.", whyNot: "" },
+        { why: "Diurético de alça reduziria volume.", whyNot: "Não é indicado para HAS não complicada (reservado a DRC avançada ou sobrecarga volêmica), e pioraria a noctúria já incômoda." },
+        { why: "Minoxidil é potente redutor de PA.", whyNot: "Reservado a HAS grave refratária a outros tratamentos — desproporcional para Estágio 1, e não trata os sintomas urinários." }
+      ],
+      steps: [
+        ["Paciente é HAS?", "Sim — PA <strong>148/92 mmHg</strong> persistente mesmo após MEV."],
+        ["Estadiamento?", "<strong>Estágio 1</strong>."],
+        ["Estratificação de risco?", "Risco <strong>baixo/moderado</strong> — sem lesão de órgão-alvo."],
+        ["Decisão terapêutica?", "MEV isolada já tentada por tempo suficiente (3 meses) sem controle → iniciar monoterapia."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
+        ["Mono ou combinada?", "<strong>Monoterapia</strong> — Estágio 1 + risco baixo/moderado."],
+        ["Contraindicações / preferência?", "Nenhuma contraindicação absoluta — mas <strong>alfabloqueador</strong> traz benefício adicional para a HPB sintomática associada, mesmo não sendo 1ª linha isolada para HAS."]
+      ]
+    },
+    {
+      name: "Zilda", age: 58, sex: "feminino", initials: "ZL",
+      vitals: [
+        { label: "PA persistente", value: "190/115", flag: true },
+        { label: "K+", value: "4.3", flag: false },
         { label: "FC", value: "88 bpm", flag: false }
       ],
       tags: [
-        { t: "ICFEr (FEVE 32%)", c: "crit" },
-        { t: "Dispneia aos esforços", c: "crit" },
-        { t: "Pós-alta recente por descompensação", c: "warn" },
-        { t: "Dislipidemia", c: "warn" }
+        { t: "HAS grave, refratária a 5 classes", c: "crit" },
+        { t: "Já tentou espironolactona e clonidina", c: "crit" },
+        { t: "Investigação de causa secundária negativa", c: "warn" },
+        { t: "Boa adesão confirmada", c: "" }
       ],
-      qp: "Em acompanhamento após internação por insuficiência cardíaca descompensada há 1 mês. Refere cansaço aos médios esforços.",
+      qp: "Em acompanhamento por HAS grave, já em uso otimizado de IECA, diurético, BCC, espironolactona e clonidina, com adesão confirmada. Investigação para causas secundárias já realizada, sem achados.",
       options: [
-        { t: "Bloqueador de canal de cálcio + diurético" },
-        { t: "IECA ou BRA + betabloqueador" },
-        { t: "Monoterapia com bloqueador de canal de cálcio" },
-        { t: "Betabloqueador em monoterapia" }
+        { t: "Minoxidil, associado a diurético e betabloqueador" },
+        { t: "Repetir espironolactona em dose maior (já em dose otimizada)" },
+        { t: "Suspender o tratamento e reavaliar em 6 meses" },
+        { t: "Betabloqueador não-cardiosseletivo isolado, substituindo os demais" }
       ],
-      answer: 1,
+      answer: 0,
       feedback: [
-        { why: "BCC + diurético é uma combinação de 1ª linha em HAS não complicada.", whyNot: "Não aqui: BCC não tem papel comprovado em ICFEr, e não substitui a terapia de base que o coração dele precisa (IECA/BRA + BB)." },
-        { why: "Essa combinação é a terapia guiada por evidência para ICFEr (reduz mortalidade e reinternação) e, ao mesmo tempo, trata a hipertensão — dois objetivos com o mesmo esquema.", whyNot: "" },
-        { why: "Monoterapia pareceria um começo mais simples.", whyNot: "Estágio 1 + alto risco (DCV estabelecida) já pede combinação, e BCC isolado não trata a insuficiência cardíaca de base." },
-        { why: "Betabloqueador sozinho já ataca parte do problema.", whyNot: "Insuficiente isoladamente — falta o IECA/BRA, também parte essencial da terapia de ICFEr e da combinação exigida pelo estágio/risco." }
+        { why: "Minoxidil é reservado justamente para HAS grave, refratária a outros tratamentos — exatamente o cenário desta paciente, já em 5 classes otimizadas e sem causa secundária identificada. Deve ser associado a diurético e betabloqueador, pois causa retenção de sódio/água e taquicardia reflexa.", whyNot: "" },
+        { why: "Aumentar a dose pareceria uma tentativa razoável.", whyNot: "Já está em dose otimizada — insistir na mesma classe não é o próximo passo correto diante de HAS verdadeiramente refratária." },
+        { why: "Suspender pareceria uma pausa segura.", whyNot: "HAS grave não controlada mantém risco cardiovascular alto — não deve ficar sem tratamento." },
+        { why: "Substituir tudo por um único fármaco pareceria simplificar.", whyNot: "Perderia o benefício das classes já em uso, e um betabloqueador isolado é insuficiente para esse grau de gravidade." }
       ],
       steps: [
-        ["Paciente é HAS?", "Sim — PA <strong>148/92 mmHg</strong> persistente."],
-        ["Estadiamento?", "<strong>Estágio 1</strong>."],
-        ["Estratificação de risco?", "<strong>Alto risco</strong> — ICFEr é doença cardiovascular estabelecida, classifica automaticamente."],
-        ["Decisão terapêutica?", "Combinação dupla — Estágio 1 + risco alto, reforçada pela indicação cardiológica."],
-        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>, com individualização conforme tolerância hemodinâmica."],
-        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
-        ["Contraindicações / indicação especial?", "<strong>IECA/BRA + betabloqueador</strong> são indicação compelida em ICFEr — tratam a insuficiência cardíaca e a HAS ao mesmo tempo."]
+        ["Paciente é HAS?", "Sim — PA <strong>190/115 mmHg</strong> persistente apesar de tratamento otimizado."],
+        ["Estadiamento?", "<strong>Estágio 3</strong> residual, apesar de 5 classes."],
+        ["Estratificação de risco?", "<strong>Alto risco</strong> — HAS grave refratária."],
+        ["Decisão terapêutica?", "Configura HAS grave refratária: múltiplas classes otimizadas, adesão confirmada, sem causa secundária."],
+        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>, ainda distante."],
+        ["Mono ou combinada?", "Já em esquema múltiplo — avançar para <strong>minoxidil</strong>."],
+        ["Contraindicações / cuidado?", "Minoxidil deve sempre ser associado a diurético e betabloqueador, pelo risco de retenção hidrossalina e taquicardia reflexa."]
       ]
     },
     {
-      name: "Helena", age: 41, sex: "feminino", initials: "HL",
+      name: "Camila", age: 34, sex: "feminino", initials: "CM",
       vitals: [
-        { label: "PA persistente", value: "146/94", flag: true },
-        { label: "FC", value: "62 bpm", flag: true },
-        { label: "IMC", value: "29 kg/m²", flag: false }
+        { label: "PA persistente", value: "144/92", flag: true },
+        { label: "FC", value: "72 bpm", flag: false },
+        { label: "IMC", value: "24 kg/m²", flag: false }
       ],
       tags: [
-        { t: "Enxaqueca crônica", c: "" },
-        { t: "Em uso de verapamil (neuro)", c: "crit" },
-        { t: "Obesidade grau I", c: "warn" },
-        { t: "Sedentarismo", c: "warn" }
+        { t: "Enxaqueca crônica frequente", c: "crit" },
+        { t: "Sem uso de BCC não-di-idropiridínico", c: "" },
+        { t: "Estágio 1", c: "warn" },
+        { t: "Risco baixo/moderado", c: "" }
       ],
-      qp: "Em acompanhamento neurológico para enxaqueca crônica, em uso de verapamil há 8 meses com boa resposta. PA elevada nas últimas consultas.",
+      qp: "Refere crises de enxaqueca frequentes, cerca de 6 dias por mês, impactando o trabalho. Ainda sem tratamento anti-hipertensivo.",
       options: [
-        { t: "Adicionar betabloqueador" },
-        { t: "Adicionar IECA ou BRA" },
-        { t: "Trocar o verapamil por diurético tiazídico" },
-        { t: "Adicionar outro bloqueador de canal de cálcio" }
+        { t: "IECA em monoterapia" },
+        { t: "Betabloqueador (ex. propranolol) em monoterapia" },
+        { t: "Alfabloqueador em monoterapia" },
+        { t: "Diurético de alça em monoterapia" }
       ],
       answer: 1,
       feedback: [
-        { why: "Betabloqueador é uma classe eficaz e comum em combinações.", whyNot: "Não junto com verapamil: a combinação betabloqueador + BCC não-di-idropiridínico tem risco real de bradicardia/bloqueio AV grave — contraindicação direta aqui." },
-        { why: "IECA/BRA soma um mecanismo de ação diferente do verapamil, sem interação relevante, mantendo o controle da enxaqueca já conquistado e tratando a HAS com a combinação padrão.", whyNot: "" },
-        { why: "Trocar o verapamil resolveria a questão da interação.", whyNot: "Sem necessidade: o verapamil está funcionando bem para a enxaqueca dela — trocar um medicamento estável sem motivo clínico não é a conduta, e ainda perderia esse benefício." },
-        { why: "Mais um BCC pareceria reforçar o mesmo mecanismo.", whyNot: "Empilhar dois BCCs não é estratégia padrão de combinação — o parceiro indicado é de outra classe (IECA/BRA)." }
+        { why: "IECA é opção válida de monoterapia em geral.", whyNot: "Não aproveita nenhum benefício adicional para a comorbidade dela, ao contrário de outra opção disponível." },
+        { why: "Betabloqueador tem indicação reconhecida também na profilaxia de enxaqueca, além de tratar a HAS — combinação racional aqui, já que ela não usa BCC não-di-idropiridínico (sem risco de interação).", whyNot: "" },
+        { why: "Alfabloqueador não tem indicação específica nesse quadro.", whyNot: "Sua indicação principal é HPB — irrelevante para uma mulher de 34 anos sem essa condição." },
+        { why: "Diurético de alça não é indicado para HAS não complicada.", whyNot: "Reservado a DRC avançada ou sobrecarga volêmica — não é o caso aqui." }
       ],
       steps: [
-        ["Paciente é HAS?", "Sim — PA <strong>146/94 mmHg</strong> persistente."],
+        ["Paciente é HAS?", "Sim — PA <strong>144/92 mmHg</strong> persistente."],
         ["Estadiamento?", "<strong>Estágio 1</strong>."],
-        ["Estratificação de risco?", "Risco <strong>moderado</strong> — obesidade e sedentarismo, sem DCV estabelecida."],
-        ["Decisão terapêutica?", "Combinação dupla — Estágio 1 + risco moderado."],
+        ["Estratificação de risco?", "Risco <strong>baixo/moderado</strong> — sem lesão de órgão-alvo."],
+        ["Decisão terapêutica?", "Tratamento farmacológico indicado — ainda sem terapia prévia."],
         ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
-        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
-        ["Contraindicações?", "<strong>Betabloqueador contraindicado</strong> pela combinação com verapamil (BCC não-di-idropiridínico) — risco de bradicardia/bloqueio AV. IECA/BRA é o parceiro seguro."]
+        ["Mono ou combinada?", "<strong>Monoterapia</strong> — Estágio 1 + risco baixo/moderado."],
+        ["Contraindicações / indicação especial?", "Nenhuma contraindicação — <strong>betabloqueador</strong> traz benefício adicional reconhecido na profilaxia de enxaqueca."]
       ]
     },
     {
-      name: "Antônia", age: 71, sex: "feminino", initials: "AT",
+      name: "Wellington", age: 66, sex: "masculino", initials: "WL",
       vitals: [
-        { label: "PA persistente", value: "172/104", flag: true },
-        { label: "FC", value: "80 bpm", flag: false },
-        { label: "IMC", value: "27 kg/m²", flag: false }
+        { label: "PA persistente", value: "146/90", flag: true },
+        { label: "FC", value: "78 bpm", flag: false },
+        { label: "ITB", value: "0.75 (reduzido)", flag: true }
       ],
       tags: [
-        { t: "Hígida, sem quedas", c: "" },
-        { t: "Sem hipotensão ortostática", c: "" },
-        { t: "Sobrepeso", c: "warn" },
-        { t: "Sedentarismo", c: "warn" }
+        { t: "DAOP — claudicação intermitente", c: "crit" },
+        { t: "Angina estável associada", c: "crit" },
+        { t: "Tabagista", c: "warn" },
+        { t: "Estágio 1", c: "warn" }
       ],
-      qp: "Consulta de rotina, ativa e independente. Nunca teve tontura ou episódios de queda.",
+      qp: "Refere dor em panturrilha ao caminhar, aliviada com repouso (claudicação intermitente), além de desconforto torácico aos esforços moderados, já investigado como angina estável.",
       options: [
-        { t: "Monoterapia com IECA, reavaliar em 3 meses" },
-        { t: "Combinação dupla" },
-        { t: "MEV isolada por 3 meses" },
-        { t: "Combinação tripla imediata" }
+        { t: "Propranolol (não-cardiosseletivo)" },
+        { t: "Atenolol (cardiosseletivo comum)" },
+        { t: "Carvedilol ou nebivolol (ação vasodilatadora adicional)" },
+        { t: "Nenhum betabloqueador pode ser usado em DAOP, sob nenhuma circunstância" }
       ],
-      answer: 1,
+      answer: 2,
       feedback: [
-        { why: "Monoterapia pareceria prudente pela idade dela.", whyNot: "A regra de monoterapia por idade vale para ≥80 anos, frágeis, ou com hipotensão ortostática sintomática — ela tem 71 anos, é hígida e sem nenhum desses critérios. Idade isolada não basta." },
-        { why: "Estágio 2 pede combinação dupla já de início, independente do risco — e não há nenhum motivo de fragilidade que justifique começar mais devagar aqui.", whyNot: "" },
-        { why: "MEV isolada seria a conduta em quadros mais leves.", whyNot: "Estágio 2 já exige tratamento farmacológico imediato, não espera de MEV isolada." },
-        { why: "Tripla pareceria mais agressivo, compatível com a PA elevada.", whyNot: "Desproporcional para Estágio 2 sem gravidade adicional — combinação dupla já é a conduta indicada." }
+        { why: "Propranolol trataria a angina pela ação betabloqueadora.", whyNot: "Não-cardiosseletivo, sem ação vasodilatadora — pode agravar a vasoconstrição periférica na DAOP." },
+        { why: "Atenolol é cardiosseletivo, geralmente mais bem tolerado.", whyNot: "Ainda assim, sem a ação vasodilatadora que faz diferença na presença de DAOP — não é a escolha mais apropriada quando há alternativa melhor." },
+        { why: "DAOP é contraindicação relativa a betabloqueadores em geral — mas carvedilol e nebivolol, com ação vasodilatadora adicional, são a exceção citada no material, sendo racionais aqui, tratando também a angina.", whyNot: "" },
+        { why: "Pareceria mais seguro evitar toda a classe.", whyNot: "Existe sim uma exceção — betabloqueadores vasodilatadores (carvedilol, nebivolol) podem ser usados com mais segurança nesse contexto." }
       ],
       steps: [
-        ["Paciente é HAS?", "Sim — PA <strong>172/104 mmHg</strong> persistente."],
-        ["Estadiamento?", "<strong>Estágio 2</strong> (PAS 160–179 e/ou PAD 100–109)."],
-        ["Estratificação de risco?", "Risco <strong>moderado</strong> — sobrepeso e sedentarismo, sem lesão de órgão-alvo."],
-        ["Decisão terapêutica?", "Combinação dupla, indicada para Estágio 2 independente do risco."],
-        ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
-        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
-        ["Contraindicações?", "Nenhuma por idade — os critérios de monoterapia (≥80 anos, fragilidade, hipotensão ortostática) não se aplicam a ela."]
-      ]
-    },
-    {
-      name: "Marcelo", age: 56, sex: "masculino", initials: "MC",
-      vitals: [
-        { label: "PA persistente", value: "148/94", flag: true },
-        { label: "K+", value: "3.1", flag: true },
-        { label: "IMC", value: "25 kg/m²", flag: false }
-      ],
-      tags: [
-        { t: "Uso crônico de laxantes", c: "crit" },
-        { t: "Hipocalemia (K+ 3.1)", c: "crit" },
-        { t: "Diarreia recorrente", c: "warn" },
-        { t: "Sem DCV estabelecida", c: "" }
-      ],
-      qp: "Refere fraqueza muscular leve e cãibras. Uso prolongado de laxantes por constipação autolimitada, sem orientação médica.",
-      options: [
-        { t: "IECA ou BRA + diurético tiazídico" },
-        { t: "IECA ou BRA + bloqueador de canal de cálcio" },
-        { t: "Diurético tiazídico em monoterapia" },
-        { t: "Espironolactona em monoterapia" }
-      ],
-      answer: 1,
-      feedback: [
-        { why: "Tiazídico é o parceiro mais comum do IECA/BRA.", whyNot: "Não aqui: ele já está hipocalêmico (K+ 3.1) pelo uso crônico de laxantes — tiazídico reduziria ainda mais o potássio, com risco de arritmia." },
-        { why: "IECA/BRA mantém a combinação eficaz de 1ª linha, e o BCC não interfere no potássio — evita agravar a hipocalemia já presente.", whyNot: "" },
-        { why: "Diurético tiazídico isolado seria insuficiente.", whyNot: "Estágio 1 + risco moderado pede combinação, não monoterapia — e ainda pioraria a hipocalemia." },
-        { why: "Espironolactona poupa potássio, o que pareceria lógico aqui.", whyNot: "Não é indicação de 1ª linha fora do contexto de HAS resistente — o caso pede a combinação padrão inicial, não um antagonista mineralocorticoide isolado." }
-      ],
-      steps: [
-        ["Paciente é HAS?", "Sim — PA <strong>148/94 mmHg</strong> persistente."],
+        ["Paciente é HAS?", "Sim — PA <strong>146/90 mmHg</strong> persistente."],
         ["Estadiamento?", "<strong>Estágio 1</strong>."],
-        ["Estratificação de risco?", "Risco <strong>moderado</strong> — sem DCV estabelecida."],
-        ["Decisão terapêutica?", "Combinação dupla — Estágio 1 + risco moderado."],
+        ["Estratificação de risco?", "<strong>Alto risco</strong> — DAOP e angina estável são DCV estabelecida."],
+        ["Decisão terapêutica?", "Combinação dupla — Estágio 1 + risco alto."],
         ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
-        ["Mono ou combinada?", "<strong>Combinada dupla</strong>."],
-        ["Contraindicações?", "<strong>Diurético tiazídico contraindicado</strong> — hipocalemia já presente (K+ 3.1) por uso crônico de laxantes; BCC é o parceiro seguro."]
+        ["Mono ou combinada?", "<strong>Combinada dupla</strong>, incluindo betabloqueador pela indicação de angina."],
+        ["Contraindicações / escolha da molécula?", "DAOP é contraindicação relativa a BB em geral, <strong>exceto</strong> os com ação vasodilatadora adicional (carvedilol, nebivolol) — a exceção certa para esse paciente."]
       ]
     }
   ];
