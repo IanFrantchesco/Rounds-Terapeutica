@@ -65,18 +65,29 @@
     * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
   }
 
-  .page { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 26px; }
+  .page { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 18px; }
 
-  .masthead { padding-bottom: 14px; border-bottom: 1px solid var(--line-strong); display: flex; flex-direction: column; gap: 4px; }
+  .masthead { padding-bottom: 14px; border-bottom: 1px solid var(--line-strong); display: flex; flex-direction: column; gap: 12px; }
   .masthead .eyebrow {
     display: block; font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.66rem;
     letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 2px;
   }
-  .masthead h1 { font-family: "Spectral", Georgia, serif; font-weight: 700; font-size: clamp(1.3rem, 5.5vw, 1.7rem); margin: 0; letter-spacing: -0.01em; }
+  .masthead h1 { font-family: "Spectral", Georgia, serif; font-weight: 700; font-size: clamp(1.25rem, 5.5vw, 1.6rem); margin: 0; letter-spacing: -0.01em; }
   .masthead .byline { margin: 4px 0 0; font-size: 0.85rem; font-weight: 600; }
   .masthead .byline span { font-weight: 400; color: var(--ink-soft); }
   .back-link { font-size: 0.78rem; color: var(--teal); text-decoration: none; }
   .back-link:hover { text-decoration: underline; }
+
+  .tabs { display: flex; gap: 4px; background: var(--paper); border: 1px solid var(--line); border-radius: 100px; padding: 4px; }
+  .tab-btn {
+    flex: 1; border: none; background: transparent; color: var(--ink-soft); font-family: "Public Sans", sans-serif;
+    font-weight: 600; font-size: 0.85rem; padding: 9px 10px; border-radius: 100px; cursor: pointer; transition: background 0.15s ease, color 0.15s ease;
+  }
+  .tab-btn[aria-selected="true"] { background: var(--teal); color: var(--paper-raised); }
+  .tab-btn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
+  .panel { display: none; flex-direction: column; gap: 18px; }
+  .panel.active { display: flex; }
 
   .section-title { font-family: "Spectral", Georgia, serif; font-weight: 600; font-size: 1.05rem; margin: 0 0 2px; }
   .section-sub { font-size: 0.82rem; color: var(--ink-soft); margin: 0 0 12px; }
@@ -99,11 +110,25 @@
 
   .cat-grid { display: flex; flex-direction: column; gap: 10px; }
   .cat-card { background: var(--paper-raised); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-  .cat-card.highlight { border-color: var(--brick); background: var(--brick-soft); }
   .cat-card h3 { margin: 0 0 8px; font-family: "Spectral", Georgia, serif; font-size: 0.95rem; font-weight: 600; }
   .cat-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; }
   .cat-card li { display: flex; gap: 7px; align-items: flex-start; }
   .cat-card li::before { content: ""; flex: none; width: 6px; height: 6px; border-radius: 50%; background: var(--brick); margin-top: 6px; }
+
+  /* ---- case nav row ---- */
+  .case-nav-row { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .navbtn {
+    width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--paper-raised); color: var(--ink);
+    font-family: "IBM Plex Mono", monospace; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s ease, opacity 0.15s ease; flex: none;
+  }
+  .navbtn:hover:not(:disabled) { background: var(--teal-soft); border-color: var(--teal); color: var(--teal); }
+  .navbtn:disabled { opacity: 0.3; cursor: default; }
+  .navbtn:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .case-counter {
+    font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.76rem; color: var(--ink-soft); white-space: nowrap;
+    font-variant-numeric: tabular-nums; min-width: 68px; text-align: center;
+  }
 
   /* ---- chart card (caso clínico) ---- */
   .chart { background: var(--paper-raised); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; }
@@ -115,10 +140,10 @@
   .chart-id-text h2 { margin: 0 0 2px; font-family: "Spectral", Georgia, serif; font-size: 1.15rem; font-weight: 600; }
   .chart-id-text p { margin: 0; font-size: 0.85rem; color: var(--ink-soft); }
   .vitals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border-bottom: 1px solid var(--line); }
-  .vital { background: var(--paper-raised); padding: 12px 10px; text-align: center; }
+  .vital { background: var(--paper-raised); padding: 12px 8px; text-align: center; }
   .vital.flag { background: var(--brick-soft); }
-  .vital .label { display: block; font-size: 0.63rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); margin-bottom: 4px; }
-  .vital .value { font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 600; font-size: 0.98rem; font-variant-numeric: tabular-nums; }
+  .vital .label { display: block; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); margin-bottom: 4px; }
+  .vital .value { font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 600; font-size: 0.92rem; font-variant-numeric: tabular-nums; }
   .vital.flag .value { color: var(--brick); }
   .chart-body { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 14px; }
   .field-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin: 0 0 6px; }
@@ -176,9 +201,7 @@
   .next-btn.show { display: inline-flex; }
   .next-btn:hover { opacity: 0.92; }
 
-  .done-card {
-    background: var(--teal-soft); border: 1px solid var(--teal); border-radius: 14px; padding: 20px; text-align: center; display: none;
-  }
+  .done-card { background: var(--teal-soft); border: 1px solid var(--teal); border-radius: 14px; padding: 20px; text-align: center; display: none; }
   .done-card.show { display: block; }
   .done-card h3 { margin: 0 0 6px; font-family: "Spectral", serif; color: var(--teal); font-size: 1.05rem; }
   .done-card p { margin: 0; font-size: 0.88rem; color: var(--ink); }
@@ -191,170 +214,174 @@
 <div class="page">
 
   <div class="masthead">
-    <a class="back-link" href="../../">&lsaquo; Rounds de Terapêutica</a>
-    <span class="eyebrow">Rounds &middot; HAS &middot; Diretriz SBC 2025</span>
-    <h1>Crise Hipertensiva</h1>
-    <p class="byline"><span>por</span> Ian Frantchesco</p>
-  </div>
-
-  <div>
-    <p class="section-title">Classificação</p>
-    <p class="section-sub">A diretriz 2025 não usa mais o termo "urgência hipertensiva"</p>
-    <div class="table-wrap">
-      <table class="class-table emergencia">
-        <thead><tr><th>Elevação importante da PA (sem LOA aguda)</th><th>Emergência</th></tr></thead>
-        <tbody>
-          <tr><td>Nível de PA elevado acentuado</td><td>Nível de PA elevado acentuado</td></tr>
-          <tr><td>Sem LOA aguda e progressiva</td><td>Com LOA aguda e progressiva</td></tr>
-          <tr><td>Combinação medicamentosa oral</td><td>Medicamentos parenterais</td></tr>
-          <tr><td>Sem risco iminente de morte</td><td>Com risco iminente de morte</td></tr>
-          <tr><td>Acompanhamento ambulatorial precoce (1–7 dias)</td><td>Internação em UTI</td></tr>
-        </tbody>
-      </table>
+    <div>
+      <a class="back-link" href="../../">&lsaquo; Rounds de Terapêutica</a><br>
+      <span class="eyebrow">Rounds &middot; HAS &middot; Diretriz SBC 2025</span>
+      <h1>Crise Hipertensiva</h1>
+      <p class="byline"><span>por</span> Ian Frantchesco</p>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn" role="tab" data-tab="resumo" aria-selected="true">Resumo</button>
+      <button class="tab-btn" role="tab" data-tab="casos" aria-selected="false">Casos clínicos</button>
     </div>
   </div>
 
-  <div>
-    <p class="section-title">Fluxo de decisão</p>
-    <p class="section-sub">PAS ≥ 180 e/ou PAD ≥ 110 mmHg — o que define a conduta é a lesão de órgão-alvo (LOA), não só o número da PA</p>
-    <figure class="diagram">
-      <svg viewBox="0 0 360 246" role="img" aria-label="Fluxograma: diante de PA muito elevada, se há lesão de órgão-alvo nova ou progressiva, é emergência hipertensiva, tratada de forma intensiva em UTI; se não há, é elevação importante da PA, tratada com ajuste do esquema oral e reavaliação ambulatorial em até 7 dias.">
-        <defs>
-          <marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
-          </marker>
-        </defs>
+  <!-- ===== PAINEL: RESUMO ===== -->
+  <div class="panel active" id="panelResumo">
 
-        <rect x="20" y="8" width="320" height="32" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
-        <text x="180" y="28" text-anchor="middle" font-size="11" fill="var(--ink)" font-family="Public Sans, sans-serif">PAS ≥180 e/ou PAD ≥110 mmHg</text>
+    <div>
+      <p class="section-title">Classificação</p>
+      <p class="section-sub">A diretriz 2025 não usa mais o termo "urgência hipertensiva"</p>
+      <div class="table-wrap">
+        <table class="class-table emergencia">
+          <thead><tr><th>Elevação importante da PA (sem LOA aguda)</th><th>Emergência</th></tr></thead>
+          <tbody>
+            <tr><td>Nível de PA elevado acentuado</td><td>Nível de PA elevado acentuado</td></tr>
+            <tr><td>Sem LOA aguda e progressiva</td><td>Com LOA aguda e progressiva</td></tr>
+            <tr><td>Combinação medicamentosa oral</td><td>Medicamentos parenterais</td></tr>
+            <tr><td>Sem risco iminente de morte</td><td>Com risco iminente de morte</td></tr>
+            <tr><td>Acompanhamento ambulatorial precoce (1–7 dias)</td><td>Internação em UTI</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-        <line x1="180" y1="40" x2="180" y2="50.5" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrowC)"></line>
+    <div>
+      <p class="section-title">Fluxo de decisão</p>
+      <p class="section-sub">PAS ≥ 180 e/ou PAD ≥ 110 mmHg — o que define a conduta é a lesão de órgão-alvo (LOA), não só o número da PA</p>
+      <figure class="diagram">
+        <svg viewBox="0 0 360 246" role="img" aria-label="Fluxograma: diante de PA muito elevada, se há lesão de órgão-alvo nova ou progressiva, é emergência hipertensiva, tratada de forma intensiva em UTI; se não há, é elevação importante da PA, tratada com ajuste do esquema oral e reavaliação ambulatorial em até 7 dias.">
+          <defs>
+            <marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
+            </marker>
+          </defs>
 
-        <rect x="15" y="52" width="330" height="36" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
-        <text x="180" y="66" text-anchor="middle" font-size="9.5" fill="var(--ink)" font-family="Public Sans, sans-serif">Lesão de órgão-alvo nova,</text>
-        <text x="180" y="79" text-anchor="middle" font-size="9.5" fill="var(--ink)" font-family="Public Sans, sans-serif">progressiva ou em piora?</text>
+          <rect x="20" y="8" width="320" height="32" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="180" y="28" text-anchor="middle" font-size="11" fill="var(--ink)" font-family="Public Sans, sans-serif">PAS ≥180 e/ou PAD ≥110 mmHg</text>
 
-        <line x1="95" y1="88" x2="95" y2="108.5" stroke="var(--brick)" stroke-width="1.3" marker-end="url(#arrowC)"></line>
-        <text x="95" y="99" text-anchor="middle" font-size="8.5" font-weight="700" fill="var(--brick)" font-family="IBM Plex Mono, monospace">SIM</text>
+          <line x1="180" y1="40" x2="180" y2="50.5" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrowC)"></line>
 
-        <line x1="265" y1="88" x2="265" y2="108.5" stroke="var(--teal)" stroke-width="1.3" marker-end="url(#arrowC)"></line>
-        <text x="265" y="99" text-anchor="middle" font-size="8.5" font-weight="700" fill="var(--teal)" font-family="IBM Plex Mono, monospace">NÃO</text>
+          <rect x="15" y="52" width="330" height="36" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="180" y="66" text-anchor="middle" font-size="9.5" fill="var(--ink)" font-family="Public Sans, sans-serif">Lesão de órgão-alvo nova,</text>
+          <text x="180" y="79" text-anchor="middle" font-size="9.5" fill="var(--ink)" font-family="Public Sans, sans-serif">progressiva ou em piora?</text>
 
-        <rect x="15" y="110" width="160" height="32" rx="7" fill="var(--brick-soft)" stroke="var(--brick)" stroke-width="1.1"></rect>
-        <text x="95" y="130" text-anchor="middle" font-size="9.3" fill="var(--brick)" font-family="Public Sans, sans-serif">Emergência hipertensiva</text>
+          <line x1="95" y1="88" x2="95" y2="108.5" stroke="var(--brick)" stroke-width="1.3" marker-end="url(#arrowC)"></line>
+          <text x="95" y="99" text-anchor="middle" font-size="8.5" font-weight="700" fill="var(--brick)" font-family="IBM Plex Mono, monospace">SIM</text>
 
-        <line x1="95" y1="142" x2="95" y2="152.5" stroke="var(--brick)" stroke-width="1.2" marker-end="url(#arrowC)"></line>
+          <line x1="265" y1="88" x2="265" y2="108.5" stroke="var(--teal)" stroke-width="1.3" marker-end="url(#arrowC)"></line>
+          <text x="265" y="99" text-anchor="middle" font-size="8.5" font-weight="700" fill="var(--teal)" font-family="IBM Plex Mono, monospace">NÃO</text>
 
-        <rect x="15" y="154" width="160" height="36" rx="7" fill="var(--brick-soft)" stroke="var(--brick)" stroke-width="1.1"></rect>
-        <text x="95" y="169" text-anchor="middle" font-size="8.6" fill="var(--brick)" font-family="Public Sans, sans-serif">Tratamento intensivo</text>
-        <text x="95" y="181" text-anchor="middle" font-size="8.6" fill="var(--brick)" font-family="Public Sans, sans-serif">UTI &middot; medicação IV</text>
+          <rect x="15" y="110" width="160" height="32" rx="7" fill="var(--brick-soft)" stroke="var(--brick)" stroke-width="1.1"></rect>
+          <text x="95" y="130" text-anchor="middle" font-size="9.3" fill="var(--brick)" font-family="Public Sans, sans-serif">Emergência hipertensiva</text>
 
-        <rect x="185" y="110" width="160" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
-        <text x="265" y="130" text-anchor="middle" font-size="9" fill="var(--teal)" font-family="Public Sans, sans-serif">Elevação importante da PA</text>
+          <line x1="95" y1="142" x2="95" y2="152.5" stroke="var(--brick)" stroke-width="1.2" marker-end="url(#arrowC)"></line>
 
-        <line x1="265" y1="142" x2="265" y2="152.5" stroke="var(--teal)" stroke-width="1.2" marker-end="url(#arrowC)"></line>
+          <rect x="15" y="154" width="160" height="36" rx="7" fill="var(--brick-soft)" stroke="var(--brick)" stroke-width="1.1"></rect>
+          <text x="95" y="169" text-anchor="middle" font-size="8.6" fill="var(--brick)" font-family="Public Sans, sans-serif">Tratamento intensivo</text>
+          <text x="95" y="181" text-anchor="middle" font-size="8.6" fill="var(--brick)" font-family="Public Sans, sans-serif">UTI &middot; medicação IV</text>
 
-        <rect x="185" y="154" width="160" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
-        <text x="265" y="174" text-anchor="middle" font-size="8.6" fill="var(--teal)" font-family="Public Sans, sans-serif">Introduzir/readequar tto oral</text>
+          <rect x="185" y="110" width="160" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
+          <text x="265" y="130" text-anchor="middle" font-size="9" fill="var(--teal)" font-family="Public Sans, sans-serif">Elevação importante da PA</text>
 
-        <line x1="265" y1="186" x2="265" y2="196.5" stroke="var(--teal)" stroke-width="1.2" marker-end="url(#arrowC)"></line>
+          <line x1="265" y1="142" x2="265" y2="152.5" stroke="var(--teal)" stroke-width="1.2" marker-end="url(#arrowC)"></line>
 
-        <rect x="185" y="198" width="160" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
-        <text x="265" y="214" text-anchor="middle" font-size="8.3" fill="var(--teal)" font-family="Public Sans, sans-serif">Reavaliação ambulatorial</text>
-        <text x="265" y="224" text-anchor="middle" font-size="8" fill="var(--teal)" font-family="Public Sans, sans-serif">em até 7 dias</text>
-      </svg>
-      <figcaption>Diagnóstico, prognóstico e conduta nas crises hipertensivas (Quadro 11.1).</figcaption>
-    </figure>
-  </div>
+          <rect x="185" y="154" width="160" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
+          <text x="265" y="174" text-anchor="middle" font-size="8.6" fill="var(--teal)" font-family="Public Sans, sans-serif">Introduzir/readequar tto oral</text>
 
-  <div>
-    <p class="section-title">Metas de redução da PA na emergência</p>
-    <p class="section-sub">Redução aguda pode ser prejudicial — a intensidade depende do quadro</p>
-    <div class="table-wrap">
-      <table class="class-table">
-        <thead><tr><th>Quadro</th><th>Meta de redução</th></tr></thead>
-        <tbody>
-          <tr><td>Crise catecolaminérgica, edema agudo de pulmão ou dissecção aguda de aorta</td><td>PAS &lt;140 mmHg na 1ª hora (&lt;120 mmHg se dissecção)</td></tr>
-          <tr><td>Demais emergências hipertensivas</td><td>↓25% na 1ª hora &rarr; 160/100–110 mmHg em 2–6h &rarr; valores normais em 24–48h</td></tr>
-        </tbody>
-      </table>
+          <line x1="265" y1="186" x2="265" y2="196.5" stroke="var(--teal)" stroke-width="1.2" marker-end="url(#arrowC)"></line>
+
+          <rect x="185" y="198" width="160" height="32" rx="7" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.1"></rect>
+          <text x="265" y="214" text-anchor="middle" font-size="8.3" fill="var(--teal)" font-family="Public Sans, sans-serif">Reavaliação ambulatorial</text>
+          <text x="265" y="224" text-anchor="middle" font-size="8" fill="var(--teal)" font-family="Public Sans, sans-serif">em até 7 dias</text>
+        </svg>
+        <figcaption>Diagnóstico, prognóstico e conduta nas crises hipertensivas (Quadro 11.1).</figcaption>
+      </figure>
+    </div>
+
+    <div>
+      <p class="section-title">Metas de redução da PA na emergência</p>
+      <p class="section-sub">Redução aguda pode ser prejudicial — a intensidade depende do quadro</p>
+      <div class="table-wrap">
+        <table class="class-table">
+          <thead><tr><th>Quadro</th><th>Meta de redução</th></tr></thead>
+          <tbody>
+            <tr><td>Crise catecolaminérgica, edema agudo de pulmão ou dissecção aguda de aorta</td><td>PAS &lt;140 mmHg na 1ª hora (&lt;120 mmHg se dissecção)</td></tr>
+            <tr><td>Demais emergências hipertensivas</td><td>↓25% na 1ª hora &rarr; 160/100–110 mmHg em 2–6h &rarr; valores normais em 24–48h</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-title">Emergências hipertensivas por categoria</p>
+      <p class="section-sub">O que caracteriza cada grupo</p>
+      <div class="cat-grid">
+        <div class="cat-card">
+          <h3>Cerebrovasculares</h3>
+          <ul><li>Encefalopatia hipertensiva</li><li>Hemorragia intracerebral</li><li>Hemorragia subaracnóidea</li><li>AVC isquêmico</li></ul>
+        </div>
+        <div class="cat-card">
+          <h3>Cardiocirculatórias</h3>
+          <ul><li>Dissecção aguda da aorta</li><li>Edema agudo de pulmão com IVE</li><li>Infarto agudo do miocárdio</li><li>Angina instável</li></ul>
+        </div>
+        <div class="cat-card">
+          <h3>Sistêmicas</h3>
+          <ul><li>Hipertensão acelerada/maligna</li><li>Hipertensão com múltiplos danos a órgãos-alvo (MOD)</li></ul>
+        </div>
+        <div class="cat-card">
+          <h3>Crises adrenérgicas graves</h3>
+          <ul><li>Crise do feocromocitoma</li><li>Dose excessiva de drogas ilícitas (cocaína, crack, LSD)</li></ul>
+        </div>
+        <div class="cat-card">
+          <h3>Hipertensão na gestação</h3>
+          <ul><li>Eclâmpsia</li><li>Pré-eclâmpsia grave</li><li>Síndrome HELLP</li><li>Hipertensão grave em final de gestação</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-title">Medicamentos parenterais</p>
+      <p class="section-sub">Uso em UTI, com monitorização de PA, FC, SatO₂ e diurese</p>
+      <div class="table-wrap">
+        <table class="class-table">
+          <thead><tr><th>Medicamento</th><th>Início / Duração</th><th>Indicações</th><th>Eventos adversos</th></tr></thead>
+          <tbody>
+            <tr><td>Nitroprussiato de sódio</td><td>Imediato / 1–2 min</td><td>Maioria das emergências</td><td>Intoxicação por cianeto, hipotensão grave; cuidado na IRA/hepatopatia; proteger da luz</td></tr>
+            <tr><td>Nitroglicerina</td><td>2–5 min / 3–5 min</td><td>Insuficiência coronariana, EAP</td><td>Cefaleia, taquicardia reflexa, taquifilaxia, rubor</td></tr>
+            <tr><td>Metoprolol (IV)</td><td>5–10 min / 3–4h</td><td>Insuficiência coronariana, dissecção aguda de aorta</td><td>Bradicardia, BAV avançado, broncoespasmo</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
-  <div>
-    <p class="section-title">Emergências hipertensivas por categoria</p>
-    <p class="section-sub">O que caracteriza cada grupo</p>
-    <div class="cat-grid">
-      <div class="cat-card">
-        <h3>Cerebrovasculares</h3>
-        <ul><li>Encefalopatia hipertensiva</li><li>Hemorragia intracerebral</li><li>Hemorragia subaracnóidea</li><li>AVC isquêmico</li></ul>
-      </div>
-      <div class="cat-card">
-        <h3>Cardiocirculatórias</h3>
-        <ul><li>Dissecção aguda da aorta</li><li>Edema agudo de pulmão com IVE</li><li>Infarto agudo do miocárdio</li><li>Angina instável</li></ul>
-      </div>
-      <div class="cat-card">
-        <h3>Sistêmicas</h3>
-        <ul><li>Hipertensão acelerada/maligna</li><li>Hipertensão com múltiplos danos a órgãos-alvo (MOD)</li></ul>
-      </div>
-      <div class="cat-card">
-        <h3>Crises adrenérgicas graves</h3>
-        <ul><li>Crise do feocromocitoma</li><li>Dose excessiva de drogas ilícitas (cocaína, crack, LSD)</li></ul>
-      </div>
-      <div class="cat-card">
-        <h3>Hipertensão na gestação</h3>
-        <ul><li>Eclâmpsia</li><li>Pré-eclâmpsia grave</li><li>Síndrome HELLP</li><li>Hipertensão grave em final de gestação</li></ul>
-      </div>
-    </div>
-  </div>
+  <!-- ===== PAINEL: CASOS CLÍNICOS ===== -->
+  <div class="panel" id="panelCasos">
 
-  <div>
-    <p class="section-title">Medicamentos parenterais</p>
-    <p class="section-sub">Uso em UTI, com monitorização de PA, FC, SatO₂ e diurese</p>
-    <div class="table-wrap">
-      <table class="class-table">
-        <thead><tr><th>Medicamento</th><th>Início / Duração</th><th>Indicações</th><th>Eventos adversos</th></tr></thead>
-        <tbody>
-          <tr><td>Nitroprussiato de sódio</td><td>Imediato / 1–2 min</td><td>Maioria das emergências</td><td>Intoxicação por cianeto, hipotensão grave; cuidado na IRA/hepatopatia; proteger da luz</td></tr>
-          <tr><td>Nitroglicerina</td><td>2–5 min / 3–5 min</td><td>Insuficiência coronariana, EAP</td><td>Cefaleia, taquicardia reflexa, taquifilaxia, rubor</td></tr>
-          <tr><td>Metoprolol (IV)</td><td>5–10 min / 3–4h</td><td>Insuficiência coronariana, dissecção aguda de aorta</td><td>Bradicardia, BAV avançado, broncoespasmo</td></tr>
-        </tbody>
-      </table>
+    <div class="case-nav-row">
+      <button class="navbtn" id="prevBtn" aria-label="Caso anterior">&lsaquo;</button>
+      <span class="case-counter" id="caseCounter">01 / 05</span>
+      <button class="navbtn" id="nextBtn" aria-label="Próximo caso">&rsaquo;</button>
     </div>
-  </div>
-
-  <div>
-    <p class="section-title">Caso clínico</p>
-    <p class="section-sub">Raciocínio passo a passo — responda em sequência</p>
 
     <div class="chart">
       <div class="chart-id">
-        <div class="avatar">LC</div>
+        <div class="avatar" id="avatar">LC</div>
         <div class="chart-id-text">
-          <h2>Lucas</h2>
-          <p>29 anos &middot; masculino &middot; estudante de Educação Física</p>
+          <h2 id="pName">—</h2>
+          <p id="pMeta">—</p>
         </div>
       </div>
-      <div class="vitals">
-        <div class="vital flag"><span class="label">PA</span><span class="value">220/130</span></div>
-        <div class="vital flag"><span class="label">FC</span><span class="value">112 bpm</span></div>
-        <div class="vital"><span class="label">IMC</span><span class="value">33 kg/m²</span></div>
-      </div>
+      <div class="vitals" id="vitals"></div>
       <div class="chart-body">
         <div>
-          <p class="field-label">Achados &amp; substâncias em uso</p>
-          <div class="tags">
-            <span class="tag crit">Cipionato de testosterona</span>
-            <span class="tag crit">Trembolona</span>
-            <span class="tag crit">Hormônio do crescimento</span>
-            <span class="tag warn">Pré-treino, altas doses de cafeína</span>
-            <span class="tag warn">HVE ao ECG</span>
-            <span class="tag">Ganho de 12kg em 8 meses</span>
-          </div>
+          <p class="field-label">Achados</p>
+          <div class="tags" id="tags"></div>
         </div>
         <div class="qp">
           <strong>Queixa principal</strong>
-          Cefaleia intensa, palpitações, ansiedade, sensação de pressão na cabeça e episódios recorrentes de epistaxe há 3 dias, com piora progressiva nas últimas 24h. Nega diabetes, DRC e antecedentes cardiovasculares. Exame neurológico sem déficits focais; exame cardiovascular com taquicardia, sem sopros.
+          <span id="qpText">—</span>
         </div>
       </div>
     </div>
@@ -367,11 +394,11 @@
       <p id="feedbackMain"></p>
       <p class="muted" id="feedbackWhyNot"></p>
     </div>
-    <button class="next-btn" id="nextBtn">Próxima pergunta &rsaquo;</button>
+    <button class="next-btn" id="nextBtn2">Próxima pergunta &rsaquo;</button>
 
     <div class="done-card" id="doneCard">
       <h3>Caso concluído</h3>
-      <p>PA muito elevada não é sinônimo de emergência — o que muda a conduta é a lesão de órgão-alvo. Etiologia identificada (esteroides anabolizantes) orienta suspensão da causa; betabloqueador cardiosseletivo trata a taquicardia e a ativação simpática, com boa tolerância em pacientes jovens.</p>
+      <p id="doneText"></p>
     </div>
   </div>
 
@@ -379,57 +406,334 @@
 </div>
 
 <script>
-  const STEPS = [
+  const CASES = [
     {
-      prompt: "Como você classificaria esse quadro?",
-      options: ["Hipertensão estágio 2", "Hipertensão resistente", "Elevação importante da pressão arterial", "Emergência hipertensiva"],
-      answer: 2,
-      feedback: [
-        { why: "Isso descreveria só o nível de PA, sem considerar o critério que realmente define a gravidade da crise.", whyNot: "Nesse contexto (PA ≥180/110 com repercussão sistêmica), a classificação por estágio de PA não é a resposta clínica esperada." },
-        { why: "HAS resistente é sobre falha de tratamento otimizado.", whyNot: "Lucas nem sequer tem diagnóstico de HAS tratada há tempo suficiente para esse conceito — é uma crise aguda, não resistência terapêutica." },
-        { why: "Apesar da PA muito elevada (220x130), não há evidências de lesão aguda e progressiva em órgão-alvo: sem déficit neurológico, sem edema agudo de pulmão, sem síndrome coronariana aguda, sem insuficiência renal aguda. Por definição, isso é elevação importante da PA — não emergência.", whyNot: "" },
-        { why: "Emergência exigiria lesão de órgão-alvo aguda e progressiva.", whyNot: "Apesar da gravidade do número da PA, os achados até agora não confirmam LOA aguda — por isso não é emergência (ainda)." }
-      ]
+      name: "Lucas", age: 29, sex: "masculino, estudante de Educação Física", initials: "LC",
+      vitals: [
+        { label: "PA", value: "220/130", flag: true },
+        { label: "FC", value: "112 bpm", flag: true },
+        { label: "IMC", value: "33 kg/m²", flag: false }
+      ],
+      tags: [
+        { t: "Cipionato de testosterona", c: "crit" },
+        { t: "Trembolona", c: "crit" },
+        { t: "Hormônio do crescimento", c: "crit" },
+        { t: "Pré-treino, altas doses de cafeína", c: "warn" },
+        { t: "HVE ao ECG", c: "warn" },
+        { t: "Ganho de 12kg em 8 meses", c: "" }
+      ],
+      qp: "Cefaleia intensa, palpitações, ansiedade, sensação de pressão na cabeça e episódios recorrentes de epistaxe há 3 dias, com piora progressiva nas últimas 24h. Nega diabetes, DRC e antecedentes cardiovasculares. Sem déficits focais; taquicardia, sem sopros.",
+      steps: [
+        {
+          prompt: "Como você classificaria esse quadro?",
+          options: ["Hipertensão estágio 2", "Hipertensão resistente", "Elevação importante da pressão arterial", "Emergência hipertensiva"],
+          answer: 2,
+          feedback: [
+            { why: "Isso descreveria só o nível de PA, sem considerar o critério que realmente define a gravidade da crise.", whyNot: "Nesse contexto, a classificação por estágio de PA não é a resposta clínica esperada." },
+            { why: "HAS resistente é sobre falha de tratamento otimizado.", whyNot: "Lucas nem tem diagnóstico de HAS tratada há tempo suficiente — é uma crise aguda, não resistência terapêutica." },
+            { why: "Apesar da PA muito elevada (220x130), não há evidências de lesão aguda e progressiva em órgão-alvo: sem déficit neurológico, sem edema agudo de pulmão, sem SCA, sem IRA. Por definição, isso é elevação importante da PA — não emergência.", whyNot: "" },
+            { why: "Emergência exigiria lesão de órgão-alvo aguda e progressiva.", whyNot: "Apesar da gravidade do número da PA, os achados não confirmam LOA aguda — por isso não é emergência (ainda)." }
+          ]
+        },
+        {
+          prompt: "Qual fator etiológico parece estar mais relacionado ao quadro?",
+          options: ["Doença renal crônica", "Hiperaldosteronismo primário", "Uso de hormônios exógenos", "Feocromocitoma"],
+          answer: 2,
+          feedback: [
+            { why: "DRC é uma causa clássica de HAS secundária.", whyNot: "Nada no caso aponta pra isso — sem histórico, sem alteração de função renal." },
+            { why: "Hiperaldosteronismo é uma causa endócrina relevante.", whyNot: "Sem hipopotassemia, sem achados típicos — o quadro aponta para outra causa mais evidente." },
+            { why: "Idade jovem, ganho ponderal rápido, uso declarado de testosterona, trembolona e hormônio do crescimento, além de cafeína em excesso. Esteroides anabolizantes elevam a PA por retenção hidrossalina, ativação simpática, disfunção endotelial e aumento da resistência vascular periférica.", whyNot: "" },
+            { why: "Feocromocitoma cursa com cefaleia, sudorese e palpitações — há alguma sobreposição.", whyNot: "A causa mais evidente e diretamente relatada é o uso das substâncias exógenas — não há necessidade de hipotetizar uma causa mais rara sem investigá-la primeiro." }
+          ]
+        },
+        {
+          prompt: "Qual deve ser a primeira conduta?",
+          options: ["Prescrever clonidina", "Prescrever minoxidil", "Introduzir atenolol", "Investigar a presença de lesão aguda em órgãos-alvo"],
+          answer: 3,
+          feedback: [
+            { why: "Clonidina poderia parecer uma resposta rápida.", whyNot: "Prescrever qualquer anti-hipertensivo antes de excluir LOA aguda inverte a ordem correta do raciocínio clínico." },
+            { why: "Minoxidil é reservado para HAS grave refratária.", whyNot: "Não é a primeira conduta em nenhum cenário agudo, e o passo inicial nem é escolher fármaco ainda." },
+            { why: "Atenolol até seria racional pela taquicardia.", whyNot: "Escolher a classe não é o primeiro passo — antes é preciso confirmar se há ou não LOA aguda, o que muda toda a conduta." },
+            { why: "Antes de escolher o anti-hipertensivo, é fundamental excluir lesão aguda em órgãos-alvo: encefalopatia, SCA, dissecção de aorta, IC aguda, IRA. Só depois se define a melhor estratégia terapêutica.", whyNot: "" }
+          ]
+        },
+        {
+          prompt: "Diante do quadro (sem LOA aguda, taquicardia, ativação simpática por anabolizantes), qual a melhor escolha terapêutica?",
+          options: ["IECA + bloqueador de canal de cálcio", "Betabloqueador cardiosseletivo (ex. metoprolol)", "Diurético tiazídico isolado", "Vasodilatador direto (minoxidil)"],
+          answer: 1,
+          feedback: [
+            { why: "IECA + BCC é combinação padrão de 1ª linha em HAS crônica.", whyNot: "Não ataca o mecanismo central do quadro — a taquicardia e a ativação simpática pelo uso de anabolizantes." },
+            { why: "Betabloqueador cardiosseletivo (metoprolol succinato) controla a taquicardia, reduz a ativação simpática, o débito cardíaco e a liberação de renina — com benefício sobre a HVE já presente. Bem tolerado em pacientes jovens.", whyNot: "" },
+            { why: "Diurético isolado poderia parecer uma opção simples.", whyNot: "Não trata o mecanismo predominante (ativação simpática/taquicardia) e é insuficiente isoladamente." },
+            { why: "Minoxidil é potente redutor de PA.", whyNot: "Reservado para HAS grave refratária — causa taquicardia reflexa e retenção de sódio/água, o oposto do que esse paciente precisa." }
+          ]
+        }
+      ],
+      done: "PA muito elevada não é sinônimo de emergência — o que muda a conduta é a lesão de órgão-alvo. Etiologia identificada (esteroides anabolizantes) orienta a suspensão da causa; betabloqueador cardiosseletivo trata a taquicardia e a ativação simpática."
     },
     {
-      prompt: "Qual fator etiológico parece estar mais relacionado ao quadro?",
-      options: ["Doença renal crônica", "Hiperaldosteronismo primário", "Uso de hormônios exógenos", "Feocromocitoma"],
-      answer: 2,
-      feedback: [
-        { why: "DRC é uma causa clássica de HAS secundária.", whyNot: "Nada no caso aponta pra isso — sem histórico, sem alteração de função renal, sem exame de urina alterado." },
-        { why: "Hiperaldosteronismo é uma causa endócrina relevante de HAS secundária.", whyNot: "Sem hipopotassemia, sem os achados típicos — o quadro aponta para outra causa mais evidente." },
-        { why: "Vários elementos apontam junto: idade jovem, ganho ponderal rápido, uso declarado de testosterona, trembolona e hormônio do crescimento, além de cafeína em excesso. Esteroides anabolizantes elevam a PA por retenção hidrossalina, ativação simpática, disfunção endotelial e aumento da resistência vascular periférica.", whyNot: "" },
-        { why: "Feocromocitoma cursa com a tríade cefaleia, sudorese e palpitações — tem alguma sobreposição de sintomas aqui.", whyNot: "Mas a causa mais evidente e diretamente relatada pelo paciente é o uso das substâncias exógenas — não há necessidade de hipotetizar uma causa mais rara sem investigá-la primeiro." }
-      ]
+      name: "Marlene", age: 58, sex: "feminino", initials: "MR",
+      vitals: [
+        { label: "PA", value: "210/125", flag: true },
+        { label: "Glasgow", value: "13/15", flag: true },
+        { label: "FC", value: "98 bpm", flag: false }
+      ],
+      tags: [
+        { t: "Confusão mental aguda", c: "crit" },
+        { t: "Cefaleia holocraniana intensa", c: "crit" },
+        { t: "Náuseas e vômitos", c: "warn" },
+        { t: "Sem déficit focal", c: "" },
+        { t: "Má adesão ao tratamento prévio", c: "warn" }
+      ],
+      qp: "Trazida pela família após piora progressiva de confusão mental nas últimas 6 horas, associada a cefaleia intensa e vômitos. Em uso irregular de anti-hipertensivo há meses.",
+      steps: [
+        {
+          prompt: "Como você classificaria esse quadro?",
+          options: ["Elevação importante da PA", "Hipertensão estágio 3", "Emergência hipertensiva", "HAS resistente"],
+          answer: 2,
+          feedback: [
+            { why: "Elevação importante é a classificação para PA muito alta sem LOA.", whyNot: "Aqui há LOA aguda e progressiva (confusão mental de início recente) — isso caracteriza emergência." },
+            { why: "O estágio da PA de fato está muito elevado.", whyNot: "Classificar só pelo número da PA ignora o achado mais grave do caso: a alteração aguda do estado mental." },
+            { why: "PA muito elevada associada a alteração aguda e progressiva do estado mental caracteriza encefalopatia hipertensiva — uma emergência clássica, com indicação de UTI.", whyNot: "" },
+            { why: "HAS resistente é sobre falha de tratamento otimizado.", whyNot: "Não há informação de tratamento em doses otimizadas — o quadro agudo é o que importa agora." }
+          ]
+        },
+        {
+          prompt: "Qual conduta inicial é prioritária diante desse quadro?",
+          options: ["Reduzir a PA para valores normais o mais rápido possível", "Investigar outras causas de confusão mental antes de atribuir tudo à PA", "Internar em UTI e reduzir a PA de forma controlada (não abrupta)", "Aguardar reavaliação ambulatorial em 7 dias"],
+          answer: 2,
+          feedback: [
+            { why: "Reduzir a PA parece a prioridade óbvia.", whyNot: "Normalizar rápido demais é perigoso — compromete a autorregulação cerebral e pode causar isquemia." },
+            { why: "Excluir outras causas de confusão mental é sempre criterioso.", whyNot: "Nesse contexto (PA muito elevada + confusão aguda), o quadro já configura emergência — a prioridade é o tratamento intensivo, não adiar por investigação extensa." },
+            { why: "Emergência com encefalopatia exige internação em UTI e redução controlada da PA — cerca de 25% na 1ª hora, evitando quedas abruptas que prejudiquem a perfusão cerebral.", whyNot: "" },
+            { why: "Reavaliação ambulatorial é a conduta para elevação importante sem LOA.", whyNot: "Não se aplica aqui — há LOA aguda (encefalopatia), exigindo conduta imediata." }
+          ]
+        },
+        {
+          prompt: "Qual a meta de redução da PA na 1ª hora?",
+          options: ["Normalizar totalmente a PA (ex. 120/80)", "Reduzir cerca de 25% do valor inicial", "Reduzir para PAS <140mmHg (meta de crises catecolaminérgicas)", "Não há meta definida"],
+          answer: 1,
+          feedback: [
+            { why: "Normalizar rápido parece 'resolver' o problema.", whyNot: "Perigoso — pode causar hipoperfusão de órgãos já adaptados à PA elevada, sobretudo cerebral." },
+            { why: "Para a maioria das emergências (fora dos casos catecolaminérgicos/EAP/dissecção), a meta é reduzir cerca de 25% na 1ª hora, depois 160/100-110mmHg em 2-6h, normalizando em 24-48h.", whyNot: "" },
+            { why: "Essa meta mais agressiva existe.", whyNot: "É reservada a crises catecolaminérgicas, EAP ou dissecção de aorta — não é o padrão para encefalopatia hipertensiva isolada." },
+            { why: "Parece uma resposta segura.", whyNot: "Existe sim uma meta padronizada — 25% na 1ª hora — que deve orientar a conduta." }
+          ]
+        },
+        {
+          prompt: "Qual medicamento parenteral é mais indicado para a maioria das emergências hipertensivas, incluindo este caso?",
+          options: ["Nitroprussiato de sódio", "Metoprolol IV isolado", "Diurético tiazídico", "Minoxidil"],
+          answer: 0,
+          feedback: [
+            { why: "Vasodilatador arterial/venoso de ação imediata e curta duração (1-2min), indicado para a maioria das emergências hipertensivas — permite titulação fina, essencial numa encefalopatia.", whyNot: "" },
+            { why: "Metoprolol IV tem seu lugar em quadros específicos.", whyNot: "É mais indicado em insuficiência coronariana e dissecção de aorta — não é a 1ª escolha para encefalopatia isolada." },
+            { why: "Diurético tiazídico é via oral, de ação lenta.", whyNot: "Não tem papel em emergência hipertensiva — via e velocidade de ação inadequadas para o contexto agudo." },
+            { why: "Minoxidil é um vasodilatador potente.", whyNot: "É via oral, reservado para HAS grave refratária ambulatorial — não é medicação parenteral de emergência." }
+          ]
+        }
+      ],
+      done: "Encefalopatia hipertensiva é emergência clássica: LOA aguda (confusão mental) exige UTI e redução controlada — cerca de 25% na 1ª hora — nunca normalização abrupta, pelo risco de hipoperfusão cerebral."
     },
     {
-      prompt: "Qual deve ser a primeira conduta?",
-      options: ["Prescrever clonidina", "Prescrever minoxidil", "Introduzir atenolol", "Investigar a presença de lesão aguda em órgãos-alvo"],
-      answer: 3,
-      feedback: [
-        { why: "Clonidina poderia parecer uma resposta rápida à PA elevada.", whyNot: "Prescrever qualquer anti-hipertensivo antes de excluir lesão aguda de órgão-alvo inverte a ordem correta do raciocínio clínico." },
-        { why: "Minoxidil é reservado para HAS grave refratária a outros tratamentos.", whyNot: "Não é a primeira conduta em nenhum cenário agudo, e o passo inicial aqui nem é escolher fármaco ainda." },
-        { why: "Atenolol até seria racional pela taquicardia.", whyNot: "Escolher a classe de medicamento não é o primeiro passo — antes disso, é preciso confirmar se há ou não lesão aguda de órgão-alvo, o que muda toda a conduta." },
-        { why: "Antes de escolher o anti-hipertensivo, é fundamental excluir lesão aguda em órgãos-alvo: encefalopatia hipertensiva, síndrome coronariana aguda, dissecção aguda de aorta, insuficiência cardíaca aguda, insuficiência renal aguda. Só depois dessa avaliação se define a melhor estratégia terapêutica.", whyNot: "" }
-      ]
+      name: "Roberto", age: 61, sex: "masculino", initials: "RB",
+      vitals: [
+        { label: "PA (MSD)", value: "210/120", flag: true },
+        { label: "PA (MSE)", value: "170/95", flag: true },
+        { label: "FC", value: "104 bpm", flag: true }
+      ],
+      tags: [
+        { t: "Dor torácica súbita em facada, irradia p/ dorso", c: "crit" },
+        { t: "Assimetria pressórica entre os braços", c: "crit" },
+        { t: "Sopro diastólico novo", c: "warn" },
+        { t: "Tabagista", c: "warn" }
+      ],
+      qp: "Dor torácica intensa, de início súbito, tipo 'facada', irradiando para a região dorsal. Refere síncope há 20 minutos.",
+      steps: [
+        {
+          prompt: "Como você classificaria esse quadro?",
+          options: ["Elevação importante da PA", "Emergência hipertensiva", "HAS estágio 3", "HAS resistente"],
+          answer: 1,
+          feedback: [
+            { why: "Elevação importante seria PA alta sem LOA aguda.", whyNot: "Dor torácica súbita com assimetria pressórica entre os braços é achado clássico de dissecção aguda de aorta — LOA aguda cardiocirculatória." },
+            { why: "Dor torácica súbita + assimetria pressórica entre os membros superiores é o padrão clássico de suspeita de dissecção aguda de aorta — uma emergência hipertensiva com risco iminente de morte.", whyNot: "" },
+            { why: "Classificar só pelo estágio da PA.", whyNot: "Ignora o achado mais grave e específico do caso — a suspeita de dissecção de aorta." },
+            { why: "HAS resistente é sobre falha terapêutica otimizada.", whyNot: "Este é um quadro agudo, não uma questão de resistência a tratamento prévio." }
+          ]
+        },
+        {
+          prompt: "Qual achado deste caso mais chama atenção para o diagnóstico correto?",
+          options: ["PA muito elevada isoladamente", "Assimetria pressórica entre os membros superiores + dor com irradiação dorsal", "Tabagismo", "Frequência cardíaca elevada"],
+          answer: 1,
+          feedback: [
+            { why: "A PA elevada por si só não aponta para um diagnóstico específico.", whyNot: "É inespecífica — muitas emergências cursam com PA muito alta." },
+            { why: "Assimetria pressórica entre os braços associada a dor torácica súbita com irradiação para o dorso é o padrão clássico de dissecção aguda de aorta.", whyNot: "" },
+            { why: "Tabagismo é fator de risco relevante.", whyNot: "É contexto, mas não o achado que aponta diretamente para o diagnóstico agudo." },
+            { why: "Taquicardia é comum em quadros de dor e estresse.", whyNot: "Inespecífica isoladamente — a assimetria pressórica é o sinal mais direcionador aqui." }
+          ]
+        },
+        {
+          prompt: "Qual o cuidado farmacológico mais importante nesse quadro?",
+          options: ["Usar vasodilatador (ex. nitroprussiato) isoladamente, sem controlar a frequência cardíaca", "Controlar a frequência cardíaca com betabloqueador antes de (ou junto com) o vasodilatador", "Aguardar exames de imagem antes de iniciar qualquer tratamento", "Priorizar diurético para reduzir volume"],
+          answer: 1,
+          feedback: [
+            { why: "Vasodilatador isolado reduz a PA rapidamente.", whyNot: "Perigoso aqui: causa taquicardia reflexa, aumentando a força de ejeção e o estresse de cisalhamento na parede da aorta — pode propagar a dissecção." },
+            { why: "Controlar a FC com betabloqueador (ex. esmolol/metoprolol IV) antes ou junto ao vasodilatador reduz a força de contração ventricular (dP/dt) que agride a parede aórtica — conduta clássica na suspeita de dissecção.", whyNot: "" },
+            { why: "Confirmar o diagnóstico por imagem é importante.", whyNot: "Já é emergência com risco iminente — o tratamento inicial não pode esperar a confirmação completa por imagem." },
+            { why: "Diurético reduziria volume circulante.", whyNot: "Não é a prioridade farmacológica inicial nesse quadro — o controle da FC/força de ejeção vem primeiro." }
+          ]
+        },
+        {
+          prompt: "Qual a meta de redução da PAS na 1ª hora para este paciente?",
+          options: ["<160mmHg", "<140mmHg (meta geral de emergências catecolaminérgicas)", "<120mmHg (meta específica para dissecção de aorta)", "Redução de apenas 10%"],
+          answer: 2,
+          feedback: [
+            { why: "160mmHg ainda é uma PA elevada para esse contexto.", whyNot: "Insuficiente — dissecção de aorta exige a meta mais agressiva do quadro." },
+            { why: "Essa é a meta geral para crises catecolaminérgicas e EAP.", whyNot: "Dissecção de aorta tem meta ainda mais agressiva que essa." },
+            { why: "Dissecção aguda de aorta tem a meta mais agressiva: PAS <120mmHg já na 1ª hora, para minimizar o estresse na parede aórtica.", whyNot: "" },
+            { why: "Redução de apenas 10% pareceria mais cautelosa.", whyNot: "Insuficiente para o risco de propagação da dissecção — a meta precisa ser mais agressiva." }
+          ]
+        }
+      ],
+      done: "Dissecção aguda de aorta exige a meta mais agressiva de redução (PAS <120mmHg na 1ªh) e uma armadilha clássica: nunca usar vasodilatador isolado — controlar a frequência cardíaca com betabloqueador primeiro evita a taquicardia reflexa que agride a parede aórtica."
     },
     {
-      prompt: "Diante do quadro (sem LOA aguda, taquicardia, ativação simpática por anabolizantes), qual a melhor escolha terapêutica?",
-      options: ["IECA + bloqueador de canal de cálcio", "Betabloqueador cardiosseletivo (ex. metoprolol)", "Diurético tiazídico isolado", "Vasodilatador direto (minoxidil)"],
-      answer: 1,
-      feedback: [
-        { why: "IECA + BCC é uma combinação padrão de 1ª linha em HAS crônica.", whyNot: "Não é o alvo certo aqui: não ataca o mecanismo central do quadro — a taquicardia e a ativação simpática pelo uso de anabolizantes." },
-        { why: "Betabloqueador cardiosseletivo (metoprolol succinato) controla a taquicardia, reduz a ativação simpática, o débito cardíaco e a liberação de renina — além de trazer benefício sobre a hipertrofia ventricular esquerda já presente no ECG. Bem tolerado em pacientes jovens, com boa evidência de benefício cardiovascular nesse contexto.", whyNot: "" },
-        { why: "Diurético isolado poderia parecer uma opção simples.", whyNot: "Não trata o mecanismo predominante (ativação simpática/taquicardia) e é insuficiente isoladamente para esse quadro." },
-        { why: "Minoxidil é potente redutor de PA.", whyNot: "Reservado para HAS grave refratária — causa taquicardia reflexa e retenção de sódio/água, exatamente o oposto do que esse paciente precisa." }
-      ]
+      name: "Beatriz", age: 32, sex: "feminino, gestante (32 semanas)", initials: "BT",
+      vitals: [
+        { label: "PA", value: "172/116", flag: true },
+        { label: "Proteinúria", value: "3+ na fita", flag: true },
+        { label: "FC", value: "92 bpm", flag: false }
+      ],
+      tags: [
+        { t: "Pré-eclâmpsia grave", c: "crit" },
+        { t: "Cefaleia holocraniana", c: "crit" },
+        { t: "Escotomas visuais", c: "crit" },
+        { t: "Hiperreflexia", c: "warn" },
+        { t: "32 semanas de gestação", c: "" }
+      ],
+      qp: "Refere cefaleia intensa e visão turva com pontos luminosos (escotomas) há algumas horas. Edema importante de mãos e face.",
+      steps: [
+        {
+          prompt: "Como você classificaria esse quadro?",
+          options: ["Elevação importante da PA", "Emergência hipertensiva", "HAS gestacional leve", "HAS crônica descompensada"],
+          answer: 1,
+          feedback: [
+            { why: "Elevação importante é PA alta sem LOA aguda.", whyNot: "Sintomas neurológicos (cefaleia, escotomas) em pré-eclâmpsia grave configuram LOA aguda — é emergência." },
+            { why: "Pré-eclâmpsia grave com sintomas neurológicos (cefaleia, escotomas) é uma emergência hipertensiva na categoria 'hipertensão na gestação', com risco de progressão para eclâmpsia.", whyNot: "" },
+            { why: "'Leve' não descreve um quadro com sintomas neurológicos e proteinúria 3+.", whyNot: "A gravidade dos achados classifica esse quadro como pré-eclâmpsia grave, não leve." },
+            { why: "HAS crônica descompensada seria outra categoria.", whyNot: "O quadro combina proteinúria + sintomas neurológicos na gestação — o diagnóstico mais preciso é pré-eclâmpsia grave." }
+          ]
+        },
+        {
+          prompt: "Qual medicamento é a escolha para redução aguda da PA nesta paciente?",
+          options: ["IECA", "BRA", "Hidralazina", "Minoxidil"],
+          answer: 2,
+          feedback: [
+            { why: "IECA é 1ª linha fora da gestação.", whyNot: "Contraindicação absoluta em toda a gestação — teratogênico." },
+            { why: "BRA erraria pelo mesmo motivo.", whyNot: "Também contraindicado em toda a gestação." },
+            { why: "Hidralazina é o vasodilatador direto de escolha para redução aguda da PA na pré-eclâmpsia — indicação específica já estabelecida.", whyNot: "" },
+            { why: "Minoxidil é potente redutor de PA.", whyNot: "Contraindicado na gestação." }
+          ]
+        },
+        {
+          prompt: "Além do anti-hipertensivo, qual conduta associada é essencial diante dos sintomas neurológicos (cefaleia, escotomas)?",
+          options: ["Sulfato de magnésio, para profilaxia/tratamento de convulsão", "Anticoagulação plena", "Betabloqueador isolado, sem outras medidas", "Repouso domiciliar e reavaliação em 7 dias"],
+          answer: 0,
+          feedback: [
+            { why: "Sulfato de magnésio é a conduta padrão para prevenir e tratar convulsões (eclâmpsia) diante de sinais de iminência, como os sintomas neurológicos aqui presentes.", whyNot: "" },
+            { why: "Anticoagulação não tem papel nesse quadro.", whyNot: "Não é a conduta indicada para pré-eclâmpsia grave com sintomas neurológicos." },
+            { why: "Betabloqueador poderia ajudar no controle pressórico.", whyNot: "Isolado, não cobre o risco neurológico principal — a prevenção de convulsão precisa de sulfato de magnésio." },
+            { why: "Repouso domiciliar seria a conduta para um quadro leve.", whyNot: "Contradiz a gravidade do quadro — sintomas neurológicos exigem conduta hospitalar imediata, não domiciliar." }
+          ]
+        },
+        {
+          prompt: "Qual o ambiente adequado para conduzir este caso?",
+          options: ["Ambulatorial, com reavaliação em 7 dias", "Internação em unidade obstétrica de alto risco/UTI, com monitorização intensiva", "Alta com anti-hipertensivo oral", "Encaminhamento eletivo ao pré-natal de rotina"],
+          answer: 1,
+          feedback: [
+            { why: "Ambulatorial seria a conduta para elevação importante sem LOA.", whyNot: "Não se aplica — há sinais de gravidade (sintomas neurológicos, proteinúria) que exigem internação." },
+            { why: "Pré-eclâmpsia grave com sintomas neurológicos exige internação em unidade de alto risco, com monitorização materno-fetal intensiva e vigilância para eclâmpsia.", whyNot: "" },
+            { why: "Alta pareceria resolver rapidamente.", whyNot: "Inseguro diante da gravidade do quadro — risco de progressão para eclâmpsia." },
+            { why: "Pré-natal de rotina é para acompanhamento não urgente.", whyNot: "Esse quadro é agudo e grave, não compatível com encaminhamento eletivo." }
+          ]
+        }
+      ],
+      done: "Pré-eclâmpsia grave com sintomas neurológicos é emergência hipertensiva: hidralazina para redução aguda, sulfato de magnésio para prevenir convulsão, e internação com monitorização intensiva — nunca conduta ambulatorial."
+    },
+    {
+      name: "Cláudio", age: 45, sex: "masculino", initials: "CD",
+      vitals: [
+        { label: "PA (crise)", value: "230/130", flag: true },
+        { label: "FC", value: "126 bpm", flag: true },
+        { label: "Episódios/mês", value: "4x", flag: true }
+      ],
+      tags: [
+        { t: "Crises paroxísticas: cefaleia, sudorese, palpitações", c: "crit" },
+        { t: "Palidez cutânea durante as crises", c: "crit" },
+        { t: "Sem fator desencadeante claro", c: "warn" },
+        { t: "Perda de peso recente", c: "warn" }
+      ],
+      qp: "Refere crises recorrentes, de início súbito, com cefaleia latejante intensa, sudorese profusa e palpitações, seguidas de melhora espontânea em cerca de 30 minutos. Já teve uma crise nesta consulta, com PA registrada em 230x130mmHg.",
+      steps: [
+        {
+          prompt: "Como você classificaria esse quadro?",
+          options: ["Elevação importante da PA", "Emergência hipertensiva (crise adrenérgica grave)", "HAS do avental branco", "Pré-hipertensão"],
+          answer: 1,
+          feedback: [
+            { why: "Elevação importante seria PA alta persistente sem esse padrão paroxístico.", whyNot: "O padrão paroxístico com PA extremamente elevada configura crise adrenérgica grave — categoria própria de emergência hipertensiva." },
+            { why: "Crises paroxísticas com PA muito elevada (230x130) e tríade clássica (cefaleia, sudorese, palpitações) caracterizam uma crise adrenérgica grave — uma categoria de emergência hipertensiva.", whyNot: "" },
+            { why: "Avental branco seria PA elevada só no consultório, sem esse padrão de crise.", whyNot: "O padrão paroxístico recorrente com sintomas adrenérgicos não é compatível com avental branco." },
+            { why: "Pré-hipertensão é PA levemente elevada, persistente.", whyNot: "Muito distante do quadro — PA de 230x130 em crise paroxística é grave." }
+          ]
+        },
+        {
+          prompt: "Qual a suspeita diagnóstica mais provável?",
+          options: ["Hipertireoidismo", "Feocromocitoma", "Síndrome de Cushing", "Hiperaldosteronismo primário"],
+          answer: 1,
+          feedback: [
+            { why: "Hipertireoidismo pode causar palpitações e perda de peso.", whyNot: "Mas o padrão paroxístico com a tríade clássica completa (cefaleia + sudorese + palpitações) aponta mais especificamente para outra causa." },
+            { why: "A tríade clássica — cefaleia, sudorese e palpitações em crises paroxísticas — é o achado mais característico de feocromocitoma, um tumor produtor de catecolaminas.", whyNot: "" },
+            { why: "Cushing cursa com ganho de peso e alterações características.", whyNot: "O quadro aqui é de perda de peso e crises paroxísticas — não bate com o padrão de Cushing." },
+            { why: "Hiperaldosteronismo cursa mais com HAS persistente e hipopotassemia.", whyNot: "Não explica o padrão paroxístico com a tríade adrenérgica clássica." }
+          ]
+        },
+        {
+          prompt: "Qual medicamento deve ser evitado nesta crise, antes de bloqueio alfa-adrenérgico adequado?",
+          options: ["Nitroprussiato de sódio", "Betabloqueador isolado", "Ambos são igualmente seguros", "Nenhum anti-hipertensivo deve ser usado"],
+          answer: 1,
+          feedback: [
+            { why: "Nitroprussiato é seguro e eficaz na maioria das emergências, inclusive nesta.", whyNot: "" },
+            { why: "Betabloqueador isolado, sem bloqueio alfa-adrenérgico prévio, pode deixar a estimulação alfa sem oposição — piorando a vasoconstrição periférica e elevando ainda mais a PA numa crise de feocromocitoma.", whyNot: "" },
+            { why: "Pareceria mais simples tratar igual.", whyNot: "Não são equivalentes — o betabloqueador isolado tem risco específico nesse contexto." },
+            { why: "Evitar todo anti-hipertensivo pareceria mais cauteloso.", whyNot: "A crise precisa de tratamento — o ponto é qual medicamento evitar isoladamente, não evitar tratar." }
+          ]
+        },
+        {
+          prompt: "Qual a conduta medicamentosa mais indicada para o controle agudo desta crise?",
+          options: ["Nitroprussiato de sódio (vasodilatador, ação imediata)", "Diurético tiazídico", "Betabloqueador cardiosseletivo isolado", "IECA"],
+          answer: 0,
+          feedback: [
+            { why: "Vasodilatador de ação imediata e titulável, indicado para a maioria das emergências — inclusive crises adrenérgicas graves, sem o risco do betabloqueador isolado.", whyNot: "" },
+            { why: "Diurético tiazídico é via oral, de ação lenta.", whyNot: "Sem papel em controle agudo de crise hipertensiva grave." },
+            { why: "Betabloqueador cardiosseletivo isolado pareceria razoável pela taquicardia.", whyNot: "Risco de estimulação alfa sem oposição numa crise de feocromocitoma — evitar isoladamente." },
+            { why: "IECA é fármaco oral de ação mais lenta.", whyNot: "Não é medicação parenteral de emergência, e não é a escolha para controle agudo desse quadro." }
+          ]
+        }
+      ],
+      done: "Crise adrenérgica grave (feocromocitoma): tríade cefaleia-sudorese-palpitações em crises paroxísticas. Nitroprussiato é seguro; betabloqueador isolado, sem bloqueio alfa prévio, pode piorar a crise por estimulação alfa sem oposição."
     }
   ];
 
+  let idx = 0;
   let step = 0;
   let answered = false;
 
   const els = {
+    avatar: document.getElementById("avatar"),
+    pName: document.getElementById("pName"),
+    pMeta: document.getElementById("pMeta"),
+    vitals: document.getElementById("vitals"),
+    tags: document.getElementById("tags"),
+    qpText: document.getElementById("qpText"),
     stepTrack: document.getElementById("stepTrack"),
     promptText: document.getElementById("promptText"),
     options: document.getElementById("options"),
@@ -437,12 +741,17 @@
     verdictText: document.getElementById("verdictText"),
     feedbackMain: document.getElementById("feedbackMain"),
     feedbackWhyNot: document.getElementById("feedbackWhyNot"),
-    nextBtn: document.getElementById("nextBtn"),
-    doneCard: document.getElementById("doneCard")
+    nextBtn2: document.getElementById("nextBtn2"),
+    doneCard: document.getElementById("doneCard"),
+    doneText: document.getElementById("doneText"),
+    caseCounter: document.getElementById("caseCounter"),
+    prevBtn: document.getElementById("prevBtn"),
+    nextBtn: document.getElementById("nextBtn")
   };
 
   function renderTrack() {
-    els.stepTrack.innerHTML = STEPS.map((_, i) => {
+    const total = CASES[idx].steps.length;
+    els.stepTrack.innerHTML = Array.from({ length: total }, (_, i) => {
       let cls = "step-dot";
       if (i < step) cls += " done";
       else if (i === step) cls += " current";
@@ -450,9 +759,39 @@
     }).join("");
   }
 
+  function renderCase() {
+    const c = CASES[idx];
+    step = 0;
+
+    els.avatar.textContent = c.initials;
+    els.pName.textContent = c.name;
+    els.pMeta.textContent = c.age + " anos · " + c.sex;
+
+    els.vitals.innerHTML = c.vitals.map(v =>
+      '<div class="vital' + (v.flag ? ' flag' : '') + '">' +
+        '<span class="label">' + v.label + '</span>' +
+        '<span class="value">' + v.value + '</span>' +
+      '</div>'
+    ).join("");
+
+    els.tags.innerHTML = c.tags.map(t =>
+      '<span class="tag' + (t.c ? ' ' + t.c : '') + '">' + t.t + '</span>'
+    ).join("");
+
+    els.qpText.textContent = c.qp;
+    els.doneText.textContent = c.done;
+
+    els.caseCounter.textContent = String(idx + 1).padStart(2, "0") + " / " + String(CASES.length).padStart(2, "0");
+    els.prevBtn.disabled = idx === 0;
+    els.nextBtn.disabled = idx === CASES.length - 1;
+
+    renderStep();
+  }
+
   function renderStep() {
     answered = false;
-    const s = STEPS[step];
+    const c = CASES[idx];
+    const s = c.steps[step];
     const letters = ["A", "B", "C", "D"];
 
     renderTrack();
@@ -461,7 +800,10 @@
       '<button class="option" data-i="' + i + '"><span class="letter">' + letters[i] + '</span><span class="text">' + t + '</span></button>'
     ).join("");
     els.feedback.classList.remove("show", "is-correct", "is-wrong");
-    els.nextBtn.classList.remove("show");
+    els.nextBtn2.classList.remove("show");
+    els.doneCard.classList.remove("show");
+    els.options.style.display = "flex";
+    els.promptText.style.display = "block";
   }
 
   els.options.addEventListener("click", (e) => {
@@ -469,7 +811,8 @@
     if (!btn || answered) return;
     answered = true;
 
-    const s = STEPS[step];
+    const c = CASES[idx];
+    const s = c.steps[step];
     const i = Number(btn.dataset.i);
     const data = s.feedback[i];
     const isCorrect = i === s.answer;
@@ -487,8 +830,8 @@
     els.feedbackWhyNot.textContent = data.whyNot;
     els.feedbackWhyNot.style.display = data.whyNot ? "block" : "none";
 
-    if (step < STEPS.length - 1) {
-      els.nextBtn.classList.add("show");
+    if (step < c.steps.length - 1) {
+      els.nextBtn2.classList.add("show");
     } else {
       renderTrack();
       els.doneCard.classList.add("show");
@@ -497,12 +840,24 @@
     els.feedback.scrollIntoView({ behavior: "smooth", block: "nearest" });
   });
 
-  els.nextBtn.addEventListener("click", () => {
-    step++;
-    renderStep();
-  });
+  els.nextBtn2.addEventListener("click", () => { step++; renderStep(); });
+  els.prevBtn.addEventListener("click", () => { if (idx > 0) { idx--; renderCase(); } });
+  els.nextBtn.addEventListener("click", () => { if (idx < CASES.length - 1) { idx++; renderCase(); } });
 
-  renderStep();
+  renderCase();
+
+  /* ---- tabs ---- */
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const panels = { resumo: document.getElementById("panelResumo"), casos: document.getElementById("panelCasos") };
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      tabButtons.forEach((b) => b.setAttribute("aria-selected", "false"));
+      btn.setAttribute("aria-selected", "true");
+      Object.values(panels).forEach((p) => p.classList.remove("active"));
+      panels[btn.dataset.tab].classList.add("active");
+      window.scrollTo({ top: 0 });
+    });
+  });
 </script>
 
 </body>
