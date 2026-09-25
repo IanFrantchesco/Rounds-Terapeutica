@@ -642,7 +642,7 @@
       <p class="section-title">Do diagnóstico à meta</p>
       <p class="section-sub">Fluxo de decisão terapêutica inicial</p>
       <figure class="diagram">
-        <svg viewBox="0 0 360 372" role="img" aria-label="Fluxograma: confirmar a pressão elevada, classificar estágio e risco cardiovascular, e então seguir para mudança de estilo de vida isolada, monoterapia ou combinação dupla ou tripla, conforme a combinação de estágio e risco, convergindo todos para a meta de 130 por 80 milímetros de mercúrio.">
+        <svg viewBox="0 0 360 386" role="img" aria-label="Fluxograma: confirmar a pressão elevada, classificar estágio e risco cardiovascular; pré-hipertensão ou estágio 1 de risco baixo recebem MEV isolada por 3 meses, avançando para monoterapia se sem controle; pré-hipertensão de 130 a 139 com alto risco, idoso com 80 anos ou mais, frágil ou com hipotensão ortostática recebem monoterapia direto; estágio 1 com risco moderado ou alto, estágio 2 e estágio 3 recebem combinação dupla ou tripla; todos convergem para a meta de 130 por 80 milímetros de mercúrio.">
           <defs>
             <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
               <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
@@ -666,35 +666,36 @@
           <text x="180" y="116" text-anchor="middle" font-size="11" fill="var(--ink)" font-family="Public Sans, sans-serif">Classificar estágio + risco CV</text>
 
           <!-- trunk into fork -->
-          <path d="M180,128 L180,140 L30,140 L30,306" fill="none" stroke="currentColor" stroke-width="1.3"></path>
+          <path d="M180,128 L180,140 L30,140 L30,318" fill="none" stroke="currentColor" stroke-width="1.3"></path>
 
           <!-- branch connectors -->
-          <line x1="30" y1="170" x2="56.5" y2="170" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
-          <line x1="30" y1="228" x2="56.5" y2="228" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
-          <line x1="30" y1="286" x2="56.5" y2="286" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+          <line x1="30" y1="176" x2="56.5" y2="176" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+          <line x1="30" y1="240" x2="56.5" y2="240" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+          <line x1="30" y1="298" x2="56.5" y2="298" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
 
           <!-- B1 -->
-          <rect x="58" y="150" width="282" height="40" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <rect x="58" y="150" width="282" height="52" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
           <text x="199" y="164" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">Pré-hipertensão ou Estágio 1 — risco baixo</text>
           <text x="199" y="180" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">MEV isolada</text>
+          <text x="199" y="195" text-anchor="middle" font-size="7.6" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">&rarr; monoterapia em 3 meses, se sem controle</text>
 
           <!-- B2 -->
-          <rect x="58" y="200" width="282" height="56" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
-          <text x="199" y="214" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">E1 alto risco · Pré-HAS 130–139 + alto risco</text>
-          <text x="199" y="226" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">idoso ≥80a / frágil / hipotensão ortostática</text>
-          <text x="199" y="246" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">Monoterapia</text>
+          <rect x="58" y="212" width="282" height="56" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="199" y="226" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">Pré-HAS 130–139 + alto risco</text>
+          <text x="199" y="238" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">idoso ≥80a / frágil / hipotensão ortostática</text>
+          <text x="199" y="258" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">Monoterapia</text>
 
           <!-- B3 -->
-          <rect x="58" y="266" width="282" height="40" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
-          <text x="199" y="280" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">E1 risco moderado/alto · Estágio 2 · Estágio 3</text>
-          <text x="199" y="296" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">Combinação dupla ou tripla</text>
+          <rect x="58" y="278" width="282" height="40" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="199" y="292" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">Estágio 1 risco moderado/alto · Estágio 2 · Estágio 3</text>
+          <text x="199" y="308" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">Combinação dupla ou tripla</text>
 
           <!-- converge to goal -->
-          <path d="M30,306 L30,320 L180,320 L180,330.5" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></path>
+          <path d="M30,318 L30,332 L180,332 L180,342.5" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></path>
 
           <!-- final -->
-          <rect x="30" y="332" width="300" height="34" rx="8" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.3"></rect>
-          <text x="180" y="353.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--teal)" font-family="Public Sans, sans-serif">Meta terapêutica: &lt;130/80 mmHg</text>
+          <rect x="30" y="344" width="300" height="34" rx="8" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.3"></rect>
+          <text x="180" y="365.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--teal)" font-family="Public Sans, sans-serif">Meta terapêutica: &lt;130/80 mmHg</text>
         </svg>
         <figcaption>Da confirmação diagnóstica à meta pressórica — o caminho muda conforme estágio e risco cardiovascular.</figcaption>
       </figure>
