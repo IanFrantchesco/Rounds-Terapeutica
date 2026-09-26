@@ -642,7 +642,7 @@
       <p class="section-title">Do diagnóstico à meta</p>
       <p class="section-sub">Fluxo de decisão terapêutica inicial</p>
       <figure class="diagram">
-        <svg viewBox="0 0 360 386" role="img" aria-label="Fluxograma: confirmar a pressão elevada, classificar estágio e risco cardiovascular; pré-hipertensão ou estágio 1 de risco baixo recebem MEV isolada por 3 meses, avançando para monoterapia se sem controle; pré-hipertensão de 130 a 139 com alto risco, idoso com 80 anos ou mais, frágil ou com hipotensão ortostática recebem monoterapia direto; estágio 1 com risco moderado ou alto, estágio 2 e estágio 3 recebem combinação dupla ou tripla; todos convergem para a meta de 130 por 80 milímetros de mercúrio.">
+        <svg viewBox="0 0 360 438" role="img" aria-label="Fluxograma: confirmar a pressão elevada, classificar estágio e risco cardiovascular. Pré-hipertensão com risco baixo ou moderado recebe MEV isolada. Pré-hipertensão de 130 a 139 com alto risco recebe MEV isolada por 3 meses, avançando para monoterapia somente se a PA continuar 130 sobre 80 ou mais. Estágio 1 de risco baixo, a critério médico, e idoso com 80 anos ou mais, frágil ou com hipotensão ortostática recebem monoterapia direto, sem espera. Estágio 1 com risco moderado ou alto, estágio 2 e estágio 3 recebem combinação dupla ou tripla. Todos convergem para a meta de 130 por 80 milímetros de mercúrio.">
           <defs>
             <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
               <path d="M0,0 L10,5 L0,10 z" fill="currentColor"></path>
@@ -666,36 +666,42 @@
           <text x="180" y="116" text-anchor="middle" font-size="11" fill="var(--ink)" font-family="Public Sans, sans-serif">Classificar estágio + risco CV</text>
 
           <!-- trunk into fork -->
-          <path d="M180,128 L180,140 L30,140 L30,318" fill="none" stroke="currentColor" stroke-width="1.3"></path>
+          <path d="M180,128 L180,140 L30,140 L30,368" fill="none" stroke="currentColor" stroke-width="1.3"></path>
 
           <!-- branch connectors -->
-          <line x1="30" y1="176" x2="56.5" y2="176" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
-          <line x1="30" y1="240" x2="56.5" y2="240" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
-          <line x1="30" y1="298" x2="56.5" y2="298" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+          <line x1="30" y1="170" x2="56.5" y2="170" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+          <line x1="30" y1="226" x2="56.5" y2="226" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+          <line x1="30" y1="290" x2="56.5" y2="290" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
+          <line x1="30" y1="348" x2="56.5" y2="348" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></line>
 
-          <!-- B1 -->
-          <rect x="58" y="150" width="282" height="52" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
-          <text x="199" y="164" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">Pré-hipertensão ou Estágio 1 — risco baixo</text>
+          <!-- A: MEV isolada -->
+          <rect x="58" y="150" width="282" height="40" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="199" y="164" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">Pré-hipertensão — risco baixo/moderado</text>
           <text x="199" y="180" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">MEV isolada</text>
-          <text x="199" y="195" text-anchor="middle" font-size="7.6" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">&rarr; monoterapia em 3 meses, se sem controle</text>
 
-          <!-- B2 -->
-          <rect x="58" y="212" width="282" height="56" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
-          <text x="199" y="226" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">Pré-HAS 130–139 + alto risco</text>
-          <text x="199" y="238" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">idoso ≥80a / frágil / hipotensão ortostática</text>
-          <text x="199" y="258" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">Monoterapia</text>
+          <!-- B: Pré-HAS 130-139 + alto risco, com espera de 3 meses -->
+          <rect x="58" y="200" width="282" height="52" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="199" y="214" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">Pré-hipertensão 130–139 + alto risco</text>
+          <text x="199" y="232" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">Monoterapia</text>
+          <text x="199" y="246" text-anchor="middle" font-size="7.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">&rarr; após MEV 3 meses, se PA ainda ≥130/80</text>
 
-          <!-- B3 -->
-          <rect x="58" y="278" width="282" height="40" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
-          <text x="199" y="292" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">Estágio 1 risco moderado/alto · Estágio 2 · Estágio 3</text>
-          <text x="199" y="308" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">Combinação dupla ou tripla</text>
+          <!-- C: Estágio 1 baixo risco / idoso / frágil / HO, monoterapia direta -->
+          <rect x="58" y="262" width="282" height="56" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="199" y="276" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">Estágio 1 risco baixo (a critério médico)</text>
+          <text x="199" y="288" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">idoso ≥80a / frágil / hipotensão ortostática</text>
+          <text x="199" y="308" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">Monoterapia</text>
+
+          <!-- D: Estágio 1 moderado/alto + E2 + E3 -->
+          <rect x="58" y="328" width="282" height="40" rx="8" fill="var(--paper)" stroke="var(--line-strong)" stroke-width="1.2"></rect>
+          <text x="199" y="342" text-anchor="middle" font-size="8.3" fill="var(--ink-soft)" font-family="Public Sans, sans-serif">Estágio 1 risco moderado/alto · Estágio 2 · Estágio 3</text>
+          <text x="199" y="358" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)" font-family="Public Sans, sans-serif">Combinação dupla ou tripla</text>
 
           <!-- converge to goal -->
-          <path d="M30,318 L30,332 L180,332 L180,342.5" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></path>
+          <path d="M30,368 L30,382 L180,382 L180,392.5" fill="none" stroke="currentColor" stroke-width="1.3" marker-end="url(#arrow)"></path>
 
           <!-- final -->
-          <rect x="30" y="344" width="300" height="34" rx="8" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.3"></rect>
-          <text x="180" y="365.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--teal)" font-family="Public Sans, sans-serif">Meta terapêutica: &lt;130/80 mmHg</text>
+          <rect x="30" y="394" width="300" height="34" rx="8" fill="var(--teal-soft)" stroke="var(--teal)" stroke-width="1.3"></rect>
+          <text x="180" y="415.5" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--teal)" font-family="Public Sans, sans-serif">Meta terapêutica: &lt;130/80 mmHg</text>
         </svg>
         <figcaption>Da confirmação diagnóstica à meta pressórica — o caminho muda conforme estágio e risco cardiovascular.</figcaption>
       </figure>
@@ -1170,7 +1176,7 @@
         ["Paciente é HAS?", "Sim — PA <strong>144/92 mmHg</strong> persistente mesmo após MEV."],
         ["Estadiamento?", "<strong>Estágio 1</strong>."],
         ["Estratificação de risco?", "<strong>Baixo</strong> — sem comorbidades ou lesão de órgão-alvo."],
-        ["Decisão terapêutica?", "MEV isolada já tentada por tempo suficiente (4 meses) sem controle → iniciar monoterapia."],
+        ["Decisão terapêutica?", "Estágio 1 + risco baixo pode iniciar monoterapia diretamente, a critério médico; aqui optou-se por tentar MEV antes, e sem controle após 4 meses, o passo seguinte é a monoterapia."],
         ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
         ["Mono ou combinada?", "<strong>Monoterapia</strong> — Estágio 1 + risco baixo."],
         ["Contraindicações / preferência?", "Nenhuma contraindicação absoluta — mas <strong>BCC/diurético</strong> têm resposta comprovadamente melhor que IECA/BRA isolados na população negra."]
@@ -1191,26 +1197,26 @@
       ],
       qp: "Retorno de rotina cardiológica. Assintomático, sem dor torácica ou dispneia.",
       options: [
-        { t: "MEV isolada, sem fármaco" },
-        { t: "Monoterapia" },
-        { t: "Terapia combinada dupla" },
-        { t: "Terapia combinada tripla imediata" }
+        { t: "MEV isolada, sem fármaco e sem reavaliação programada" },
+        { t: "MEV isolada por 3 meses, com reavaliação — monoterapia apenas se a PA permanecer ≥130/80" },
+        { t: "Monoterapia imediata, sem tentar MEV antes" },
+        { t: "Terapia combinada dupla" }
       ],
       answer: 1,
       feedback: [
-        { why: "MEV isolada seria a conduta padrão em pré-hipertensão de risco baixo/moderado.", whyNot: "Mas não aqui: DAC estabelecida (pós-IAM) já classifica como alto risco, mudando a conduta mesmo dentro da faixa de pré-hipertensão." },
-        { why: "PA 130-139/80-89 (pré-hipertensão) + alto risco (DAC estabelecida) é exatamente a indicação da diretriz para iniciar monoterapia — mesmo sem o paciente ainda estar em Estágio 1.", whyNot: "" },
-        { why: "Combinação dupla pareceria mais cautelosa.", whyNot: "Essa intensidade é reservada a estágios mais avançados (Estágio 1 com risco alto/moderado ou superior) — aqui ainda é pré-hipertensão." },
-        { why: "Tripla imediata seria desproporcional.", whyNot: "Não há justificativa para essa intensidade num paciente ainda em faixa de pré-hipertensão." }
+        { why: "MEV isolada é de fato o primeiro passo aqui.", whyNot: "Mas sem reavaliação programada, o alto risco dele fica sem seguimento — a diretriz exige reavaliar em 3 meses, não apenas orientar e liberar sem retorno." },
+        { why: "Na faixa específica de 130–139/80–89 associada a alto risco, a diretriz indica iniciar com MEV isolada por 3 meses; só se a PA permanecer ≥130/80 nessa reavaliação é que se inicia a monoterapia. O alto risco justifica não deixá-lo sem seguimento por mais tempo, mas ainda não pula direto para o fármaco.", whyNot: "" },
+        { why: "Pareceria mais agressivo, coerente com o alto risco.", whyNot: "Mesmo com alto risco, a diretriz reserva a monoterapia imediata para outras situações (Estágio 1 risco baixo a critério médico, idoso ≥80a, frágil, hipotensão ortostática) — na pré-hipertensão 130–139 + alto risco, o primeiro passo é a MEV por 3 meses." },
+        { why: "Combinação dupla pareceria mais cautelosa.", whyNot: "Essa intensidade é reservada a estágios mais avançados — aqui ainda é pré-hipertensão, e o passo inicial nem é fármaco." }
       ],
       steps: [
         ["Paciente é HAS?", "Ainda não — está em faixa de <strong>pré-hipertensão</strong> (PA 135/86)."],
         ["Estadiamento?", "<strong>Pré-hipertensão</strong> (120–139/80–89), especificamente na faixa 130–139/80–89."],
         ["Estratificação de risco?", "<strong>Alto risco</strong> — DAC estabelecida (pós-IAM) já classifica automaticamente, mesmo sem estágio de HAS."],
-        ["Decisão terapêutica?", "Tratamento farmacológico já indicado, mesmo em pré-hipertensão, pelo alto risco."],
+        ["Decisão terapêutica?", "Tratamento indicado, mas começa por <strong>MEV isolada</strong> — o alto risco muda o prazo de reavaliação (3 meses), não pula direto para o fármaco."],
         ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
-        ["Mono ou combinada?", "<strong>Monoterapia</strong> — regra específica da faixa 130–139/80–89 + alto risco."],
-        ["Contraindicações / indicação especial?", "Nenhuma contraindicação identificada; IECA é racional pela cardioproteção pós-IAM."]
+        ["Mono ou combinada?", "<strong>MEV isolada por 3 meses</strong> → monoterapia apenas se a PA permanecer ≥130/80 — regra específica da faixa 130–139/80–89 + alto risco."],
+        ["Contraindicações / indicação especial?", "Nenhuma contraindicação identificada; se a monoterapia vier a ser necessária, IECA é racional pela cardioproteção pós-IAM."]
       ]
     },
     {
@@ -1298,9 +1304,9 @@
         { t: "Hiperplasia prostática benigna sintomática", c: "crit" },
         { t: "Jato urinário fraco, noctúria 3x/noite", c: "crit" },
         { t: "Estágio 1", c: "warn" },
-        { t: "Risco baixo/moderado", c: "" }
+        { t: "Risco baixo", c: "" }
       ],
-      qp: "Já em MEV há 3 meses sem controle adequado da PA. Refere dificuldade miccional importante, jato urinário fraco e necessidade de urinar 3 vezes por noite, com impacto na qualidade de vida.",
+      qp: "Diagnóstico recente de HAS Estágio 1. Refere dificuldade miccional importante, jato urinário fraco e necessidade de urinar 3 vezes por noite, com impacto na qualidade de vida.",
       options: [
         { t: "Betabloqueador em monoterapia" },
         { t: "Alfabloqueador (ex. doxazosina) em monoterapia" },
@@ -1309,18 +1315,18 @@
       ],
       answer: 1,
       feedback: [
-        { why: "Monoterapia é a conduta certa para Estágio 1 + risco baixo/moderado.", whyNot: "Mas betabloqueador não trata os sintomas urinários, e não é 1ª linha de rotina para HAS sem indicação específica." },
+        { why: "Monoterapia é a conduta certa para Estágio 1 + risco baixo, a critério médico.", whyNot: "Mas betabloqueador não trata os sintomas urinários, e não é 1ª linha de rotina para HAS sem indicação específica." },
         { why: "Alfabloqueador não é 1ª linha isolada para HAS, mas sua indicação principal é justamente a hiperplasia prostática benigna — nesse paciente, tratar os dois problemas com uma única classe é racional, mesmo sabendo que não seria a escolha padrão para hipertensão sem essa comorbidade.", whyNot: "" },
         { why: "Diurético de alça reduziria volume.", whyNot: "Não é indicado para HAS não complicada (reservado a DRC avançada ou sobrecarga volêmica), e pioraria a noctúria já incômoda." },
         { why: "Minoxidil é potente redutor de PA.", whyNot: "Reservado a HAS grave refratária a outros tratamentos — desproporcional para Estágio 1, e não trata os sintomas urinários." }
       ],
       steps: [
-        ["Paciente é HAS?", "Sim — PA <strong>148/92 mmHg</strong> persistente mesmo após MEV."],
+        ["Paciente é HAS?", "Sim — PA <strong>148/92 mmHg</strong> persistente."],
         ["Estadiamento?", "<strong>Estágio 1</strong>."],
-        ["Estratificação de risco?", "Risco <strong>baixo/moderado</strong> — sem lesão de órgão-alvo."],
-        ["Decisão terapêutica?", "MEV isolada já tentada por tempo suficiente (3 meses) sem controle → iniciar monoterapia."],
+        ["Estratificação de risco?", "Risco <strong>baixo</strong> — sem lesão de órgão-alvo."],
+        ["Decisão terapêutica?", "Estágio 1 + risco baixo pode iniciar tratamento farmacológico diretamente, a critério médico."],
         ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
-        ["Mono ou combinada?", "<strong>Monoterapia</strong> — Estágio 1 + risco baixo/moderado."],
+        ["Mono ou combinada?", "<strong>Monoterapia</strong> — Estágio 1 + risco baixo, a critério médico."],
         ["Contraindicações / preferência?", "Nenhuma contraindicação absoluta — mas <strong>alfabloqueador</strong> traz benefício adicional para a HPB sintomática associada, mesmo não sendo 1ª linha isolada para HAS."]
       ]
     },
@@ -1372,7 +1378,7 @@
         { t: "Enxaqueca crônica frequente", c: "crit" },
         { t: "Sem uso de BCC não-di-idropiridínico", c: "" },
         { t: "Estágio 1", c: "warn" },
-        { t: "Risco baixo/moderado", c: "" }
+        { t: "Risco baixo", c: "" }
       ],
       qp: "Refere crises de enxaqueca frequentes, cerca de 6 dias por mês, impactando o trabalho. Ainda sem tratamento anti-hipertensivo.",
       options: [
@@ -1391,10 +1397,10 @@
       steps: [
         ["Paciente é HAS?", "Sim — PA <strong>144/92 mmHg</strong> persistente."],
         ["Estadiamento?", "<strong>Estágio 1</strong>."],
-        ["Estratificação de risco?", "Risco <strong>baixo/moderado</strong> — sem lesão de órgão-alvo."],
-        ["Decisão terapêutica?", "Tratamento farmacológico indicado — ainda sem terapia prévia."],
+        ["Estratificação de risco?", "Risco <strong>baixo</strong> — sem lesão de órgão-alvo."],
+        ["Decisão terapêutica?", "Estágio 1 + risco baixo pode iniciar tratamento farmacológico diretamente, a critério médico."],
         ["Meta terapêutica?", "<strong>&lt;130/80 mmHg</strong>."],
-        ["Mono ou combinada?", "<strong>Monoterapia</strong> — Estágio 1 + risco baixo/moderado."],
+        ["Mono ou combinada?", "<strong>Monoterapia</strong> — Estágio 1 + risco baixo, a critério médico."],
         ["Contraindicações / indicação especial?", "Nenhuma contraindicação — <strong>betabloqueador</strong> traz benefício adicional reconhecido na profilaxia de enxaqueca."]
       ]
     },
